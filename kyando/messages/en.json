@@ -1,0 +1,27 @@
+{
+  "Metadata": {
+    "title": "Kyandō",
+    "description": "The camp schedule for your coaching team."
+  },
+  "LanguageSelect": {
+    "label": "Language",
+    "de": "Deutsch",
+    "fr": "Français",
+    "it": "Italiano",
+    "en": "English"
+  },
+  "Login": {
+    "pageTitle": "Sign in",
+    "tagline": "The camp schedule for your coaching team.",
+    "title": "Sign in",
+    "description": "Sign in with your email address.",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "submit": "Sign in",
+    "submitting": "Signing in …",
+    "noAccess": "No access yet? Ask the camp lead.",
+    "error": "Sign-in didn’t work. Try again."
+  }
+}

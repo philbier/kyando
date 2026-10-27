@@ -1,0 +1,68 @@
+-----------------------------
+Prompt:
+I want to build a prototype app for managing a recreational sports camp while it’s happening (not for registration/booking beforehand).
+The app's name is Kyandō. This combines kyanpu (“camp”) with dō (道, “the way,” the second part of judo). 
+Help create a project outline and define the tech stack. 
+Create a lightweight plan as markdow `PLAN.md` including all tasks to develop a first prototype.
+There is no deadline for this project. The timeline is irrelevant.
+
+Core context:
+- Single sports camp (usually running for one week)
+- Organized/run by about 20 coaches (which are only users) that have different roles (e.g. Head Organizer, Judo coach, Polysport Coach) 
+- Goal: give coaches a simple way to see what’s happening and access shared materials during camp week
+
+Must-have features:
+- Calendar view for the whole camp week — shows the schedule of activities/sessions for the camp week (day/time blocks, activity names, maybe location/group)
+- Multiple languages, but German as default
+
+Please help me think through:
+- Suggested tech stack: favor simplicity - I am a junior developer. I want to make adjustments to the code, but it should all be based 
+  on a simple tech stack and as few frameworks as possible
+- Rough build order / milestones
+
+Usage context:
+- Devices: Users should be able to use it on their phones (mobile-first)
+- Connectivity: there is reliable Wifi
+
+About me:
+- I know JavaScript and SQL 
+- I prefer a simple JavaScript framework (What's your opinion about React?)
+- A Claude Design System based on shadcn-ui (https://github.com/shadcn-ui/ui) should be used
+- I will use Claude Code to design and develop the prototype
+
+Calendar details:
+- Head organizers create and edit plans; all others can only view
+- schedule should be imported from Excel
+- Coaches are assigned to sessions; I want a "My sessions today"
+- The schedule could change during the week; coaches should be notified about theses changes
+
+Hosting:
+- Start with a free tier option; this should be scalable if workload increases
+- It should be reusable for the next year - no one-off camp
+
+Where should it run, and what's the budget? A free tier only, or a few euros a month?
+Is this a one-off camp, or should it be reusable next year? That decides whether "single camp" can be hardcoded.
+Output format
+
+No-goal list:
+- No payments
+- no camper accounts
+- no native app
+
+-----------------
+
+- Basic screen/page list (admin view vs. participant view)
+- Minimal data model (e.g., events/sessions, files, users/roles)
+- File sharing — admin can upload files (e.g., PDFs, images, documents); coaches can view/download them
+- What to explicitly leave out of scope for v1
+- What authentication/access control is actually needed for a prototype (e.g., simple shared link vs. real login)
+
+Kyandō
+This combines kyanpu (“camp”) with dō (道, “the way,” the second part of judo). It means “the way of camp.” It suggests the whole camp journey, from sign-up to the last day, with the app as your guide.
+
+Kyandō spricht man ungefähr „Kjan-dooh” aus.
+
+Kyan klingt wie „Kjan”: Das „ky” ist ein K mit leichtem J-Laut, ähnlich wie in „Kjeld”. Das „a” ist kurz, wie in „Mann”.
+dō klingt wie „dooh”: Der Strich über dem o (ō) bedeutet ein langes O, wie in „Boot”.
+
+Im Japanischen werden die Silben fast gleich stark betont. Für deutsche Ohren klingt es am natürlichsten, wenn das lange „dooh” etwas mehr Gewicht bekommt: kjan-DOOH.

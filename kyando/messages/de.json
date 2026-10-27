@@ -1,0 +1,27 @@
+{
+  "Metadata": {
+    "title": "Kyandō",
+    "description": "Der Lagerplan für dein Coach-Team."
+  },
+  "LanguageSelect": {
+    "label": "Sprache",
+    "de": "Deutsch",
+    "fr": "Français",
+    "it": "Italiano",
+    "en": "English"
+  },
+  "Login": {
+    "pageTitle": "Anmelden",
+    "tagline": "Der Lagerplan für dein Coach-Team.",
+    "title": "Anmelden",
+    "description": "Melde dich mit deiner E-Mail-Adresse an.",
+    "email": "E-Mail",
+    "emailPlaceholder": "name@beispiel.ch",
+    "password": "Passwort",
+    "forgotPassword": "Passwort vergessen?",
+    "submit": "Anmelden",
+    "submitting": "Wird angemeldet …",
+    "noAccess": "Noch keinen Zugang? Wende dich an die Lagerleitung.",
+    "error": "Die Anmeldung hat nicht geklappt. Versuche es noch einmal."
+  }
+}

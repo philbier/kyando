@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Anmelden</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/shadcnui/tokens.css">
+<link rel="stylesheet" href="ds/shadcnui/components/bundle.css">
+<script src="ds/shadcnui/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Fira+Code&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--background);hyphens:auto;overflow-wrap:break-word}
+a{color:var(--foreground)}a:hover{color:var(--foreground)}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; box-sizing: border-box; display: flex; flex-direction: column; padding: 12px 16px 24px; background: var(--background); color: var(--foreground); font-family: var(--font-sans)">
+
+  <div style="display: flex; justify-content: flex-end">
+    <x-import component-from-global-scope="ShadcnUI.Select" default-value="de">
+      <x-import component-from-global-scope="ShadcnUI.SelectTrigger" aria-label="Sprache" style="width: 148px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+        <x-import component-from-global-scope="ShadcnUI.SelectValue" placeholder="Sprache"></x-import>
+      </x-import>
+      <x-import component-from-global-scope="ShadcnUI.SelectContent">
+        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="de">Deutsch</x-import>
+        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="fr">Français</x-import>
+        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="it">Italiano</x-import>
+        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="en">English</x-import>
+      </x-import>
+    </x-import>
+  </div>
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 48px 0 32px; text-align: center">
+    <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: var(--radius-xl); background: var(--primary); color: var(--primary-foreground); font-weight: 800; font-size: 32px">K</span>
+    <h1 style="margin: 0; font-size: 36px; line-height: 40px; font-weight: 800; letter-spacing: -0.025em">Kyandō</h1>
+    <p style="margin: 0; font-size: 16px; line-height: 24px">Der Lagerplan für dein Coach-Team.</p>
+  </div>
+
+  <x-import component-from-global-scope="ShadcnUI.Card">
+    <x-import component-from-global-scope="ShadcnUI.CardHeader">
+      <x-import component-from-global-scope="ShadcnUI.CardTitle">Anmelden</x-import>
+      <x-import component-from-global-scope="ShadcnUI.CardDescription">Melde dich mit deiner E-Mail-Adresse an.</x-import>
+    </x-import>
+    <x-import component-from-global-scope="ShadcnUI.CardContent">
+      <form style="margin: 0">
+        <x-import component-from-global-scope="ShadcnUI.FieldGroup">
+          <x-import component-from-global-scope="ShadcnUI.Field">
+            <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="email">E-Mail</x-import>
+            <x-import component-from-global-scope="ShadcnUI.Input" id="email" type="email" autocomplete="email" inputmode="email" placeholder="name@beispiel.ch" style="height: 44px; font-size: 16px"></x-import>
+          </x-import>
+          <x-import component-from-global-scope="ShadcnUI.Field">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+              <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="password">Passwort</x-import>
+              <a href="#" style="font-size: 14px; line-height: 20px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px">Passwort vergessen?</a>
+            </div>
+            <x-import component-from-global-scope="ShadcnUI.Input" id="password" type="password" autocomplete="current-password" style="height: 44px; font-size: 16px"></x-import>
+          </x-import>
+          <x-import component-from-global-scope="ShadcnUI.Button" type="submit" size="lg" style="width: 100%; height: 44px">Anmelden</x-import>
+        </x-import>
+      </form>
+    </x-import>
+  </x-import>
+
+  <p style="margin: auto 0 0; text-align: center; font-size: 14px; line-height: 20px">Noch keinen Zugang? Wende dich an die Lagerleitung.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

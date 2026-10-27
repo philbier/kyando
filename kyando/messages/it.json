@@ -1,0 +1,27 @@
+{
+  "Metadata": {
+    "title": "Kyandō",
+    "description": "Il programma del campo per il tuo team di coach."
+  },
+  "LanguageSelect": {
+    "label": "Lingua",
+    "de": "Deutsch",
+    "fr": "Français",
+    "it": "Italiano",
+    "en": "English"
+  },
+  "Login": {
+    "pageTitle": "Accedi",
+    "tagline": "Il programma del campo per il tuo team di coach.",
+    "title": "Accedi",
+    "description": "Accedi con il tuo indirizzo e-mail.",
+    "email": "E-mail",
+    "emailPlaceholder": "nome@esempio.ch",
+    "password": "Password",
+    "forgotPassword": "Password dimenticata?",
+    "submit": "Accedi",
+    "submitting": "Accesso in corso …",
+    "noAccess": "Non hai ancora un accesso? Rivolgiti alla direzione del campo.",
+    "error": "Accesso non riuscito. Riprova."
+  }
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Kalender – Woche</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/shadcnui/tokens.css">
+<link rel="stylesheet" href="ds/shadcnui/components/bundle.css">
+<script src="ds/shadcnui/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Fira+Code&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--background)}
+</style>
+</helmet>
+<div style="width: 390px; height: 1320px; background: var(--background); color: var(--foreground); font-family: var(--font-sans)">
+  <dc-import name="CalendarDay" ansicht="woche" rolle="{{rolle}}" hint-size="390px,1320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"rolle":{"editor":"enum","options":["Coach","Lagerleitung"],"default":"Coach"},"$preview":{"width":390,"height":1320}}'>
+class Component extends DCLogic {
+  renderVals() { return { rolle: this.props.rolle || 'Coach' }; }
+}
+</script>
+</body>
+</html>
