@@ -1,0 +1,10 @@
+[
+  {
+    "id": "camp-2026-herbst",
+    "name": "Herbstlager 2026",
+    "starts_on": "2026-10-12",
+    "ends_on": "2026-10-16",
+    "timezone": "Europe/Berlin",
+    "is_active": true
+  }
+]

@@ -23,5 +23,41 @@
     "submitting": "Accesso in corso …",
     "noAccess": "Non hai ancora un accesso? Rivolgiti alla direzione del campo.",
     "error": "Accesso non riuscito. Riprova."
+  },
+  "Navigation": {
+    "label": "Navigazione principale",
+    "heute": "Oggi",
+    "kalender": "Calendario",
+    "profil": "Profilo",
+    "openProfile": "Apri il profilo"
+  },
+  "Heute": {
+    "pageTitle": "Oggi",
+    "title": "Le mie unità di oggi",
+    "dayOfCamp": "{date} · Giorno {day} di {days}",
+    "summary": "{total, plural, one {# unità} other {# unità}} · {done, plural, one {# conclusa} other {# concluse}} · {camp}",
+    "empty": "Oggi non hai unità.",
+    "now": "Ora",
+    "remaining": "ancora {duration}",
+    "currentLink": "Unità in corso: {title} – apri i dettagli",
+    "groupDetails": "{size} bambini, {ageRange} anni",
+    "withCoaches": "Con {names}",
+    "details": "Dettagli e note",
+    "next": "Prossima",
+    "startsIn": "tra {duration}",
+    "later": "Più tardi oggi",
+    "done": "Concluse",
+    "lastUpdated": "Ultimo aggiornamento alle {time}"
+  },
+  "Session": {
+    "timeRange": "{start} – {end}",
+    "group": "Gruppo {name}",
+    "allGroups": "Tutti i gruppi",
+    "allCoaches": "Tutti i coach"
+  },
+  "Duration": {
+    "minutes": "{minutes} min",
+    "hours": "{hours} h",
+    "hoursMinutes": "{hours} h {minutes} min"
   }
 }

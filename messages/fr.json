@@ -23,5 +23,41 @@
     "submitting": "Connexion …",
     "noAccess": "Pas encore d’accès ? Adresse-toi à la direction du camp.",
     "error": "La connexion a échoué. Réessaie."
+  },
+  "Navigation": {
+    "label": "Navigation principale",
+    "heute": "Aujourd’hui",
+    "kalender": "Calendrier",
+    "profil": "Profil",
+    "openProfile": "Ouvrir le profil"
+  },
+  "Heute": {
+    "pageTitle": "Aujourd’hui",
+    "title": "Mes unités aujourd’hui",
+    "dayOfCamp": "{date} · Jour {day} sur {days}",
+    "summary": "{total, plural, one {# unité} other {# unités}} · {done, plural, one {# terminée} other {# terminées}} · {camp}",
+    "empty": "Tu n’as aucune unité aujourd’hui.",
+    "now": "Maintenant",
+    "remaining": "encore {duration}",
+    "currentLink": "Unité en cours : {title} – ouvrir les détails",
+    "groupDetails": "{size} enfants, {ageRange} ans",
+    "withCoaches": "Avec {names}",
+    "details": "Détails et remarques",
+    "next": "Ensuite",
+    "startsIn": "dans {duration}",
+    "later": "Plus tard aujourd’hui",
+    "done": "Terminé",
+    "lastUpdated": "Dernière mise à jour à {time}"
+  },
+  "Session": {
+    "timeRange": "{start} – {end}",
+    "group": "Groupe {name}",
+    "allGroups": "Tous les groupes",
+    "allCoaches": "Tous les coachs"
+  },
+  "Duration": {
+    "minutes": "{minutes} min",
+    "hours": "{hours} h",
+    "hoursMinutes": "{hours} h {minutes} min"
   }
 }
