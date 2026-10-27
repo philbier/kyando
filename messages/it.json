@@ -31,6 +31,20 @@
     "profil": "Profilo",
     "openProfile": "Apri il profilo"
   },
+  "Profil": {
+    "title": "Profilo",
+    "language": "Lingua",
+    "languageHint": "L’app cambia lingua subito.",
+    "campDetails": "{dates} · {venue}",
+    "headOrganizer": "Direzione del campo",
+    "emergency": "Emergenza",
+    "emergencyPlaceholder": "[numero di emergenza]",
+    "signOut": "Esci"
+  },
+  "Roles": {
+    "coach": "Coach",
+    "head_organizer": "Direzione del campo"
+  },
   "Heute": {
     "pageTitle": "Oggi",
     "title": "Le mie unità di oggi",

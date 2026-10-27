@@ -31,6 +31,20 @@
     "profil": "Profile",
     "openProfile": "Open profile"
   },
+  "Profil": {
+    "title": "Profile",
+    "language": "Language",
+    "languageHint": "The app switches right away.",
+    "campDetails": "{dates} · {venue}",
+    "headOrganizer": "Camp lead",
+    "emergency": "Emergency",
+    "emergencyPlaceholder": "[emergency number]",
+    "signOut": "Sign out"
+  },
+  "Roles": {
+    "coach": "Coach",
+    "head_organizer": "Camp lead"
+  },
   "Heute": {
     "pageTitle": "Today",
     "title": "My sessions today",

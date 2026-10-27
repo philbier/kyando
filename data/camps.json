@@ -5,6 +5,8 @@
     "starts_on": "2026-10-12",
     "ends_on": "2026-10-16",
     "timezone": "Europe/Berlin",
+    "venue": "Sportzentrum Sonnenberg",
+    "emergency_phone": null,
     "is_active": true
   }
 ]

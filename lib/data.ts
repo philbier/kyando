@@ -22,6 +22,8 @@ export type Camp = {
   starts_on: string; // date, "YYYY-MM-DD"
   ends_on: string;
   timezone: string; // e.g. "Europe/Berlin"
+  venue: string | null; // e.g. "Sportzentrum Sonnenberg"
+  emergency_phone: string | null; // null = not set yet, Profil shows a placeholder
   is_active: boolean;
 };
 
@@ -30,6 +32,7 @@ export type Profile = {
   full_name: string;
   email: string;
   role: Role;
+  job_title: string | null; // e.g. "Judo-Coach"; Profil falls back to the role label
   locale: string;
 };
 
@@ -93,6 +96,13 @@ export function getActiveCamp(): Camp | undefined {
 
 export function getProfile(id: string): Profile | undefined {
   return profiles.find((profile) => profile.id === id);
+}
+
+// The camp's contact people (Lagerleitung), ordered by name.
+export function getHeadOrganizers(): Profile[] {
+  return profiles
+    .filter((profile) => profile.role === "head_organizer")
+    .sort((a, b) => a.full_name.localeCompare(b.full_name));
 }
 
 // "Meine Einheiten heute": the coach's sessions on one day, ordered by start time.
