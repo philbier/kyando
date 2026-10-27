@@ -4,7 +4,7 @@
 // Server Action `signIn` runs. useActionState holds the action's last result.
 
 import { CircleAlertIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
@@ -13,12 +13,15 @@ import { signIn, type LoginState } from "./actions";
 
 export function LoginForm() {
   const t = useTranslations("Login");
+  const locale = useLocale();
   const [state, formAction, isPending] = useActionState<LoginState, FormData>(signIn, {});
   const hasError = Boolean(state.failed);
 
   return (
     // noValidate: we show our own translated messages instead of the browser's.
     <form action={formAction} noValidate>
+      {/* Tells the Server Action which language to continue in. */}
+      <input type="hidden" name="locale" value={locale} />
       <FieldGroup>
         <Field>
           <FieldLabel htmlFor="email">{t("email")}</FieldLabel>
