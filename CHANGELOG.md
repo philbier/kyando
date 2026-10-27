@@ -12,7 +12,9 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - "Meine Einheiten heute" screen at `/[locale]/heute`, built from `design/screens/02-heute.png`: header with avatar, day and camp summary, "Jetzt" card, "Als Nächstes", "Später heute", "Erledigt" and "Zuletzt aktualisiert um …". Each section only shows when it has sessions.
 - Bottom navigation (Heute · Kalender · Profil) in the logged-in layout `app/[locale]/(app)/layout.tsx`.
 - Dummy data in `data/*.json`, one file per planned database table, read through `lib/data.ts`. `data/demo.json` fixes the current time (Tuesday, 13 October 2026, 11:20) and the logged-in coach (Lena Brunner).
-- shadcn components `avatar`, `badge` and `item`.
+- Profil screen at `/[locale]/profil`, built from `design/screens/07-profil.png`: name, email and job title, language as radio buttons that switch the app right away, camp info with the Lagerleitung and an emergency-number placeholder, and "Abmelden" (for now it just goes back to the login screen).
+- Data fields `profiles.job_title`, `camps.venue` and `camps.emergency_phone`.
+- shadcn components `avatar`, `badge`, `item` and `radio-group`.
 - Translations for the new screen in `de`, `fr`, `it` and `en`.
 
 ### Changed

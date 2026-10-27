@@ -1,17 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "@/i18n/navigation";
-
-// "Lena Brunner" -> "LB"
-function initials(fullName: string) {
-  return fullName
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((part) => part[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-}
+import { initials } from "@/lib/utils";
 
 // Top bar of the main screens: logo and name on the left, the user's avatar
 // (a link to Profil) on the right.
