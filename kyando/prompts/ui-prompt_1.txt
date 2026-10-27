@@ -1,0 +1,31 @@
+Design a mobile-first web app called Kyandō. Coaches use it to run a recreational sports camp while the camp is happening. It is not for registration or booking beforehand.
+
+Users:
+About 20 coaches. They are the only users; campers have no accounts.
+Roles include Head Organizer, Judo Coach and Polysport Coach.
+Head Organizers create and edit the schedule. Everyone else can only view it.
+
+Context of use:
+Coaches use it mostly on their phones during a busy camp week (usually one week), often quickly and between sessions.
+It's a web app, not a native app.
+
+Core screens and features
+Login-Screen: with E-Mail and Password.
+Camp week calendar: the full week's schedule with day and time blocks, activity name, location and group. It must be easy to read on a small screen. Offer day and week views.
+"My sessions today": a personal view of the sessions the logged-in coach is assigned to. This is the most important screen and probably the home screen.
+
+Language:
+The app supports several languages, with German as the default. Design all UI copy in German first.
+Include a language switcher, and allow for longer German words in the layout.
+
+Design system:
+Use a Claude Design System based on shadcn/ui (https://github.com/shadcn-ui/ui) components and conventions.
+
+Out of scope
+No payments
+No camper accounts
+No native app
+
+What I'd like from you
+The key screens and navigation structure
+Layouts for "My sessions today", the calendar (day and week)
