@@ -1,0 +1,11 @@
+[
+  { "id": "loc-dojo-b", "camp_id": "camp-2026-herbst", "name": "Dojo (Halle B)", "address_hint": "Sportzentrum Sonnenberg" },
+  { "id": "loc-dojo-a", "camp_id": "camp-2026-herbst", "name": "Dojo (Halle A)", "address_hint": "Sportzentrum Sonnenberg" },
+  { "id": "loc-dreifachturnhalle", "camp_id": "camp-2026-herbst", "name": "Dreifachturnhalle", "address_hint": "Sportzentrum Sonnenberg" },
+  { "id": "loc-kletterwand", "camp_id": "camp-2026-herbst", "name": "Kletterwand", "address_hint": "Sportzentrum Sonnenberg, Halle C" },
+  { "id": "loc-mensa", "camp_id": "camp-2026-herbst", "name": "Mensa", "address_hint": "Hauptgebäude, Erdgeschoss" },
+  { "id": "loc-leiterzimmer", "camp_id": "camp-2026-herbst", "name": "Leiterzimmer", "address_hint": "Hauptgebäude, 1. Stock" },
+  { "id": "loc-sportplatz-nord", "camp_id": "camp-2026-herbst", "name": "Sportplatz Nord", "address_hint": null },
+  { "id": "loc-wald", "camp_id": "camp-2026-herbst", "name": "Wald Sonnenberg", "address_hint": "Treffpunkt beim Parkplatz" },
+  { "id": "loc-gelaende", "camp_id": "camp-2026-herbst", "name": "Ganzes Gelände", "address_hint": null }
+]

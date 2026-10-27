@@ -1,0 +1,6 @@
+[
+  { "id": "group-adler", "camp_id": "camp-2026-herbst", "name": "Adler", "age_range": "8–10", "size": 12 },
+  { "id": "group-fuechse", "camp_id": "camp-2026-herbst", "name": "Füchse", "age_range": "6–7", "size": 10 },
+  { "id": "group-luchse", "camp_id": "camp-2026-herbst", "name": "Luchse", "age_range": "11–12", "size": 14 },
+  { "id": "group-baeren", "camp_id": "camp-2026-herbst", "name": "Bären", "age_range": "13–15", "size": 11 }
+]
