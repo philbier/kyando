@@ -23,5 +23,41 @@
     "submitting": "Signing in …",
     "noAccess": "No access yet? Ask the camp lead.",
     "error": "Sign-in didn’t work. Try again."
+  },
+  "Navigation": {
+    "label": "Main navigation",
+    "heute": "Today",
+    "kalender": "Calendar",
+    "profil": "Profile",
+    "openProfile": "Open profile"
+  },
+  "Heute": {
+    "pageTitle": "Today",
+    "title": "My sessions today",
+    "dayOfCamp": "{date} · Day {day} of {days}",
+    "summary": "{total, plural, one {# session} other {# sessions}} · {done} done · {camp}",
+    "empty": "You have no sessions today.",
+    "now": "Now",
+    "remaining": "{duration} left",
+    "currentLink": "Current session: {title} – open details",
+    "groupDetails": "{size} kids, ages {ageRange}",
+    "withCoaches": "With {names}",
+    "details": "Details and notes",
+    "next": "Up next",
+    "startsIn": "in {duration}",
+    "later": "Later today",
+    "done": "Done",
+    "lastUpdated": "Last updated at {time}"
+  },
+  "Session": {
+    "timeRange": "{start} – {end}",
+    "group": "Group {name}",
+    "allGroups": "All groups",
+    "allCoaches": "All coaches"
+  },
+  "Duration": {
+    "minutes": "{minutes} min",
+    "hours": "{hours} h",
+    "hoursMinutes": "{hours} h {minutes} min"
   }
 }

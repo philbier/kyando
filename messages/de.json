@@ -23,5 +23,41 @@
     "submitting": "Wird angemeldet …",
     "noAccess": "Noch keinen Zugang? Wende dich an die Lagerleitung.",
     "error": "Die Anmeldung hat nicht geklappt. Versuche es noch einmal."
+  },
+  "Navigation": {
+    "label": "Hauptnavigation",
+    "heute": "Heute",
+    "kalender": "Kalender",
+    "profil": "Profil",
+    "openProfile": "Profil öffnen"
+  },
+  "Heute": {
+    "pageTitle": "Heute",
+    "title": "Meine Einheiten heute",
+    "dayOfCamp": "{date} · Tag {day} von {days}",
+    "summary": "{total, plural, one {# Einheit} other {# Einheiten}} · {done} erledigt · {camp}",
+    "empty": "Heute hast du keine Einheiten.",
+    "now": "Jetzt",
+    "remaining": "noch {duration}",
+    "currentLink": "Aktuelle Einheit: {title} – Details öffnen",
+    "groupDetails": "{size} Kinder, {ageRange} Jahre",
+    "withCoaches": "Mit {names}",
+    "details": "Details und Hinweise",
+    "next": "Als Nächstes",
+    "startsIn": "in {duration}",
+    "later": "Später heute",
+    "done": "Erledigt",
+    "lastUpdated": "Zuletzt aktualisiert um {time}"
+  },
+  "Session": {
+    "timeRange": "{start} – {end}",
+    "group": "Gruppe {name}",
+    "allGroups": "Alle Gruppen",
+    "allCoaches": "Alle Coaches"
+  },
+  "Duration": {
+    "minutes": "{minutes} Min.",
+    "hours": "{hours} Std.",
+    "hoursMinutes": "{hours} Std. {minutes} Min."
   }
 }
