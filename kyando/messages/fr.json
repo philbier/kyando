@@ -1,0 +1,27 @@
+{
+  "Metadata": {
+    "title": "Kyandō",
+    "description": "Le planning du camp pour ton équipe de coachs."
+  },
+  "LanguageSelect": {
+    "label": "Langue",
+    "de": "Deutsch",
+    "fr": "Français",
+    "it": "Italiano",
+    "en": "English"
+  },
+  "Login": {
+    "pageTitle": "Connexion",
+    "tagline": "Le planning du camp pour ton équipe de coachs.",
+    "title": "Se connecter",
+    "description": "Connecte-toi avec ton adresse e-mail.",
+    "email": "E-mail",
+    "emailPlaceholder": "nom@exemple.ch",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "submit": "Se connecter",
+    "submitting": "Connexion …",
+    "noAccess": "Pas encore d’accès ? Adresse-toi à la direction du camp.",
+    "error": "La connexion a échoué. Réessaie."
+  }
+}
