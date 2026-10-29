@@ -100,7 +100,7 @@ The bottom navigation (Heute · Kalender · Profil) lives once in the logged-in 
 ## Data model (first draft)
 
 - `camps`: id, name, starts_on, ends_on, timezone (default `Europe/Berlin`), venue, emergency_phone, is_active
-- `profiles`: id (references `auth.users`), full_name, email, role, job_title (e.g. "Judo-Coach", optional), locale
+- `profiles`: id (references `auth.users`), full_name, email, role, job_title (e.g. "Judo-Coach", optional), phone (optional), locale
 - `groups`: id, camp_id, name, age_range, size
 - `locations`: id, camp_id, name, address_hint
 - `sessions`: id, camp_id, title, short_name (≤ 10 chars), category (`judo` | `polysport` | `gemeinsam` | `ausflug_abend`), starts_at, ends_at (`timestamptz`), location_id, group_id (null means all groups), coaches_only (shown as "Alle Coaches", e.g. the morning meeting), notes, updated_by, updated_at

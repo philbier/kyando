@@ -14,7 +14,8 @@ import sessionCoachesJson from "@/data/session_coaches.json";
 import sessionsJson from "@/data/sessions.json";
 
 export type Role = "head_organizer" | "coach";
-export type Category = "judo" | "polysport" | "gemeinsam" | "ausflug_abend";
+export const categories = ["judo", "polysport", "gemeinsam", "ausflug_abend"] as const;
+export type Category = (typeof categories)[number];
 
 export type Camp = {
   id: string;
@@ -33,6 +34,7 @@ export type Profile = {
   email: string;
   role: Role;
   job_title: string | null; // e.g. "Judo-Coach"; Profil falls back to the role label
+  phone: string | null; // for the call button on the session details
   locale: string;
 };
 
@@ -148,6 +150,80 @@ export function getCampSessions(camp: Camp): SessionWithDetails[] {
     .map(withDetails);
 }
 
+// One session with its details, or undefined if there is no such session.
+export function getSession(id: string): SessionWithDetails | undefined {
+  const session = sessions.find((s) => s.id === id);
+  return session && withDetails(session);
+}
+
+// The camp's locations, ordered by name.
+export function getLocations(camp: Camp): Location[] {
+  return locations
+    .filter((location) => location.camp_id === camp.id)
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// Everyone who can be assigned to a session (coaches and Lagerleitung), ordered by name.
+export function getCoaches(): Profile[] {
+  return [...profiles].sort((a, b) => a.full_name.localeCompare(b.full_name));
+}
+
+// The fields of a session that the edit form changes.
+export type SessionInput = Pick<
+  Session,
+  | "title"
+  | "short_name"
+  | "category"
+  | "starts_at"
+  | "ends_at"
+  | "location_id"
+  | "group_id"
+  | "coaches_only"
+  | "notes"
+>;
+
+// Prototype only: changes are kept in the server's memory, so they show up
+// everywhere in the app but are lost when the dev server restarts.
+// TODO: replace with an insert/update on `sessions` and `session_coaches` in Supabase.
+// Returns the session's id (a new one when `id` is null).
+export function saveSession(
+  camp: Camp,
+  id: string | null,
+  input: SessionInput,
+  coachIds: string[],
+  updatedBy: string,
+  updatedAt: Date,
+): string {
+  const changes = { ...input, updated_by: updatedBy, updated_at: updatedAt.toISOString() };
+  let session = id ? sessions.find((s) => s.id === id) : undefined;
+  if (session) {
+    Object.assign(session, changes);
+  } else {
+    session = { id: `s-${crypto.randomUUID()}`, camp_id: camp.id, ...changes };
+    sessions.push(session);
+  }
+
+  // Like "delete from session_coaches where session_id = $1" followed by one insert per coach.
+  removeSessionCoaches(session.id);
+  for (const coachId of coachIds) sessionCoaches.push({ session_id: session.id, coach_id: coachId });
+
+  return session.id;
+}
+
+// Prototype only, like saveSession. TODO: "delete from sessions where id = $1" in Supabase
+// (session_coaches rows go with it through "on delete cascade").
+export function deleteSession(id: string) {
+  const index = sessions.findIndex((s) => s.id === id);
+  if (index >= 0) sessions.splice(index, 1);
+  removeSessionCoaches(id);
+}
+
+function removeSessionCoaches(sessionId: string) {
+  for (let i = sessionCoaches.length - 1; i >= 0; i--) {
+    if (sessionCoaches[i].session_id === sessionId) sessionCoaches.splice(i, 1);
+  }
+}
+
 function withDetails(session: Session): SessionWithDetails {
   const coachIds = sessionCoaches
     .filter((row) => row.session_id === session.id)
@@ -184,6 +260,42 @@ export function minutesInTimeZone(date: Date, timeZone: string): number {
   }).formatToParts(date);
   const value = (type: string) => Number(parts.find((p) => p.type === type)?.value);
   return value("hour") * 60 + value("minute");
+}
+
+// The wall-clock time ("HH:MM") of a moment in the given time zone, e.g. for
+// the value of an <input type="time">. Not for display (that goes through next-intl).
+export function timeInTimeZone(date: Date, timeZone: string): string {
+  const minutes = minutesInTimeZone(date, timeZone);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${pad(Math.floor(minutes / 60))}:${pad(minutes % 60)}`;
+}
+
+// The moment when the clock in the given time zone shows `day` at `time`,
+// e.g. ("2026-10-13", "10:45", "Europe/Berlin") -> 2026-10-13T08:45:00Z.
+// This is what "timestamp '2026-10-13 10:45' at time zone 'Europe/Berlin'" does in SQL.
+export function zonedTimeToUtc(day: string, time: string, timeZone: string): Date {
+  const asUtc = Date.parse(`${day}T${time}:00Z`);
+  // How far the time zone is ahead of UTC at a given moment, in milliseconds.
+  const offset = (ms: number) => wallClockAsUtc(new Date(ms), timeZone) - ms;
+  // Guess with the offset at `asUtc`, then correct once in case a daylight-saving switch lies in between.
+  const guess = asUtc - offset(asUtc);
+  return new Date(asUtc - offset(guess));
+}
+
+// The wall-clock date and time of a moment in a time zone, read as if it were UTC.
+function wallClockAsUtc(date: Date, timeZone: string): number {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const value = (type: string) => Number(parts.find((p) => p.type === type)?.value);
+  return Date.UTC(value("year"), value("month") - 1, value("day"), value("hour"), value("minute"), value("second"));
 }
 
 // Whole days from one "YYYY-MM-DD" date to another, e.g. ("2026-10-12", "2026-10-13") -> 1.

@@ -24,6 +24,14 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
   - Category colors and legend in `components/category.tsx`.
 - Seed sessions for the whole camp week (Monday to Friday) and three more locations.
 - shadcn components `tabs` and `toggle-group`.
+- Einheit details at `/[locale]/einheit/[id]`, built from `design/screens/05-einheit-details.png`: category, title, "Jetzt" badge with time left (or "beginnt in …" later today), time and length, date, location with a "Karte" button (opens Google Maps), group, coaches with a call button, Hinweise and "Geändert von …". The back button returns to the previous screen, so the Kalender keeps its day and filter. "Einheit bearbeiten" in a fixed bottom bar, shown only to the Lagerleitung.
+- Einheit bearbeiten at `/[locale]/einheit/[id]/bearbeiten` and Neue Einheit at `/[locale]/einheit/neu`, built from `design/screens/06-einheit-bearbeiten.png`, for the Lagerleitung only (coaches are sent back to the details or the Kalender):
+  - Fields Aktivität, Kurzname (max. 10 characters), Kategorie, Tag, Beginn/Ende, Ort, Gruppe (including "Alle Gruppen" and "Alle Coaches"), Coaches and Hinweise, with translated error messages.
+  - "Überschneidung" alert while editing, when a selected coach is already in another session at the same time.
+  - "Einheit löschen" with a confirm dialog.
+  - The Server Actions `saveSessionAction` and `deleteSessionAction` check the role and every value. For now, changes are kept in the server's memory and are lost when the server restarts.
+- Data field `profiles.phone`.
+- shadcn components `alert`, `alert-dialog`, `checkbox` and `textarea`.
 
 ### Changed
 
