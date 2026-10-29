@@ -16,10 +16,19 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - Data fields `profiles.job_title`, `camps.venue` and `camps.emergency_phone`.
 - shadcn components `avatar`, `badge`, `item` and `radio-group`.
 - Translations for the new screen in `de`, `fr`, `it` and `en`.
+- Kalender screen at `/[locale]/kalender`, built from `design/screens/03-kalender-tag.png` and `04-kalender-woche.png`. View, day and filter are kept in the URL (`?ansicht=tag|woche&tag=…&filter=…`).
+  - Tag: day picker for the camp days, filter (Alle Gruppen, Nur meine Einheiten, one group), sessions grouped by time slot with "Jetzt" and "Meine" badges. On today, finished slots fold into "Frühere Einheiten anzeigen (n)".
+  - Woche: 08–18 h grid for "Meine Einheiten" or one group, with dashed half-hour lines, a "now" line and a separate evening row. Each session shows its short name and times ("10:00-11:00"). Overlapping sessions are shown side by side.
+  - "Zuletzt aktualisiert um …" at the bottom, for the sessions on screen. Changes from an earlier day also show the date.
+  - "Neue Einheit" button, shown only to the Lagerleitung.
+  - Category colors and legend in `components/category.tsx`.
+- Seed sessions for the whole camp week (Monday to Friday) and three more locations.
+- shadcn components `tabs` and `toggle-group`.
 
 ### Changed
 
 - For testing, "Anmelden" no longer checks credentials: it always goes to the Heute screen in the current language.
+- changed login form an removed 'forgot password'
 
 ## [0.1.0] - 2026-10-11
 
@@ -42,8 +51,3 @@ First version: project setup and the login screen.
   - Note for people without an account.
 - The `signIn` Server Action (`app/[locale]/login/actions.ts`). For now it always fails, and the form shows a general error message while keeping the email that was entered.
 - `README.md` explaining how to install Node.js, install the dependencies, start the app locally and fix common problems.
-
-### Known limitations
-
-- The "Anmelden" button doesn't check the email and password yet; it always shows the error. Real sign-in with Supabase Auth will come in a later version.
-- The "Passwort vergessen?" link doesn't lead anywhere yet.

@@ -132,6 +132,22 @@ export function getCoachSessionsOnDay(
     .map(withDetails);
 }
 
+// The camp's groups, ordered by name.
+export function getGroups(camp: Camp): Group[] {
+  return groups
+    .filter((group) => group.camp_id === camp.id)
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// All sessions of the camp with their details, ordered by start time.
+// The Kalender page filters them by day and group itself.
+export function getCampSessions(camp: Camp): SessionWithDetails[] {
+  return sessions
+    .filter((session) => session.camp_id === camp.id)
+    .sort((a, b) => Date.parse(a.starts_at) - Date.parse(b.starts_at))
+    .map(withDetails);
+}
+
 function withDetails(session: Session): SessionWithDetails {
   const coachIds = sessionCoaches
     .filter((row) => row.session_id === session.id)
@@ -157,7 +173,29 @@ export function dateInTimeZone(date: Date, timeZone: string): string {
   }).format(date);
 }
 
+// Minutes since midnight of a moment in the given time zone, e.g. 10:45 -> 645.
+// Used to place sessions in the week grid.
+export function minutesInTimeZone(date: Date, timeZone: string): number {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const value = (type: string) => Number(parts.find((p) => p.type === type)?.value);
+  return value("hour") * 60 + value("minute");
+}
+
 // Whole days from one "YYYY-MM-DD" date to another, e.g. ("2026-10-12", "2026-10-13") -> 1.
 export function daysBetween(from: string, to: string): number {
   return Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
+}
+
+// Every date from `from` to `to` (both included), e.g. the days of a camp.
+export function datesBetween(from: string, to: string): string[] {
+  const dates: string[] = [];
+  for (let i = 0; i <= daysBetween(from, to); i++) {
+    dates.push(new Date(Date.parse(from) + i * 86_400_000).toISOString().slice(0, 10));
+  }
+  return dates;
 }
