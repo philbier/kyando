@@ -20,6 +20,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 ### Changed
 
 - For testing, "Anmelden" no longer checks credentials: it always goes to the Heute screen in the current language.
+- changed login form an removed 'forgot password'
 
 ## [0.1.0] - 2026-10-11
 
@@ -42,8 +43,3 @@ First version: project setup and the login screen.
   - Note for people without an account.
 - The `signIn` Server Action (`app/[locale]/login/actions.ts`). For now it always fails, and the form shows a general error message while keeping the email that was entered.
 - `README.md` explaining how to install Node.js, install the dependencies, start the app locally and fix common problems.
-
-### Known limitations
-
-- The "Anmelden" button doesn't check the email and password yet; it always shows the error. Real sign-in with Supabase Auth will come in a later version.
-- The "Passwort vergessen?" link doesn't lead anywhere yet.

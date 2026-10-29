@@ -18,7 +18,6 @@
     "email": "E-mail",
     "emailPlaceholder": "nom@exemple.ch",
     "password": "Mot de passe",
-    "forgotPassword": "Mot de passe oublié ?",
     "submit": "Se connecter",
     "submitting": "Connexion …",
     "noAccess": "Pas encore d’accès ? Adresse-toi à la direction du camp.",

@@ -18,7 +18,6 @@
     "email": "Email",
     "emailPlaceholder": "name@example.com",
     "password": "Password",
-    "forgotPassword": "Forgot password?",
     "submit": "Sign in",
     "submitting": "Signing in …",
     "noAccess": "No access yet? Ask the camp lead.",

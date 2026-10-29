@@ -39,13 +39,7 @@ export function LoginForm() {
         </Field>
 
         <Field>
-          <div className="flex items-center justify-between gap-2">
-            <FieldLabel htmlFor="password">{t("password")}</FieldLabel>
-            {/* TODO: password reset flow (Supabase resetPasswordForEmail) isn't built yet. */}
-            <a href="#" className="text-sm font-medium underline underline-offset-4">
-              {t("forgotPassword")}
-            </a>
-          </div>
+          <FieldLabel htmlFor="password">{t("password")}</FieldLabel>
           <Input
             id="password"
             name="password"
