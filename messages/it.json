@@ -62,6 +62,46 @@
     "done": "Concluse",
     "lastUpdated": "Ultimo aggiornamento alle {time}"
   },
+  "Kalender": {
+    "title": "Calendario",
+    "subtitle": "{camp} · {dates}",
+    "newSession": "Nuova unità",
+    "day": "Giorno",
+    "week": "Settimana",
+    "chooseDay": "Scegli il giorno",
+    "dayButton": "{weekday} {day}",
+    "today": "{date} (oggi)",
+    "filter": "Filtro",
+    "allGroups": "Tutti i gruppi",
+    "onlyMine": "Solo le mie unità",
+    "mySessions": "Le mie unità",
+    "showEarlier": "Mostra le unità passate ({count})",
+    "hideEarlier": "Nascondi le unità passate",
+    "sessionCount": "{count, plural, one {# unità} other {# unità}}",
+    "now": "Adesso",
+    "mine": "Mia",
+    "emptyDay": "In questo giorno non ci sono unità.",
+    "emptyWeek": "In questa settimana non ci sono unità.",
+    "weekPlan": "Piano settimanale: {lens}",
+    "nowLine": "Adesso, {time}",
+    "blockLabel": "{title}, {date}, {start} – {end}{mine, select, yes {, mia unità} other {}}",
+    "blockTime": "{start}-{end}",
+    "lastUpdated": "Ultimo aggiornamento alle {time}",
+    "lastUpdatedOn": "Ultimo aggiornamento il {date} alle {time}",
+    "tapHint": "Tocca un’unità per luogo, gruppo e coach."
+  },
+  "Categories": {
+    "judo": "Judo",
+    "polysport": "Polisport",
+    "gemeinsam": "Insieme",
+    "ausflug_abend": "Gita & serata",
+    "letter": {
+      "judo": "J",
+      "polysport": "P",
+      "gemeinsam": "I",
+      "ausflug_abend": "G"
+    }
+  },
   "Session": {
     "timeRange": "{start} – {end}",
     "group": "Gruppo {name}",

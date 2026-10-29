@@ -62,6 +62,46 @@
     "done": "Erledigt",
     "lastUpdated": "Zuletzt aktualisiert um {time}"
   },
+  "Kalender": {
+    "title": "Kalender",
+    "subtitle": "{camp} · {dates}",
+    "newSession": "Neue Einheit",
+    "day": "Tag",
+    "week": "Woche",
+    "chooseDay": "Tag wählen",
+    "dayButton": "{weekday} {day}",
+    "today": "{date} (heute)",
+    "filter": "Filter",
+    "allGroups": "Alle Gruppen",
+    "onlyMine": "Nur meine Einheiten",
+    "mySessions": "Meine Einheiten",
+    "showEarlier": "Frühere Einheiten anzeigen ({count})",
+    "hideEarlier": "Frühere Einheiten ausblenden",
+    "sessionCount": "{count, plural, one {# Einheit} other {# Einheiten}}",
+    "now": "Jetzt",
+    "mine": "Meine",
+    "emptyDay": "An diesem Tag gibt es keine Einheiten.",
+    "emptyWeek": "In dieser Woche gibt es keine Einheiten.",
+    "weekPlan": "Wochenplan: {lens}",
+    "nowLine": "Jetzt, {time}",
+    "blockLabel": "{title}, {date}, {start} – {end}{mine, select, yes {, meine Einheit} other {}}",
+    "blockTime": "{start}-{end}",
+    "lastUpdated": "Zuletzt aktualisiert um {time}",
+    "lastUpdatedOn": "Zuletzt aktualisiert am {date} um {time}",
+    "tapHint": "Tippe auf eine Einheit für Ort, Gruppe und Coaches."
+  },
+  "Categories": {
+    "judo": "Judo",
+    "polysport": "Polysport",
+    "gemeinsam": "Gemeinsam",
+    "ausflug_abend": "Ausflug & Abend",
+    "letter": {
+      "judo": "J",
+      "polysport": "P",
+      "gemeinsam": "G",
+      "ausflug_abend": "A"
+    }
+  },
   "Session": {
     "timeRange": "{start} – {end}",
     "group": "Gruppe {name}",

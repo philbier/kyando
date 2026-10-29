@@ -7,5 +7,8 @@
   { "id": "loc-leiterzimmer", "camp_id": "camp-2026-herbst", "name": "Leiterzimmer", "address_hint": "Hauptgebäude, 1. Stock" },
   { "id": "loc-sportplatz-nord", "camp_id": "camp-2026-herbst", "name": "Sportplatz Nord", "address_hint": null },
   { "id": "loc-wald", "camp_id": "camp-2026-herbst", "name": "Wald Sonnenberg", "address_hint": "Treffpunkt beim Parkplatz" },
-  { "id": "loc-gelaende", "camp_id": "camp-2026-herbst", "name": "Ganzes Gelände", "address_hint": null }
+  { "id": "loc-gelaende", "camp_id": "camp-2026-herbst", "name": "Ganzes Gelände", "address_hint": null },
+  { "id": "loc-hallenbad", "camp_id": "camp-2026-herbst", "name": "Hallenbad", "address_hint": "Sportzentrum Sonnenberg, Untergeschoss" },
+  { "id": "loc-seilpark", "camp_id": "camp-2026-herbst", "name": "Seilpark Waldegg", "address_hint": "Abfahrt mit dem Car beim Parkplatz" },
+  { "id": "loc-feuerstelle", "camp_id": "camp-2026-herbst", "name": "Feuerstelle am Waldrand", "address_hint": "Hinter dem Sportplatz Nord" }
 ]
