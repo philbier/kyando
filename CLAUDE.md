@@ -74,15 +74,17 @@ The theme is **shadcn/ui with the tweakcn "Cyberpunk" preset**. Its tokens are i
 - **Shape:** radius `0.5rem`. Cards use `rounded-xl`, buttons and inputs `rounded-md`. Shadows stay soft and black, never colored glows.
 - **Icons:** Lucide, 2px stroke, `size-4` inside controls. Icon-only buttons need an `aria-label` (translated).
 - **Mobile-first:** design width 390px, must work at 360px, no horizontal page scroll. Touch targets are at least 44px tall, even where shadcn's default control height is 36px. Inputs use 16px text so iOS doesn't zoom.
+- **Laptop layout, Lagerleitung only:** design width 1440px. On a laptop-sized screen (Tailwind `lg`, 1024px and wider), a `head_organizer` gets a sticky shadcn `Sidebar` instead of the bottom navigation. See "App structure" below and `design/README.md`.
 - Copy style follows shadcn's examples: short, plain, sentence case. Buttons are verbs, labels are nouns.
 
 ## Visual reference
 
 The screens were designed on a Claude Design canvas. Treat them as the visual target for layout, hierarchy and German copy. **`design/README.md` maps each screen to its route and lists the details the images don't show.**
 
-- `design/screens/*.png`: one screenshot per screen. Open the matching image before building a screen.
-- `design/source/*.dc.html`: the design source of each screen. Read it for exact German copy and for which shadcn component is used where. It is **not runnable**: `<x-import component-from-global-scope="ShadcnUI.Card">` means shadcn's `<Card>`, and `<sc-for>` / `<sc-if>` are loops and conditions.
-- `design/Kyandō – Mobile Screens.pdf`: all screens in one file.
+- `design/mobile/screens/*.png`: one screenshot per phone screen. Open the matching image before building a screen.
+- `design/mobile/source/*.dc.html`: the design source of each phone screen. Read it for exact German copy and for which shadcn component is used where. It is **not runnable**: `<x-import component-from-global-scope="ShadcnUI.Card">` means shadcn's `<Card>`, and `<sc-for>` / `<sc-if>` are loops and conditions.
+- `design/mobile/Kyandō – Mobile Screens.pdf`: all phone screens in one file.
+- `design/desktop/screens/*.png` and `design/desktop/source/*.dc.html`: the laptop screens for the Lagerleitung (sidebar, full-screen Wochenplan with edit mode, Einheit details, Einheit bearbeiten, Profil).
 
 ## App structure (planned routes)
 
@@ -96,6 +98,24 @@ The screens were designed on a Claude Design canvas. Treat them as the visual ta
 | `/[locale]/profil` | Profil, Sprache, Abmelden |
 
 The bottom navigation (Heute · Kalender · Profil) lives once in the logged-in layout.
+
+**Lagerleitung on a laptop** (`head_organizer`, Tailwind `lg` and wider):
+
+- **Navigation:** a sticky sidebar replaces the bottom navigation. It holds:
+  - the camp switcher;
+  - Kalender and Profil;
+  - Coaches, Gruppen and Orte, which are placeholders with no screens yet;
+  - the user with "Abmelden" in the footer.
+- **After login:** they land on the full-screen Wochenplan (`/[locale]/kalender?ansicht=woche`), not on Heute. The login screen looks the same as on the phone.
+- **Wochenplan:** shows all groups at once, with one fixed lane per group in each day column.
+- **Edit mode:** "Bearbeiten" (top right) switches the Wochenplan into edit mode, with "Abbrechen" and "Speichern". In edit mode the Lagerleitung can:
+  - drag a session to another time or day (15-minute steps);
+  - drag a session's bottom edge to change its length;
+  - drag across an empty slot to create a session, which opens "Einheit bearbeiten".
+
+  Changes are only stored when they click "Speichern"; "Abbrechen" throws them away.
+- **Laptop layouts:** only Wochenplan, Einheit details, Einheit bearbeiten and Profil have one. Heute and the day view keep the phone layout.
+- **Not decided yet:** what coaches see on a laptop. Ask the owner before building it.
 
 ## Data model (first draft)
 
@@ -120,5 +140,6 @@ The bottom navigation (Heute · Kalender · Profil) lives once in the logged-in 
 ## Scope
 
 - **Prototype v1:** the designed screens: login, Heute, Kalender (day and week), session details, edit or create a session, Profil with language switcher.
+- **Laptop layout for the Lagerleitung:** designed in `design/desktop/`: sidebar, full-screen Wochenplan with edit mode (drag to move, resize, draw new), Einheit details, Einheit bearbeiten, Profil.
 - **Later** (see `prompt.text` and `ui-prompt_2.txt`): Excel import of the schedule, notifying coaches of schedule changes, shared materials (file uploads), switching camps by year.
 - **Out of scope:** payments, booking, camper accounts, native app.

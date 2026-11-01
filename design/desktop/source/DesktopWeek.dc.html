@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Wochenplan – Laptop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/shadcnui/tokens.css">
+<link rel="stylesheet" href="ds/shadcnui/components/bundle.css">
+<script src="ds/shadcnui/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Fira+Code&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--background);hyphens:auto;overflow-wrap:break-word}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+</style>
+</helmet>
+<div style="width: 1440px; height: 960px; overflow: hidden; background: var(--background); color: var(--foreground); font-family: var(--font-sans)">
+<x-import component-from-global-scope="ShadcnUI.SidebarProvider" style="min-height: 0; height: 960px; width: 1440px">
+
+  <x-import component-from-global-scope="ShadcnUI.Sidebar" collapsible="none" style="height: 960px; border-right: 1px solid var(--sidebar-border)">
+    <x-import component-from-global-scope="ShadcnUI.SidebarHeader">
+      <x-import component-from-global-scope="ShadcnUI.SidebarMenu">
+        <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+          <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton" size="lg" aria-label="Lager wechseln">
+            <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 32px; height: 32px; border-radius: var(--radius-md); background: var(--primary); color: var(--primary-foreground); font-weight: 800; font-size: 20px">K</span>
+            <span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><span style="font-size: 16px; font-weight: 800; letter-spacing: -0.025em">Kyandō</span><span style="font-size: 12px; font-weight: 500">Herbstlager 2026</span></span>
+            <svg style="margin-left: auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+          </x-import>
+        </x-import>
+      </x-import>
+    </x-import>
+    <x-import component-from-global-scope="ShadcnUI.SidebarContent">
+      <x-import component-from-global-scope="ShadcnUI.SidebarGroup">
+        <x-import component-from-global-scope="ShadcnUI.SidebarGroupLabel">Lager</x-import>
+        <x-import component-from-global-scope="ShadcnUI.SidebarGroupContent">
+          <x-import component-from-global-scope="ShadcnUI.SidebarMenu">
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton" is-active="{{yes}}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                <span>Kalender</span>
+              </x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>Profil</span>
+              </x-import>
+            </x-import>
+          </x-import>
+        </x-import>
+      </x-import>
+      <x-import component-from-global-scope="ShadcnUI.SidebarGroup">
+        <x-import component-from-global-scope="ShadcnUI.SidebarGroupLabel">Verwaltung</x-import>
+        <x-import component-from-global-scope="ShadcnUI.SidebarGroupContent">
+          <x-import component-from-global-scope="ShadcnUI.SidebarMenu">
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>Coaches</span>
+              </x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z"></path><rect x="3" y="14" width="7" height="7" rx="1"></rect><circle cx="17.5" cy="17.5" r="3.5"></circle></svg>
+                <span>Gruppen</span>
+              </x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>Orte</span>
+              </x-import>
+            </x-import>
+          </x-import>
+        </x-import>
+      </x-import>
+    </x-import>
+    <x-import component-from-global-scope="ShadcnUI.SidebarFooter">
+      <div style="display: flex; align-items: center; gap: 8px; padding: 8px">
+        <x-import component-from-global-scope="ShadcnUI.Avatar"><x-import component-from-global-scope="ShadcnUI.AvatarFallback">SM</x-import></x-import>
+        <div style="display: flex; flex-direction: column; min-width: 0; flex: 1; font-size: 14px; line-height: 20px"><span style="font-weight: 600">Sandra Meier</span><span style="font-size: 12px; line-height: 16px">Lagerleitung</span></div>
+        <x-import component-from-global-scope="ShadcnUI.Button" variant="ghost" size="icon" aria-label="Abmelden">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+        </x-import>
+      </div>
+    </x-import>
+  </x-import>
+
+  <main style="flex: 1; min-width: 0; height: 960px; overflow: auto; box-sizing: border-box; padding: 24px 24px 24px; display: flex; flex-direction: column; gap: 16px">
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+        <h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800; letter-spacing: -0.025em">Wochenplan</h1>
+        <p style="margin: 0; font-size: 14px; line-height: 20px">Herbstlager 2026 · 12.–16. Oktober · alle Gruppen</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <sc-if value="{{viewMode}}" hint-placeholder-val="{{true}}">
+          <x-import component-from-global-scope="ShadcnUI.Button" on-click="{{startEdit}}">
+            <svg data-icon="inline-start" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg>
+            Bearbeiten
+          </x-import>
+        </sc-if>
+        <sc-if value="{{editing}}" hint-placeholder-val="{{false}}">
+          <x-import component-from-global-scope="ShadcnUI.Button" variant="outline" on-click="{{stopEdit}}">
+            <svg data-icon="inline-start" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            Abbrechen
+          </x-import>
+          <x-import component-from-global-scope="ShadcnUI.Button" on-click="{{stopEdit}}">
+            <svg data-icon="inline-start" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+            Speichern
+          </x-import>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 40px">
+      <sc-if value="{{viewMode}}" hint-placeholder-val="{{true}}">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-size: 12px; line-height: 16px; font-weight: 500">
+          <sc-for list="{{legend}}" as="l" hint-placeholder-count="4">
+            <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 12px; height: 12px; box-sizing: border-box; border-radius: 3px; background: {{l.bg}}; border: {{l.bd}}"></span>{{l.name}}</span>
+          </sc-for>
+          <span>Spalten je Tag: Adler · Füchse · Luchse · Bären</span>
+        </div>
+        <span style="font-size: 12px; line-height: 16px; font-weight: 500">Klick auf eine Einheit öffnet die Details.</span>
+      </sc-if>
+      <sc-if value="{{editing}}" hint-placeholder-val="{{false}}">
+        <div role="status" style="flex: 1; display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: var(--radius-lg); background: var(--muted); border: 1px solid var(--border); font-size: 14px; line-height: 20px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg>
+          <span><span style="font-weight: 600">Bearbeitungsmodus.</span> Einheit ziehen zum Verschieben · unteren Rand ziehen für die Dauer · in eine freie Fläche ziehen für eine neue Einheit.</span>
+          <span style="margin-left: auto; flex: none"><x-import component-from-global-scope="ShadcnUI.Badge" variant="secondary">2 ungespeicherte Änderungen</x-import></span>
+        </div>
+      </sc-if>
+    </div>
+
+    <section aria-label="Wochenplan aller Gruppen" style="flex: 1; min-height: 0; display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--card); box-shadow: var(--shadow-sm); padding: 12px 16px 16px 8px">
+      <div style="display: grid; grid-template-columns: 48px repeat(5, minmax(0, 1fr)); column-gap: 8px">
+        <span></span>
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="5">
+          <div style="display: flex; flex-direction: column; gap: 6px; padding-bottom: 6px; border-bottom: 1px solid var(--border)">
+            <div style="display: flex; align-items: center; gap: 8px; height: 28px">
+              <span style="font-size: 14px; line-height: 20px; font-weight: 600">{{d.d}}</span>
+              <span style="display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 6px; box-sizing: border-box; border-radius: 999px; font-size: 14px; font-weight: 700; background: {{d.headBg}}; color: {{d.headFg}}">{{d.n}}</span>
+              <span style="font-size: 12px; line-height: 16px; font-weight: 500">{{d.note}}</span>
+            </div>
+            <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; font-size: 11px; line-height: 14px; font-weight: 500; text-align: center">
+              <span>Adler</span><span>Füchse</span><span>Luchse</span><span>Bären</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 48px repeat(5, minmax(0, 1fr)); column-gap: 8px; padding-top: 8px">
+        <div style="position: relative; height: {{gridH}}px">
+          <sc-for list="{{hours}}" as="h" hint-placeholder-count="14">
+            <span style="position: absolute; right: 4px; top: {{h.top}}px; transform: translateY(-50%); font-family: var(--font-mono); font-size: 11px; line-height: 12px">{{h.label}}</span>
+          </sc-for>
+        </div>
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="5">
+          <div style="position: relative; height: {{gridH}}px; background: repeating-linear-gradient(to bottom, var(--border) 0 1px, transparent 1px {{hourPx}}px)">
+            <sc-if value="{{editing}}" hint-placeholder-val="{{false}}">
+              <span aria-hidden="true" style="position: absolute; inset: 0; opacity: 0.45; background: repeating-linear-gradient(to bottom, var(--border) 0 1px, transparent 1px {{quarterPx}}px)"></span>
+            </sc-if>
+            <sc-for list="{{d.blocks}}" as="b" hint-placeholder-count="12">
+              <a href="{{b.href}}" aria-label="{{b.aria}}" style="position: absolute; top: {{b.top}}px; height: {{b.h}}px; left: {{b.left}}; width: {{b.width}}; box-sizing: border-box; padding: 3px 4px; border-radius: var(--radius-sm); background: {{b.bg}}; color: {{b.fg}}; border: {{b.bd}}; box-shadow: {{b.shadow}}; z-index: {{b.z}}; overflow: {{b.ov}}; opacity: {{b.op}}; cursor: {{b.cursor}}; font-size: 11px; line-height: 14px">
+                <span style="display: block; font-weight: 600; hyphens: manual">{{b.label}}</span>
+                <sc-if value="{{b.showTime}}" hint-placeholder-val="{{true}}"><span style="display: block">{{b.time}}</span></sc-if>
+                <sc-if value="{{b.changed}}" hint-placeholder-val="{{false}}"><span role="img" aria-label="Geändert, nicht gespeichert" style="position: absolute; top: 3px; right: 3px; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); box-shadow: 0 0 0 2px var(--card)"></span></sc-if>
+                <sc-if value="{{b.grip}}" hint-placeholder-val="{{false}}"><span aria-hidden="true" style="position: absolute; left: 50%; bottom: 2px; width: 16px; height: 3px; margin-left: -8px; border-radius: 999px; background: currentColor; opacity: 0.6"></span></sc-if>
+                <sc-if value="{{b.showTip}}" hint-placeholder-val="{{false}}"><span role="status" style="position: absolute; left: {{b.tipLeft}}; right: {{b.tipRight}}; top: calc(100% + 6px); white-space: nowrap; padding: 4px 8px; border-radius: var(--radius-md); background: var(--foreground); color: var(--background); font-size: 12px; line-height: 16px; font-weight: 500; box-shadow: var(--shadow-md)">{{b.tip}}</span></sc-if>
+              </a>
+            </sc-for>
+            <sc-if value="{{d.today}}" hint-placeholder-val="{{false}}">
+              <span role="img" aria-label="Jetzt, 11:20" style="position: absolute; left: -4px; right: 0; top: {{nowTop}}px; height: 2px; background: var(--primary); z-index: 20"></span>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+</x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"modus":{"editor":"enum","options":["ansicht","bearbeiten"],"default":"ansicht"},"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var editing = (this.state && typeof this.state.editing === 'boolean') ? this.state.editing : this.props.modus === 'bearbeiten';
+    var CAT = {
+      judo: { bg: 'var(--chart-2)', fg: 'var(--primary-foreground)', bd: 'none', name: 'Judo' },
+      poly: { bg: 'var(--chart-3)', fg: 'var(--accent-foreground)', bd: 'none', name: 'Polysport' },
+      gem: { bg: 'var(--muted)', fg: 'var(--foreground)', bd: '1px solid var(--border)', name: 'Gemeinsam' },
+      abend: { bg: 'var(--chart-5)', fg: 'var(--accent-foreground)', bd: 'none', name: 'Ausflug & Abend' }
+    };
+    var GROUPS = ['Gruppe Adler', 'Gruppe Füchse', 'Gruppe Luchse', 'Gruppe Bären'];
+    var H = '­';
+    var WEEK = [
+      { key: 'mo', d: 'Mo', n: '12', long: 'Montag, 12. Oktober', note: '', rows: [
+        ['09:00', '09:45', -1, 'gem', 'Begrüssung'],
+        ['10:00', '12:00', 0, 'judo', 'Judo'], ['10:00', '12:00', 1, 'poly', 'Bad' + H + 'minton'], ['10:00', '12:00', 2, 'judo', 'Judo'], ['10:00', '12:00', 3, 'poly', 'Uni' + H + 'hockey'],
+        ['12:00', '13:15', -1, 'gem', 'Mittagessen'],
+        ['14:00', '15:30', 0, 'poly', 'Uni' + H + 'hockey'], ['14:00', '15:30', 1, 'judo', 'Judo'], ['14:00', '15:30', 2, 'poly', 'Klet' + H + 'tern'], ['14:00', '15:30', 3, 'poly', 'Schwim' + H + 'men'],
+        ['16:00', '17:30', 0, 'poly', 'Schwim' + H + 'men'], ['16:00', '17:30', 1, 'poly', 'Klet' + H + 'tern'], ['16:00', '17:30', 2, 'poly', 'Uni' + H + 'hockey'], ['16:00', '17:30', 3, 'judo', 'Judo'],
+        ['19:30', '21:00', -1, 'abend', 'Spielabend'] ] },
+      { key: 'di', d: 'Di', n: '13', long: 'Dienstag, 13. Oktober', note: 'heute', today: true, rows: [
+        ['09:00', '10:30', 0, 'poly', 'Uni' + H + 'hockey'], ['09:00', '10:30', 1, 'judo', 'Judo'], ['09:00', '10:30', 2, 'poly', 'OL'], ['09:00', '10:30', 3, 'poly', 'Schwim' + H + 'men'],
+        ['10:45', '12:00', 0, 'judo', 'Judo'], ['10:45', '12:00', 1, 'poly', 'Bad' + H + 'minton'], ['10:45', '12:00', 2, 'poly', 'Klet' + H + 'tern'], ['10:45', '12:00', 3, 'judo', 'Judo'],
+        ['12:00', '13:15', -1, 'gem', 'Mittagessen'],
+        ['14:00', '15:30', 0, 'poly', 'Velo'], ['14:00', '15:30', 1, 'poly', 'Uni' + H + 'hockey'], ['14:00', '15:30', 2, 'judo', 'Judo'], ['14:00', '15:30', 3, 'poly', 'OL'],
+        ['16:00', '17:30', -1, 'gem', 'Ateliers nach Wahl'],
+        ['19:30', '21:00', -1, 'abend', 'Lagerolympiade'] ] },
+      { key: 'mi', d: 'Mi', n: '14', long: 'Mittwoch, 14. Oktober', note: '', rows: [
+        ['08:30', '16:30', -1, 'abend', 'Ausflug: Seilpark'],
+        ['19:30', '21:00', -1, 'abend', 'Lagerfeuer'] ] },
+      { key: 'do', d: 'Do', n: '15', long: 'Donnerstag, 15. Oktober', note: '', rows: [
+        ['09:00', '10:30', 0, 'judo', 'Judo'], ['09:00', '10:30', 1, 'poly', 'Schwim' + H + 'men'], ['09:00', '10:30', 2, 'poly', 'Bad' + H + 'minton'], ['09:00', '10:30', 3, 'poly', 'Klet' + H + 'tern'],
+        ['10:45', '12:00', 0, 'poly', 'Bad' + H + 'minton'], ['10:45', '12:00', 1, 'judo', 'Judo'], ['10:45', '12:00', 2, 'judo', 'Judo'], ['10:45', '12:00', 3, 'poly', 'Uni' + H + 'hockey'],
+        ['12:00', '13:15', -1, 'gem', 'Mittagessen'],
+        ['14:00', '15:30', 0, 'poly', 'Klet' + H + 'tern'], ['14:00', '15:30', 1, 'poly', 'Velo'], ['14:00', '15:30', 2, 'poly', 'Uni' + H + 'hockey'], ['14:00', '15:30', 3, 'judo', 'Judo'],
+        ['16:00', '17:30', 0, 'poly', 'Schwim' + H + 'men'], ['16:00', '17:30', 1, 'poly', 'OL'], ['16:00', '17:30', 2, 'poly', 'Velo'], ['16:00', '17:30', 3, 'poly', 'Bad' + H + 'minton'],
+        ['19:30', '21:00', -1, 'abend', 'Disco'] ] },
+      { key: 'fr', d: 'Fr', n: '16', long: 'Freitag, 16. Oktober', note: '', rows: [
+        ['09:00', '10:30', 0, 'judo', 'Prü' + H + 'fung'], ['09:00', '10:30', 1, 'poly', 'Tur' + H + 'nier'], ['09:00', '10:30', 2, 'judo', 'Prü' + H + 'fung'], ['09:00', '10:30', 3, 'poly', 'Tur' + H + 'nier'],
+        ['10:45', '12:00', 0, 'poly', 'Tur' + H + 'nier'], ['10:45', '12:00', 1, 'judo', 'Prü' + H + 'fung'], ['10:45', '12:00', 2, 'poly', 'Tur' + H + 'nier'], ['10:45', '12:00', 3, 'judo', 'Prü' + H + 'fung'],
+        ['12:00', '13:15', -1, 'gem', 'Mittagessen'],
+        ['14:00', '15:30', -1, 'gem', 'Abschlussfeier mit Eltern'] ] }
+    ];
+    var START = 480, END = 1290, PX = 0.84;
+    var toMin = function (s) { var p = s.split(':'); return Number(p[0]) * 60 + Number(p[1]); };
+    var fmt = function (m) { var h = Math.floor(m / 60), mm = m % 60; return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; };
+    var place = function (lane) { return lane < 0 ? { left: '0', width: '100%' } : { left: (lane * 25) + '%', width: 'calc(25% - 2px)' }; };
+
+    var make = function (day, r, extra) {
+      var c = CAT[r[3]];
+      var s = toMin(r[0]), e = toMin(r[1]);
+      var pos = place(r[2]);
+      var h = (e - s) * PX - 2;
+      var all = r[2] < 0;
+      var b = {
+        label: r[4], time: all ? r[0] + ' – ' + r[1] : r[0], showTime: h >= 30,
+        top: (s - START) * PX + 1, h: h, left: pos.left, width: pos.width,
+        bg: c.bg, fg: c.fg, bd: c.bd, shadow: 'none', z: 1, ov: 'hidden', op: 1,
+        cursor: editing ? 'grab' : 'pointer', href: editing ? '#' : 'DesktopDetails.dc.html',
+        grip: editing, changed: false, showTip: false, tip: '', tipLeft: '0', tipRight: 'auto',
+        aria: r[4].split(H).join('') + ', ' + (all ? 'Alle Gruppen' : GROUPS[r[2]]) + ', ' + day.long + ', ' + r[0] + '–' + r[1]
+      };
+      if (extra) { for (var k in extra) { b[k] = extra[k]; } }
+      return b;
+    };
+
+    var days = WEEK.map(function (day) {
+      var blocks = day.rows.map(function (r) {
+        var id = day.key + '-' + r[0] + '-' + r[2];
+        if (editing && id === 'mo-14:00-2') {
+          var s = toMin('14:00'), e = toMin('15:45');
+          return make(day, ['14:00', '15:45', 2, 'poly', r[4]], { h: (e - s) * PX - 2, shadow: '0 0 0 2px var(--ring)', z: 6, ov: 'visible', showTip: true, tip: '14:00–15:45 · 105 Min.', changed: true });
+        }
+        if (editing && id === 'di-14:00-3') { return make(day, r, { changed: true }); }
+        if (editing && id === 'do-16:00-0') {
+          return make(day, r, { bg: 'transparent', fg: 'var(--foreground)', bd: '2px dashed var(--foreground)', op: 0.45, grip: false, aria: 'Ursprüngliche Position von Schwimmen, Gruppe Adler' });
+        }
+        return make(day, r);
+      });
+      if (editing && day.key === 'mi') {
+        blocks.push(make(day, ['16:45', '18:15', 0, 'poly', 'Schwim' + H + 'men'], { shadow: '0 0 0 2px var(--ring), var(--shadow-xl)', z: 10, ov: 'visible', showTip: true, tip: 'Mi, 14. Okt. · 16:45–18:15', cursor: 'grabbing' }));
+      }
+      if (editing && day.key === 'fr') {
+        blocks.push(make(day, ['16:00', '17:00', 3, 'gem', '+ Neu'], { bg: 'var(--card)', fg: 'var(--foreground)', bd: '2px dashed var(--primary)', z: 6, ov: 'visible', showTip: true, tip: 'Neue Einheit · 16:00–17:00', tipLeft: 'auto', tipRight: '0', grip: false, cursor: 'crosshair', aria: 'Neue Einheit, Gruppe Bären, Freitag, 16:00–17:00' }));
+      }
+      return {
+        d: day.d, n: day.n, note: day.note, today: !!day.today, blocks: blocks,
+        headBg: day.today ? 'var(--primary)' : 'transparent',
+        headFg: day.today ? 'var(--primary-foreground)' : 'var(--foreground)'
+      };
+    });
+    var hours = [];
+    for (var m = START; m <= END; m += 60) { hours.push({ label: fmt(m), top: (m - START) * PX }); }
+    var legend = ['judo', 'poly', 'gem', 'abend'].map(function (k) { return { name: CAT[k].name, bg: CAT[k].bg, bd: CAT[k].bd }; });
+    return {
+      yes: true, editing: editing, viewMode: !editing,
+      startEdit: function () { self.setState({ editing: true }); },
+      stopEdit: function () { self.setState({ editing: false }); },
+      days: days, hours: hours, legend: legend,
+      gridH: (END - START) * PX, hourPx: 60 * PX, quarterPx: 15 * PX, nowTop: (680 - START) * PX
+    };
+  }
+}
+</script>
+</body>
+</html>

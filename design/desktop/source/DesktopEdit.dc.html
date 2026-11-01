@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Einheit bearbeiten – Laptop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/shadcnui/tokens.css">
+<link rel="stylesheet" href="ds/shadcnui/components/bundle.css">
+<script src="ds/shadcnui/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Fira+Code&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--background);hyphens:auto;overflow-wrap:break-word}
+a{color:var(--foreground);text-decoration:none}a:hover{color:var(--foreground)}
+</style>
+</helmet>
+<div style="width: 1440px; height: 960px; overflow: hidden; background: var(--background); color: var(--foreground); font-family: var(--font-sans)">
+<x-import component-from-global-scope="ShadcnUI.SidebarProvider" style="min-height: 0; height: 960px; width: 1440px">
+
+  <x-import component-from-global-scope="ShadcnUI.Sidebar" collapsible="none" style="height: 960px; border-right: 1px solid var(--sidebar-border)">
+    <x-import component-from-global-scope="ShadcnUI.SidebarHeader">
+      <x-import component-from-global-scope="ShadcnUI.SidebarMenu">
+        <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+          <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton" size="lg" aria-label="Lager wechseln">
+            <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 32px; height: 32px; border-radius: var(--radius-md); background: var(--primary); color: var(--primary-foreground); font-weight: 800; font-size: 20px">K</span>
+            <span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><span style="font-size: 16px; font-weight: 800; letter-spacing: -0.025em">Kyandō</span><span style="font-size: 12px; font-weight: 500">Herbstlager 2026</span></span>
+            <svg style="margin-left: auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+          </x-import>
+        </x-import>
+      </x-import>
+    </x-import>
+    <x-import component-from-global-scope="ShadcnUI.SidebarContent">
+      <x-import component-from-global-scope="ShadcnUI.SidebarGroup">
+        <x-import component-from-global-scope="ShadcnUI.SidebarGroupLabel">Lager</x-import>
+        <x-import component-from-global-scope="ShadcnUI.SidebarGroupContent">
+          <x-import component-from-global-scope="ShadcnUI.SidebarMenu">
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton" is-active="{{yes}}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                <span>Kalender</span>
+              </x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>Profil</span>
+              </x-import>
+            </x-import>
+          </x-import>
+        </x-import>
+      </x-import>
+      <x-import component-from-global-scope="ShadcnUI.SidebarGroup">
+        <x-import component-from-global-scope="ShadcnUI.SidebarGroupLabel">Verwaltung</x-import>
+        <x-import component-from-global-scope="ShadcnUI.SidebarGroupContent">
+          <x-import component-from-global-scope="ShadcnUI.SidebarMenu">
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>Coaches</span>
+              </x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z"></path><rect x="3" y="14" width="7" height="7" rx="1"></rect><circle cx="17.5" cy="17.5" r="3.5"></circle></svg>
+                <span>Gruppen</span>
+              </x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>Orte</span>
+              </x-import>
+            </x-import>
+          </x-import>
+        </x-import>
+      </x-import>
+    </x-import>
+    <x-import component-from-global-scope="ShadcnUI.SidebarFooter">
+      <div style="display: flex; align-items: center; gap: 8px; padding: 8px">
+        <x-import component-from-global-scope="ShadcnUI.Avatar"><x-import component-from-global-scope="ShadcnUI.AvatarFallback">SM</x-import></x-import>
+        <div style="display: flex; flex-direction: column; min-width: 0; flex: 1; font-size: 14px; line-height: 20px"><span style="font-weight: 600">Sandra Meier</span><span style="font-size: 12px; line-height: 16px">Lagerleitung</span></div>
+        <x-import component-from-global-scope="ShadcnUI.Button" variant="ghost" size="icon" aria-label="Abmelden">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+        </x-import>
+      </div>
+    </x-import>
+  </x-import>
+
+  <main style="flex: 1; min-width: 0; height: 960px; overflow: auto; box-sizing: border-box; padding: 24px 32px 32px">
+    <form style="margin: 0; display: flex; flex-direction: column; gap: 20px">
+
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+          <x-import component-from-global-scope="ShadcnUI.Breadcrumb">
+            <x-import component-from-global-scope="ShadcnUI.BreadcrumbList">
+              <x-import component-from-global-scope="ShadcnUI.BreadcrumbItem">
+                <x-import component-from-global-scope="ShadcnUI.BreadcrumbLink" href="DesktopWeek.dc.html">Wochenplan</x-import>
+              </x-import>
+              <x-import component-from-global-scope="ShadcnUI.BreadcrumbSeparator"></x-import>
+              <x-import component-from-global-scope="ShadcnUI.BreadcrumbItem">
+                <x-import component-from-global-scope="ShadcnUI.BreadcrumbLink" href="DesktopDetails.dc.html">Judo: Fallschule</x-import>
+              </x-import>
+              <x-import component-from-global-scope="ShadcnUI.BreadcrumbSeparator"></x-import>
+              <x-import component-from-global-scope="ShadcnUI.BreadcrumbItem">
+                <x-import component-from-global-scope="ShadcnUI.BreadcrumbPage">Bearbeiten</x-import>
+              </x-import>
+            </x-import>
+          </x-import>
+          <h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800; letter-spacing: -0.025em">Einheit bearbeiten</h1>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <a href="DesktopDetails.dc.html" class="{{cancelCls}}">
+            <svg data-icon="inline-start" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            Abbrechen
+          </a>
+          <x-import component-from-global-scope="ShadcnUI.Button" type="submit">
+            <svg data-icon="inline-start" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+            Speichern
+          </x-import>
+        </div>
+      </div>
+
+      <x-import component-from-global-scope="ShadcnUI.Alert">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+        <x-import component-from-global-scope="ShadcnUI.AlertTitle">Überschneidung</x-import>
+        <x-import component-from-global-scope="ShadcnUI.AlertDescription">Marco Keller ist zur gleichen Zeit für »Klettern« mit Gruppe Luchse eingeteilt.</x-import>
+      </x-import>
+
+      <div style="display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 20px; align-items: start">
+        <div style="display: flex; flex-direction: column; gap: 20px">
+          <x-import component-from-global-scope="ShadcnUI.Card" size="sm">
+            <x-import component-from-global-scope="ShadcnUI.CardHeader">
+              <x-import component-from-global-scope="ShadcnUI.CardTitle">Einheit</x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.CardContent">
+              <x-import component-from-global-scope="ShadcnUI.FieldGroup" style="gap: 16px">
+                <x-import component-from-global-scope="ShadcnUI.Field">
+                  <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="d-title">Aktivität</x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Input" id="d-title" default-value="Judo: Fallschule"></x-import>
+                </x-import>
+                <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+                  <x-import component-from-global-scope="ShadcnUI.Field">
+                    <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="d-short">Kurzname</x-import>
+                    <x-import component-from-global-scope="ShadcnUI.Input" id="d-short" default-value="Judo" maxlength="10"></x-import>
+                    <x-import component-from-global-scope="ShadcnUI.FieldDescription">Für den Wochenplan, höchstens 10 Zeichen.</x-import>
+                  </x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Field">
+                    <x-import component-from-global-scope="ShadcnUI.FieldLabel">Kategorie</x-import>
+                    <x-import component-from-global-scope="ShadcnUI.Select" default-value="judo">
+                      <x-import component-from-global-scope="ShadcnUI.SelectTrigger" aria-label="Kategorie" style="width: 100%">
+                        <x-import component-from-global-scope="ShadcnUI.SelectValue"></x-import>
+                      </x-import>
+                      <x-import component-from-global-scope="ShadcnUI.SelectContent">
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="judo">Judo</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="poly">Polysport</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="gem">Gemeinsam</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="abend">Ausflug &amp; Abend</x-import>
+                      </x-import>
+                    </x-import>
+                  </x-import>
+                </div>
+                <x-import component-from-global-scope="ShadcnUI.Field">
+                  <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="d-notes">Hinweise</x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Textarea" id="d-notes" default-value="Treffpunkt vor Halle B. Matten sind ausgelegt, Gürtel liegen im Materialraum." style="min-height: 72px"></x-import>
+                </x-import>
+              </x-import>
+            </x-import>
+          </x-import>
+
+          <x-import component-from-global-scope="ShadcnUI.Card" size="sm">
+            <x-import component-from-global-scope="ShadcnUI.CardHeader">
+              <x-import component-from-global-scope="ShadcnUI.CardTitle">Zeit und Ort</x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.CardContent">
+              <x-import component-from-global-scope="ShadcnUI.FieldGroup" style="gap: 16px">
+                <div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 16px">
+                  <x-import component-from-global-scope="ShadcnUI.Field">
+                    <x-import component-from-global-scope="ShadcnUI.FieldLabel">Tag</x-import>
+                    <x-import component-from-global-scope="ShadcnUI.Select" default-value="di">
+                      <x-import component-from-global-scope="ShadcnUI.SelectTrigger" aria-label="Tag" style="width: 100%">
+                        <x-import component-from-global-scope="ShadcnUI.SelectValue"></x-import>
+                      </x-import>
+                      <x-import component-from-global-scope="ShadcnUI.SelectContent">
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="mo">Montag, 12. Oktober</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="di">Dienstag, 13. Oktober</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="mi">Mittwoch, 14. Oktober</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="do">Donnerstag, 15. Oktober</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="fr">Freitag, 16. Oktober</x-import>
+                      </x-import>
+                    </x-import>
+                  </x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Field">
+                    <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="d-start">Beginn</x-import>
+                    <x-import component-from-global-scope="ShadcnUI.Input" id="d-start" type="time" default-value="10:45"></x-import>
+                  </x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Field">
+                    <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="d-end">Ende</x-import>
+                    <x-import component-from-global-scope="ShadcnUI.Input" id="d-end" type="time" default-value="12:00"></x-import>
+                  </x-import>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+                  <x-import component-from-global-scope="ShadcnUI.Field">
+                    <x-import component-from-global-scope="ShadcnUI.FieldLabel">Ort</x-import>
+                    <x-import component-from-global-scope="ShadcnUI.Select" default-value="dojo-b">
+                      <x-import component-from-global-scope="ShadcnUI.SelectTrigger" aria-label="Ort" style="width: 100%">
+                        <x-import component-from-global-scope="ShadcnUI.SelectValue"></x-import>
+                      </x-import>
+                      <x-import component-from-global-scope="ShadcnUI.SelectContent">
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="dojo-a">Dojo (Halle A)</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="dojo-b">Dojo (Halle B)</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="dreifach">Dreifachturnhalle</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="hallenbad">Hallenbad</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="sportplatz">Sportplatz Nord</x-import>
+                      </x-import>
+                    </x-import>
+                  </x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Field">
+                    <x-import component-from-global-scope="ShadcnUI.FieldLabel">Gruppe</x-import>
+                    <x-import component-from-global-scope="ShadcnUI.Select" default-value="adler">
+                      <x-import component-from-global-scope="ShadcnUI.SelectTrigger" aria-label="Gruppe" style="width: 100%">
+                        <x-import component-from-global-scope="ShadcnUI.SelectValue"></x-import>
+                      </x-import>
+                      <x-import component-from-global-scope="ShadcnUI.SelectContent">
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="alle">Alle Gruppen</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="adler">Gruppe Adler</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="fuechse">Gruppe Füchse</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="luchse">Gruppe Luchse</x-import>
+                        <x-import component-from-global-scope="ShadcnUI.SelectItem" value="baeren">Gruppe Bären</x-import>
+                      </x-import>
+                    </x-import>
+                  </x-import>
+                </div>
+              </x-import>
+            </x-import>
+          </x-import>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px">
+          <x-import component-from-global-scope="ShadcnUI.Card" size="sm">
+            <x-import component-from-global-scope="ShadcnUI.CardHeader">
+              <x-import component-from-global-scope="ShadcnUI.CardTitle">Coaches</x-import>
+              <x-import component-from-global-scope="ShadcnUI.CardDescription">Die gewählten Coaches sehen die Einheit unter »Heute«.</x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.CardContent">
+              <x-import component-from-global-scope="ShadcnUI.FieldGroup" style="gap: 4px">
+                <x-import component-from-global-scope="ShadcnUI.Field" orientation="horizontal" style="min-height: 40px; align-items: center">
+                  <x-import component-from-global-scope="ShadcnUI.Checkbox" id="dc-lena" default-checked="{{yes}}"></x-import>
+                  <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="dc-lena" style="flex: 1">Lena Brunner · Judo-Coach</x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Badge" variant="secondary">frei</x-import>
+                </x-import>
+                <x-import component-from-global-scope="ShadcnUI.Field" orientation="horizontal" style="min-height: 40px; align-items: center">
+                  <x-import component-from-global-scope="ShadcnUI.Checkbox" id="dc-marco" default-checked="{{yes}}"></x-import>
+                  <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="dc-marco" style="flex: 1">Marco Keller · Judo-Coach</x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Badge" variant="destructive">belegt</x-import>
+                </x-import>
+                <x-import component-from-global-scope="ShadcnUI.Field" orientation="horizontal" style="min-height: 40px; align-items: center">
+                  <x-import component-from-global-scope="ShadcnUI.Checkbox" id="dc-nico"></x-import>
+                  <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="dc-nico" style="flex: 1">Nico Frei · Polysport-Coach</x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Badge" variant="secondary">frei</x-import>
+                </x-import>
+                <x-import component-from-global-scope="ShadcnUI.Field" orientation="horizontal" style="min-height: 40px; align-items: center">
+                  <x-import component-from-global-scope="ShadcnUI.Checkbox" id="dc-aylin"></x-import>
+                  <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="dc-aylin" style="flex: 1">Aylin Demir · Polysport-Coach</x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Badge" variant="destructive">belegt</x-import>
+                </x-import>
+                <x-import component-from-global-scope="ShadcnUI.Field" orientation="horizontal" style="min-height: 40px; align-items: center">
+                  <x-import component-from-global-scope="ShadcnUI.Checkbox" id="dc-sandra"></x-import>
+                  <x-import component-from-global-scope="ShadcnUI.FieldLabel" html-for="dc-sandra" style="flex: 1">Sandra Meier · Lagerleitung</x-import>
+                  <x-import component-from-global-scope="ShadcnUI.Badge" variant="secondary">frei</x-import>
+                </x-import>
+              </x-import>
+            </x-import>
+          </x-import>
+
+          <x-import component-from-global-scope="ShadcnUI.Card" size="sm">
+            <x-import component-from-global-scope="ShadcnUI.CardHeader">
+              <x-import component-from-global-scope="ShadcnUI.CardTitle">Einheit löschen</x-import>
+              <x-import component-from-global-scope="ShadcnUI.CardDescription">Entfernt die Einheit für alle Coaches. Das lässt sich nicht rückgängig machen.</x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.CardContent">
+              <x-import component-from-global-scope="ShadcnUI.Button" type="button" variant="destructive">
+                <svg data-icon="inline-start" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                Einheit löschen
+              </x-import>
+            </x-import>
+          </x-import>
+        </div>
+      </div>
+    </form>
+  </main>
+</x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var ui = window.ShadcnUI || {};
+    var bv = ui.buttonVariants || function () { return ''; };
+    return { yes: true, cancelCls: bv({ variant: 'outline' }) };
+  }
+}
+</script>
+</body>
+</html>
