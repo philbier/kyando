@@ -1,15 +1,19 @@
 # Design reference
 
-These are the visual reference for Kyandō's prototype screens, exported from the Claude Design canvas "Kyandō – Mobile Screens". Rules for using the design system are in `../CLAUDE.md` under "Design system".
+These are the visual reference for Kyandō's screens, exported from the Claude Design canvas "Kyandō – Mobile Screens". Rules for using the design system are in `../CLAUDE.md` under "Design system".
 
-| File | Contents |
+| Path | Contents |
 | --- | --- |
 | `tokens.css` | Design tokens (shadcn/ui · Cyberpunk): light and dark theme, radius, shadows, fonts. Copy the values into `app/globals.css` unchanged. |
-| `screens/*.png` | One screenshot per screen at 1.5× (390 px wide design). |
-| `source/*.dc.html` | Design source per screen, with exact German copy and which shadcn component is used where. Not runnable. |
-| `Kyandō – Mobile Screens.pdf` / `.html` | The full canvas export. |
+| `mobile/screens/*.png` | Phone screens, one screenshot each at 1.5× (390 px wide design). For every coach, including the Lagerleitung on a phone. |
+| `mobile/source/*.dc.html` | Design source per phone screen, with exact German copy and which shadcn component is used where. Not runnable. |
+| `mobile/Kyandō – Mobile Screens.pdf` / `.html` | Full canvas export of the phone screens. |
+| `desktop/screens/*.png` | Laptop screens for the **Lagerleitung only**, one screenshot each at 1× (1440 × 960 px design). |
+| `desktop/source/*.dc.html` | Design source per laptop screen. Not runnable. `DesktopLogin` imports `mobile/source/Login.dc.html`; `DesktopWeekEdit` is `DesktopWeek` with `modus="bearbeiten"`, and `DesktopGanttEdit` is `DesktopGantt` with `modus="bearbeiten"`. |
 
-## Screens
+How to read a `.dc.html` source: `<x-import component-from-global-scope="ShadcnUI.Card">` means shadcn's `<Card>`, attributes are its props in kebab-case (`default-value` = `defaultValue`), and `<sc-for>` / `<sc-if>` are loops and conditions. The sample data for the calendars sits in the `renderVals()` script at the bottom of each file. `DesktopWeek` and `DesktopGantt` share the same data generator.
+
+## Phone screens (`mobile/`)
 
 | # | Screenshot | Source | Route | Notes |
 | --- | --- | --- | --- | --- |
@@ -22,11 +26,51 @@ These are the visual reference for Kyandō's prototype screens, exported from th
 | 6 | `06-einheit-bearbeiten.png` | `EditSession.dc.html` | `/[locale]/einheit/[id]/bearbeiten` | **Lagerleitung only.** Fields: Aktivität, Kurzname (≤ 10 characters, for the week view), Kategorie, Tag, Beginn/Ende, Ort, Gruppe, Coaches (checkboxes), Hinweise. An alert warns when a selected coach is already booked at the same time. "Einheit löschen" is destructive and needs a confirm dialog (AlertDialog). "Änderungen speichern" sits in a fixed bottom bar. |
 | 7 | `07-profil.png` | `Profile.dc.html` | `/[locale]/profil` | Name, email, role badge. Language as a RadioGroup (Deutsch, Français, Italiano, English) that applies immediately. Camp info with the Lagerleitung contact; the emergency number is a placeholder for now. "Abmelden" button. |
 
-The design sample data is a made-up camp: Herbstlager 2026, 12–16 October; groups Adler, Füchse, Luchse and Bären; logged-in coach Lena Brunner (Judo-Coach). Use the same data as seed data for development.
+## Laptop screens for the Lagerleitung (`desktop/`)
+
+On a laptop, a user with the role `head_organizer` gets a different shell. Everyone else, and the Lagerleitung on a phone, keeps the phone layout. **What coaches see on a laptop is not decided yet.**
+
+- **Sidebar instead of bottom navigation:** shadcn `Sidebar`, sticky, full height. From top to bottom:
+  - the camp switcher ("Kyandō · Herbstlager 2026" with an up/down chevron);
+  - group "Lager": **Heute**, **Kalender** (the Wochenplan), **Gantt**, Profil;
+  - group "Verwaltung": Coaches, Gruppen, Orte. These are **placeholders**, with no screens designed yet;
+  - footer: avatar, name, role, and an icon button "Abmelden".
+- **After login**, the Lagerleitung lands on **Heute**: their own sessions (the Lagerleitung can be assigned to sessions like any coach) plus what the whole camp is doing right now.
+- **Two calendar views:**
+  - **Wochenplan:** one group (or "Meine Einheiten") at a time, picked in a dropdown.
+  - **Gantt:** all groups at once, one row per group.
+
+  Both have the same edit mode.
+- **Sample data:** the laptop designs use **10 groups**: Adler, Füchse, Luchse, Bären, Wölfe, Steinböcke, Gämsen, Murmeltiere, Biber, Eulen. The phone screens still show the first 4. The logged-in user is **Sandra Meier (Lagerleitung)**.
+- **Phone layout only:** the day view was **not** redesigned for the laptop.
+
+| # | Screenshot | Source | Route | Notes |
+| --- | --- | --- | --- | --- |
+| 0 | – (same as `mobile/screens/01-login.png`) | `DesktopLogin.dc.html` | `/[locale]/login` | Identical to the phone login, centered on the page. |
+| 1 | `01-heute.png` | `DesktopToday.dc.html` | `/[locale]/heute` | **Start page of the Lagerleitung.** Two columns. **Left, their own sessions**, the same content as the phone's Heute: "Jetzt" card (title, time, "noch X Min.", then location, group and co-coach side by side; the whole card links to the details), "Als Nächstes" with "in X Min.", then "Später heute" and "Erledigt" (faded, check icons) side by side. **Right, card "Im Lager gerade"**: the current time slot and one row per group (all 10) with category, activity and location of what that group does right now. The user's own row is highlighted and marked "Meine". The "Im Gantt" button opens the Gantt; a footer line "Danach: …" shows what's next for the whole camp. "Zuletzt aktualisiert um …" top right. |
+| 2 | `02-wochenplan.png` | `DesktopWeek.dc.html` | `/[locale]/kalender?ansicht=woche&filter=…` | Full screen next to the sidebar. Above the calendar, a **dropdown** like on the phone: "Meine Einheiten", then one entry per group (Gruppe Adler … Gruppe Eulen); the screenshot shows Gruppe Adler. **No group lanes:** Mo–Fr are five wide columns, 08:00–21:30 in one grid, including the evening. Each block shows the full title, time range and location. Sessions for all groups (lunch, outing, evening program) appear in every group's view, marked "· Alle Gruppen". Legend next to the dropdown, a primary "now" line in today's column, today's date in a primary circle. Clicking a session opens its details. Top right: **"Bearbeiten"** (primary). |
+| 3 | `03-wochenplan-bearbeiten.png` | `DesktopWeekEdit.dc.html` | same route, edit mode | After "Bearbeiten", the button is replaced by **"Abbrechen"** (outline) and **"Speichern"** (primary). A bar next to the dropdown explains the mode and counts unsaved changes. Faint 15-minute lines show the snap grid. Every block gets a grip at its bottom edge. The screenshot shows three actions frozen mid-way: **move** (lifted block with a ring and a time label, dashed outline where it started), **resize** (dragging the bottom edge, with the new time and duration), and **draw new** (dashed primary box in an empty slot; releasing opens "Einheit bearbeiten" with that day, time and the selected group). Changed blocks get a primary dot. Nothing is stored until "Speichern"; "Abbrechen" discards all changes. Clicking a block does not open details in edit mode. |
+| 4 | `04-einheit-details.png` | `DesktopDetails.dc.html` | `/[locale]/einheit/[id]` | Breadcrumb (Wochenplan › day › title) and "Bearbeiten" at the top. Category, title, "Jetzt" badge with time left, "Zuletzt geändert von …". Three cards in a row: Zeit, Ort (with "Karte"), Gruppe. Below, two columns. Left: Hinweise, and "Gleichzeitig im Plan" (the first three of the other groups' sessions in the same slot, each linking to its details, plus an "Alle im Gantt" button). Right: Coaches with call buttons. |
+| 5 | `05-einheit-bearbeiten.png` | `DesktopEdit.dc.html` | `/[locale]/einheit/[id]/bearbeiten` | Breadcrumb and title, "Abbrechen" and "Speichern" at the top right (not in a bottom bar). Overlap alert. Left: card "Einheit" (Aktivität, Kurzname + Kategorie side by side, Hinweise) and card "Zeit und Ort" (Tag, Beginn, Ende in one row; Ort, Gruppe in one row; Gruppe lists "Alle Gruppen" and all 10 groups). Right: card "Coaches" with a **"frei" / "belegt"** badge next to each coach, and card "Einheit löschen" (destructive, with confirm dialog). |
+| 6 | `06-profil.png` | `DesktopProfile.dc.html` | `/[locale]/profil` | Max. 960 px wide. Cards "Konto" and camp info side by side, then "Sprache" as four selectable cards in a row (the selected one has a primary border), then "Abmelden". |
+| 7 | `07-gantt.png` | `DesktopGantt.dc.html` | `/[locale]/gantt` (suggested) | **All groups at once.** One row per group (labels on the left), plus a row **"Alle Gruppen"** on top that holds the shared sessions (lunch, Ateliers, outing, evening program). Those are not repeated in the group rows. Days and times run along the top: Mo–Fr side by side, each 08:00–21:30, 40 px per hour, so about two days fit on screen. The rest is reached by **scrolling sideways**. The view **opens scrolled to today**. Group labels and the day/hour header stay in place while scrolling. Bars show `short_name` and start time. A primary "now" line runs through all rows. Clicking a bar opens its details. Top right: "Bearbeiten". |
+| 8 | `08-gantt-bearbeiten.png` | `DesktopGanttEdit.dc.html` | same route, edit mode | Same edit mode as the Wochenplan ("Abbrechen" / "Speichern", unsaved-changes count, 15-minute lines, primary dot on changed bars). Differences: dragging a bar **into another row changes its group** (shown: OL moves from Bären to Wölfe and to 17:30), the grip for the duration sits on the **right edge**, and drawing in an empty part of a row creates a session for that group (shown: Eulen, 17:45–18:45). |
 
 ## Don't copy these export glitches
+
+Phone screens:
 
 - The Tag/Woche **Tabs** and the **filter Select** are meant to be **full width**. They render narrower in the screenshots.
 - The week grid's evening label "19:30" must stay on one line.
 - The "Jetzt" card title is meant to be larger (24px, `text-2xl`) than it looks in `02-heute.png`.
 - Tall screenshots show the whole scrollable page. On a real phone, the bottom navigation and the bottom action bars stay fixed while the content scrolls behind them.
+
+Laptop screens:
+
+- The laptop screenshots were rendered **without the Outfit font**, so they show a fallback sans. The app uses Outfit and Fira Code, as on the phone.
+- Narrow Gantt bars break some words badly ("Schwi / mmen"). They should break at the hyphenation point instead ("Schwim- / men"), or use a shorter `short_name`.
+- The **Select** fields in "Einheit bearbeiten" (Kategorie, Tag, Ort, Gruppe) are meant to be **full width** of their column.
+- The time inputs show "10:45 AM" because of the browser that made the screenshot. The app uses the 24-hour clock ("10:45").
+- In the edit-mode screenshots, the frozen tooltips cover parts of neighbouring blocks. In the app a tooltip only shows while dragging.
+- The "Jetzt" card title in `01-heute.png` is meant to be larger (24px, `text-2xl`), as on the phone.
+- On the real page, the sidebar stays fixed while the main area scrolls.

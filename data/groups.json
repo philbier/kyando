@@ -2,5 +2,11 @@
   { "id": "group-adler", "camp_id": "camp-2026-herbst", "name": "Adler", "age_range": "8–10", "size": 12 },
   { "id": "group-fuechse", "camp_id": "camp-2026-herbst", "name": "Füchse", "age_range": "6–7", "size": 10 },
   { "id": "group-luchse", "camp_id": "camp-2026-herbst", "name": "Luchse", "age_range": "11–12", "size": 14 },
-  { "id": "group-baeren", "camp_id": "camp-2026-herbst", "name": "Bären", "age_range": "13–15", "size": 11 }
+  { "id": "group-baeren", "camp_id": "camp-2026-herbst", "name": "Bären", "age_range": "13–15", "size": 11 },
+  { "id": "group-woelfe", "camp_id": "camp-2026-herbst", "name": "Wölfe", "age_range": "9–10", "size": 12 },
+  { "id": "group-steinboecke", "camp_id": "camp-2026-herbst", "name": "Steinböcke", "age_range": "12–13", "size": 13 },
+  { "id": "group-gaemsen", "camp_id": "camp-2026-herbst", "name": "Gämsen", "age_range": "10–11", "size": 11 },
+  { "id": "group-murmeltiere", "camp_id": "camp-2026-herbst", "name": "Murmeltiere", "age_range": "6–7", "size": 9 },
+  { "id": "group-biber", "camp_id": "camp-2026-herbst", "name": "Biber", "age_range": "7–8", "size": 10 },
+  { "id": "group-eulen", "camp_id": "camp-2026-herbst", "name": "Eulen", "age_range": "14–15", "size": 12 }
 ]

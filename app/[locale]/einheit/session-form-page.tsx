@@ -21,10 +21,13 @@ export async function SessionFormPage({
   camp,
   session,
   today,
+  slot,
 }: {
   camp: Camp;
   session: SessionWithDetails | null; // null = new session
   today: string; // "YYYY-MM-DD", the default day for a new session
+  // A new session drawn in the Wochenplan comes with its day, times and group. Already checked by the page.
+  slot?: Pick<SessionFormValues, "day" | "start" | "end" | "group">;
 }) {
   const tSession = await getTranslations("Session");
   const tCategories = await getTranslations("Categories");
@@ -60,6 +63,7 @@ export async function SessionFormPage({
         group: "alle",
         coachIds: [],
         notes: "",
+        ...slot,
       };
 
   const categoryOptions: Option[] = categories.map((c) => ({ value: c, label: tCategories(c) }));

@@ -27,8 +27,15 @@
     "label": "Navigation principale",
     "heute": "Aujourd’hui",
     "kalender": "Calendrier",
+    "gantt": "Gantt",
     "profil": "Profil",
-    "openProfile": "Ouvrir le profil"
+    "openProfile": "Ouvrir le profil",
+    "camp": "Camp",
+    "admin": "Gestion",
+    "coaches": "Coachs",
+    "gruppen": "Groupes",
+    "orte": "Lieux",
+    "signOut": "Se déconnecter"
   },
   "Profil": {
     "title": "Profil",
@@ -38,7 +45,14 @@
     "headOrganizer": "Direction du camp",
     "emergency": "Urgence",
     "emergencyPlaceholder": "[numéro d’urgence]",
-    "signOut": "Se déconnecter"
+    "signOut": "Se déconnecter",
+    "subtitle": "Ton compte, ta langue et les infos sur le camp.",
+    "account": "Compte",
+    "groups": "Groupes",
+    "groupsValue": "{count, plural, one {# groupe : {first}} other {# groupes, de {first} à {last}}}",
+    "coaches": "Coachs",
+    "coachesValue": "{count, plural, one {# coach} other {# coachs}}",
+    "languageDefault": "Par défaut"
   },
   "Roles": {
     "coach": "Coach",
@@ -60,7 +74,15 @@
     "startsIn": "dans {duration}",
     "later": "Plus tard aujourd’hui",
     "done": "Terminé",
-    "lastUpdated": "Dernière mise à jour à {time}"
+    "lastUpdated": "Dernière mise à jour à {time}",
+    "campNow": "Au camp en ce moment",
+    "campNowSlot": "{time} · les {count} groupes",
+    "campNowEmpty": "Aucune unité en cours.",
+    "campNowList": "Ce que fait chaque groupe en ce moment",
+    "openGantt": "Dans le Gantt",
+    "mine": "Moi",
+    "noSession": "Aucune unité",
+    "after": "Ensuite :"
   },
   "Kalender": {
     "title": "Calendrier",
@@ -90,6 +112,44 @@
     "lastUpdatedOn": "Dernière mise à jour le {date} à {time}",
     "tapHint": "Touche une unité pour voir le lieu, le groupe et les coachs."
   },
+  "Wochenplan": {
+    "title": "Planning de la semaine",
+    "subtitle": "{camp} · {dates}",
+    "edit": "Modifier",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "saving": "Enregistrement …",
+    "editModeTitle": "Mode édition.",
+    "editModeHint": "Glisse pour déplacer · tire le bord inférieur pour la durée · clique dans un espace libre pour une nouvelle unité.",
+    "unsavedCount": "{count, plural, =0 {Aucune modification non enregistrée} one {# modification non enregistrée} other {# modifications non enregistrées}}",
+    "saveError": "L’enregistrement n’a pas fonctionné. Réessaie.",
+    "keyboardHint": "Les flèches haut et bas déplacent l’unité de 15 minutes, gauche et droite d’un jour. Maj et haut ou bas modifient la durée.",
+    "regionLabel": "Planning de la semaine : {group}",
+    "today": "aujourd’hui",
+    "timeRange": "{start} – {end}",
+    "blockLabel": "{title}, {group}, {date}, {start} – {end}",
+    "moveTip": "{date} · {time}",
+    "resizeTip": "{time} · {duration}",
+    "changed": "Modifiée, pas enregistrée",
+    "newBlock": "Nouvelle",
+    "newTip": "Nouvelle unité · {group} · {time}",
+    "nowLine": "Maintenant, {time}",
+    "discardTitle": "Abandonner les modifications ?",
+    "discardDescription": "{count, plural, one {# modification n’est pas encore enregistrée} other {# modifications ne sont pas encore enregistrées}}. Si tu les abandonnes, le planning reste comme avant.",
+    "keepEditing": "Continuer à modifier",
+    "discard": "Abandonner"
+  },
+  "Gantt": {
+    "title": "Gantt",
+    "subtitle": "Les {count} groupes · {camp} · {dates}",
+    "groupColumn": "Groupe",
+    "zoom": "Zoom",
+    "scrollHint": "Fais défiler sur le côté pour les autres jours.",
+    "editModeHint": "Glisse pour déplacer, aussi vers un autre groupe · tire le bord droit pour la durée · clique dans un espace libre pour une nouvelle unité.",
+    "keyboardHint": "Les flèches gauche et droite déplacent l’unité de 15 minutes, haut et bas vers un autre groupe. Maj et gauche ou droite modifient la durée.",
+    "regionLabel": "Gantt de tous les groupes",
+    "moveTip": "{group} · {date} · {time}"
+  },
   "Einheit": {
     "title": "Unité",
     "back": "Retour",
@@ -107,7 +167,20 @@
     "notes": "Remarques",
     "changedByToday": "Modifié par {name}, aujourd’hui à {time}",
     "changedByOn": "Modifié par {name}, le {date} à {time}",
-    "edit": "Modifier l’unité"
+    "edit": "Modifier l’unité",
+    "breadcrumb": "Fil d’Ariane",
+    "weekPlan": "Planning de la semaine",
+    "editShort": "Modifier",
+    "lastChangedByToday": "Dernière modification par {name}, aujourd’hui {time}",
+    "lastChangedByOn": "Dernière modification par {name}, {date}, {time}",
+    "time": "Heure",
+    "location": "Lieu",
+    "group": "Groupe",
+    "noLocation": "Aucun lieu",
+    "parallel": "En même temps",
+    "parallelHint": "{count, plural, one {# autre groupe} other {# autres groupes}} de {start} à {end}{more, select, yes {, voici les trois premiers} other {}}.",
+    "openGantt": "Tout dans le Gantt",
+    "coachCount": "{count, plural, =0 {Aucun coach attribué} one {# coach attribué} other {# coachs attribués}}"
   },
   "EinheitForm": {
     "editTitle": "Modifier l’unité",
@@ -142,7 +215,14 @@
     "errorShortNameTooLong": "10 caractères au maximum.",
     "errorEndBeforeStart": "La fin doit être après le début.",
     "errorForbidden": "Seule la direction du camp peut modifier les unités.",
-    "errorSummary": "Vérifie les champs marqués."
+    "errorSummary": "Vérifie les champs marqués.",
+    "saveShort": "Enregistrer",
+    "editBreadcrumb": "Modifier",
+    "sectionSession": "Unité",
+    "sectionTimeAndPlace": "Heure et lieu",
+    "coachFree": "libre",
+    "coachBusy": "occupé",
+    "deleteHint": "Supprime l’unité pour tous les coachs. Cette action est irréversible."
   },
   "Categories": {
     "judo": "Judo",

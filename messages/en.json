@@ -27,8 +27,15 @@
     "label": "Main navigation",
     "heute": "Today",
     "kalender": "Calendar",
+    "gantt": "Gantt",
     "profil": "Profile",
-    "openProfile": "Open profile"
+    "openProfile": "Open profile",
+    "camp": "Camp",
+    "admin": "Admin",
+    "coaches": "Coaches",
+    "gruppen": "Groups",
+    "orte": "Locations",
+    "signOut": "Sign out"
   },
   "Profil": {
     "title": "Profile",
@@ -38,7 +45,14 @@
     "headOrganizer": "Camp lead",
     "emergency": "Emergency",
     "emergencyPlaceholder": "[emergency number]",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "subtitle": "Your account, your language and info about the camp.",
+    "account": "Account",
+    "groups": "Groups",
+    "groupsValue": "{count, plural, one {# group: {first}} other {# groups, from {first} to {last}}}",
+    "coaches": "Coaches",
+    "coachesValue": "{count, plural, one {# coach} other {# coaches}}",
+    "languageDefault": "Default"
   },
   "Roles": {
     "coach": "Coach",
@@ -60,7 +74,15 @@
     "startsIn": "in {duration}",
     "later": "Later today",
     "done": "Done",
-    "lastUpdated": "Last updated at {time}"
+    "lastUpdated": "Last updated at {time}",
+    "campNow": "In camp right now",
+    "campNowSlot": "{time} · all {count} groups",
+    "campNowEmpty": "No session is running right now.",
+    "campNowList": "What each group is doing right now",
+    "openGantt": "In Gantt",
+    "mine": "Mine",
+    "noSession": "No session",
+    "after": "Next:"
   },
   "Kalender": {
     "title": "Calendar",
@@ -90,6 +112,44 @@
     "lastUpdatedOn": "Last updated on {date} at {time}",
     "tapHint": "Tap a session for location, group and coaches."
   },
+  "Wochenplan": {
+    "title": "Week plan",
+    "subtitle": "{camp} · {dates}",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving …",
+    "editModeTitle": "Edit mode.",
+    "editModeHint": "Drag to move · drag the bottom edge to change the length · click an empty slot for a new session.",
+    "unsavedCount": "{count, plural, =0 {No unsaved changes} one {# unsaved change} other {# unsaved changes}}",
+    "saveError": "Saving didn’t work. Try again.",
+    "keyboardHint": "Arrow up and down move the session by 15 minutes, left and right by one day. Shift with up or down changes its length.",
+    "regionLabel": "Week plan: {group}",
+    "today": "today",
+    "timeRange": "{start} – {end}",
+    "blockLabel": "{title}, {group}, {date}, {start} – {end}",
+    "moveTip": "{date} · {time}",
+    "resizeTip": "{time} · {duration}",
+    "changed": "Changed, not saved",
+    "newBlock": "New",
+    "newTip": "New session · {group} · {time}",
+    "nowLine": "Now, {time}",
+    "discardTitle": "Discard changes?",
+    "discardDescription": "{count, plural, one {# change isn’t} other {# changes aren’t}} saved yet. If you discard, the week plan stays as it was.",
+    "keepEditing": "Keep editing",
+    "discard": "Discard"
+  },
+  "Gantt": {
+    "title": "Gantt",
+    "subtitle": "All {count} groups · {camp} · {dates}",
+    "groupColumn": "Group",
+    "zoom": "Zoom",
+    "scrollHint": "Scroll sideways for the other days.",
+    "editModeHint": "Drag to move, also into another group · drag the right edge to change the length · click an empty slot for a new session.",
+    "keyboardHint": "Arrow left and right move the session by 15 minutes, up and down into another group. Shift with left or right changes its length.",
+    "regionLabel": "Gantt of all groups",
+    "moveTip": "{group} · {date} · {time}"
+  },
   "Einheit": {
     "title": "Session",
     "back": "Back",
@@ -107,7 +167,20 @@
     "notes": "Notes",
     "changedByToday": "Changed by {name}, today {time}",
     "changedByOn": "Changed by {name}, {date}, {time}",
-    "edit": "Edit session"
+    "edit": "Edit session",
+    "breadcrumb": "Breadcrumb",
+    "weekPlan": "Week plan",
+    "editShort": "Edit",
+    "lastChangedByToday": "Last changed by {name}, today {time}",
+    "lastChangedByOn": "Last changed by {name}, {date}, {time}",
+    "time": "Time",
+    "location": "Place",
+    "group": "Group",
+    "noLocation": "No place",
+    "parallel": "At the same time",
+    "parallelHint": "{count, plural, one {# other group} other {# other groups}} from {start} to {end}{more, select, yes {, here are the first three} other {}}.",
+    "openGantt": "All in Gantt",
+    "coachCount": "{count, plural, =0 {No coaches assigned yet} one {# coach assigned} other {# coaches assigned}}"
   },
   "EinheitForm": {
     "editTitle": "Edit session",
@@ -142,7 +215,14 @@
     "errorShortNameTooLong": "10 characters at most.",
     "errorEndBeforeStart": "The end must be after the start.",
     "errorForbidden": "Only the camp lead can edit sessions.",
-    "errorSummary": "Please check the marked fields."
+    "errorSummary": "Please check the marked fields.",
+    "saveShort": "Save",
+    "editBreadcrumb": "Edit",
+    "sectionSession": "Session",
+    "sectionTimeAndPlace": "Time and place",
+    "coachFree": "free",
+    "coachBusy": "busy",
+    "deleteHint": "Removes the session for all coaches. This can't be undone."
   },
   "Categories": {
     "judo": "Judo",

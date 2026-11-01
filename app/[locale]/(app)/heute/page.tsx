@@ -24,11 +24,15 @@ import {
   dateInTimeZone,
   daysBetween,
   getActiveCamp,
+  getCampSessions,
   getCoachSessionsOnDay,
   getDemoContext,
+  getGroups,
   getProfile,
   type SessionWithDetails,
 } from "@/lib/data";
+import { cn } from "@/lib/utils";
+import { CampNowCard } from "./camp-now-card";
 
 export async function generateMetadata({
   params,
@@ -53,6 +57,11 @@ export default async function HeutePage({ params }: PageProps<"/[locale]/heute">
   const camp = getActiveCamp();
   if (!me || !camp) notFound();
 
+  // On a laptop (lg and wider), the Lagerleitung gets a two-column layout: their own
+  // sessions on the left (the same as on the phone), "Im Lager gerade" on the right.
+  // The server doesn't know the screen size, so CSS classes with "lg:" switch the layout.
+  const isOrganizer = me.role === "head_organizer";
+
   const timeZone = camp.timezone;
   const today = dateInTimeZone(now, timeZone);
   const sessions = getCoachSessionsOnDay(camp, me.id, today);
@@ -76,6 +85,11 @@ export default async function HeutePage({ params }: PageProps<"/[locale]/heute">
   const lastUpdated = sessions.length
     ? new Date(Math.max(...sessions.map((s) => Date.parse(s.updated_at))))
     : null;
+  const lastUpdatedLabel =
+    lastUpdated && t("lastUpdated", { time: format.dateTime(lastUpdated, "time", { timeZone }) });
+
+  // The other coaches on the current session (not me).
+  const coCoaches = current?.coaches.filter((c) => c.id !== me.id) ?? [];
 
   // --- Small formatting helpers ---
 
@@ -102,6 +116,15 @@ export default async function HeutePage({ params }: PageProps<"/[locale]/heute">
   const description = (s: SessionWithDetails) =>
     [s.location?.name, groupLabel(s)].filter(Boolean).join(" · ");
 
+  // The second line of a fact in the "Jetzt" card: after " · " on the phone,
+  // on its own line in the laptop's three columns.
+  const factDetail = (text: string) => (
+    <>
+      <span className={cn(isOrganizer && "lg:hidden")}> · </span>
+      <span className={cn(isOrganizer && "lg:block")}>{text}</span>
+    </>
+  );
+
   // One row in "Als Nächstes" / "Später heute": a link to the session.
   // Item renders our Link as its root element (asChild), so the whole row is clickable.
   const sessionRow = (s: SessionWithDetails) => (
@@ -124,10 +147,13 @@ export default async function HeutePage({ params }: PageProps<"/[locale]/heute">
   );
 
   return (
-    <>
-      <AppHeader fullName={me.full_name} />
+    <div className={cn("mx-auto w-full max-w-md", isOrganizer && "lg:max-w-none")}>
+      {/* On a laptop the sidebar replaces the header. */}
+      <div className={cn(isOrganizer && "lg:hidden")}>
+        <AppHeader fullName={me.full_name} />
+      </div>
 
-      <main className="flex flex-col gap-6 px-4 pt-5">
+      <main className={cn("flex flex-col gap-6 px-4 pt-5", isOrganizer && "lg:px-8 lg:pt-6 lg:pb-8")}>
         <section className="flex flex-col gap-1">
           <p className="text-sm font-medium">
             {dayOfCamp >= 1 && dayOfCamp <= campDays
@@ -140,134 +166,169 @@ export default async function HeutePage({ params }: PageProps<"/[locale]/heute">
           </p>
         </section>
 
-        {sessions.length === 0 && <p className="type-body">{t("empty")}</p>}
+        <div
+          className={cn(
+            "flex flex-col gap-6",
+            isOrganizer && "lg:grid lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start",
+          )}
+        >
+          {/* Left on the laptop: my own sessions, the same sections as on the phone. */}
+          <div className="flex flex-col gap-6">
+            {sessions.length === 0 && <p className="type-body">{t("empty")}</p>}
 
-        {current && (
-          <Link
-            href={`/einheit/${current.id}`}
-            aria-label={t("currentLink", { title: current.title })}
-            className="block rounded-xl outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
-          >
-            <Card className="transition-shadow hover:shadow-md">
-              <CardHeader>
-                <div className="flex flex-wrap items-center gap-2 text-sm">
-                  <Badge>{t("now")}</Badge>
-                  <span className="font-semibold">
-                    {tSession("timeRange", { start: time(current.starts_at), end: time(current.ends_at) })}
-                  </span>
-                  <span className="ml-auto">
-                    {t("remaining", { duration: duration(Date.parse(current.ends_at) - nowMs) })}
-                  </span>
-                </div>
-                <CardTitle className="text-2xl">{current.title}</CardTitle>
-              </CardHeader>
-
-              <CardContent>
-                <ul className="flex flex-col gap-3 text-base">
-                  {current.location && (
-                    <li className="flex items-start gap-3">
-                      <MapPinIcon aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
-                      <span>
-                        <span className="font-semibold">{current.location.name}</span>
-                        {current.location.address_hint && (
-                          <>
-                            <br />
-                            {current.location.address_hint}
-                          </>
-                        )}
+            {current && (
+              <Link
+                href={`/einheit/${current.id}`}
+                aria-label={t("currentLink", { title: current.title })}
+                className="block rounded-xl outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+              >
+                <Card className="transition-shadow hover:shadow-md">
+                  <CardHeader>
+                    <div className="flex flex-wrap items-center gap-2 text-sm">
+                      <Badge>{t("now")}</Badge>
+                      <span className="font-semibold">
+                        {tSession("timeRange", { start: time(current.starts_at), end: time(current.ends_at) })}
                       </span>
-                    </li>
-                  )}
-                  <li className="flex items-start gap-3">
-                    <UsersIcon aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
-                    <span>
-                      <span className="font-semibold">{groupLabel(current)}</span>
-                      {current.group &&
-                        ` · ${t("groupDetails", { size: current.group.size, ageRange: current.group.age_range })}`}
+                      <span className="ml-auto">
+                        {t("remaining", { duration: duration(Date.parse(current.ends_at) - nowMs) })}
+                      </span>
+                    </div>
+                    <CardTitle className="text-2xl">{current.title}</CardTitle>
+                  </CardHeader>
+
+                  <CardContent>
+                    {/* Location, group and co-coaches: listed on the phone, three columns on the laptop. */}
+                    <ul
+                      className={cn(
+                        "flex flex-col gap-3 text-base",
+                        isOrganizer && "lg:grid lg:grid-cols-3 lg:gap-4 lg:text-sm",
+                      )}
+                    >
+                      {current.location && (
+                        <li className="flex items-start gap-3">
+                          <MapPinIcon aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
+                          <span>
+                            <span className="font-semibold">{current.location.name}</span>
+                            {current.location.address_hint && (
+                              <>
+                                <br />
+                                {current.location.address_hint}
+                              </>
+                            )}
+                          </span>
+                        </li>
+                      )}
+                      <li className="flex items-start gap-3">
+                        <UsersIcon aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
+                        <span>
+                          <span className="font-semibold">{groupLabel(current)}</span>
+                          {current.group &&
+                            factDetail(t("groupDetails", { size: current.group.size, ageRange: current.group.age_range }))}
+                        </span>
+                      </li>
+                      {coCoaches.length > 0 && (
+                        <li className="flex items-start gap-3">
+                          <UserIcon aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
+                          <span>
+                            <span className="font-semibold">
+                              {t("withCoaches", { names: format.list(coCoaches.map((c) => c.full_name)) })}
+                            </span>
+                            {/* "Polysport-Coach", only when there is one co-coach with a job title. */}
+                            {coCoaches.length === 1 && coCoaches[0].job_title && factDetail(coCoaches[0].job_title)}
+                          </span>
+                        </li>
+                      )}
+                    </ul>
+                  </CardContent>
+
+                  <CardFooter>
+                    <div className="flex w-full items-center justify-between border-t pt-3 text-sm font-medium">
+                      {t("details")}
+                      <ChevronRightIcon aria-hidden="true" className="size-4" />
+                    </div>
+                  </CardFooter>
+                </Card>
+              </Link>
+            )}
+
+            {next && (
+              <section aria-labelledby="next-heading" className="flex flex-col gap-2">
+                <div className="flex items-baseline justify-between gap-2">
+                  <h2 id="next-heading" className="type-title-sm">
+                    {t("next")}
+                  </h2>
+                  {Date.parse(next.starts_at) > nowMs && (
+                    <span className="text-sm font-medium">
+                      {t("startsIn", { duration: duration(Date.parse(next.starts_at) - nowMs) })}
                     </span>
-                  </li>
-                  {/* The other coaches on this session (not me). */}
-                  {current.coaches.some((c) => c.id !== me.id) && (
-                    <li className="flex items-start gap-3">
-                      <UserIcon aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
-                      <span>
-                        {t("withCoaches", {
-                          names: format.list(
-                            current.coaches.filter((c) => c.id !== me.id).map((c) => c.full_name),
-                          ),
-                        })}
-                      </span>
-                    </li>
                   )}
-                </ul>
-              </CardContent>
-
-              <CardFooter>
-                <div className="flex w-full items-center justify-between border-t pt-3 text-sm font-medium">
-                  {t("details")}
-                  <ChevronRightIcon aria-hidden="true" className="size-4" />
                 </div>
-              </CardFooter>
-            </Card>
-          </Link>
-        )}
+                {sessionRow(next)}
+              </section>
+            )}
 
-        {next && (
-          <section aria-labelledby="next-heading" className="flex flex-col gap-2">
-            <div className="flex items-baseline justify-between gap-2">
-              <h2 id="next-heading" className="type-title-sm">
-                {t("next")}
-              </h2>
-              {Date.parse(next.starts_at) > nowMs && (
-                <span className="text-sm font-medium">
-                  {t("startsIn", { duration: duration(Date.parse(next.starts_at) - nowMs) })}
-                </span>
+            {/* "Später heute" and "Erledigt": one under the other on the phone, side by side on the laptop. */}
+            <div
+              className={cn(
+                "flex flex-col gap-6 empty:hidden",
+                isOrganizer && "lg:grid lg:grid-cols-2 lg:items-start",
+              )}
+            >
+              {later.length > 0 && (
+                <section aria-labelledby="later-heading" className="flex flex-col gap-2">
+                  <h2 id="later-heading" className="type-title-sm">
+                    {t("later")}
+                  </h2>
+                  {later.map(sessionRow)}
+                </section>
+              )}
+
+              {done.length > 0 && (
+                <section aria-labelledby="done-heading" className="flex flex-col gap-2">
+                  <h2 id="done-heading" className="type-title-sm">
+                    {t("done")}
+                  </h2>
+                  {/* Finished sessions are faded and not links. */}
+                  <div className="flex flex-col gap-2 opacity-60">
+                    {done.map((s) => (
+                      <Item key={s.id} variant="muted" size="sm" className="flex-nowrap">
+                        <ItemMedia className="w-12 items-start text-sm font-semibold">
+                          {time(s.starts_at)}
+                        </ItemMedia>
+                        <ItemContent className="min-w-0">
+                          <ItemTitle>{s.title}</ItemTitle>
+                          <ItemDescription className="line-clamp-none">{description(s)}</ItemDescription>
+                        </ItemContent>
+                        <ItemActions>
+                          <CheckIcon role="img" aria-label={t("done")} className="size-4" />
+                        </ItemActions>
+                      </Item>
+                    ))}
+                  </div>
+                </section>
               )}
             </div>
-            {sessionRow(next)}
-          </section>
-        )}
+          </div>
 
-        {later.length > 0 && (
-          <section aria-labelledby="later-heading" className="flex flex-col gap-2">
-            <h2 id="later-heading" className="type-title-sm">
-              {t("later")}
-            </h2>
-            {later.map(sessionRow)}
-          </section>
-        )}
+          {/* Right on the laptop: what the whole camp is doing right now.
+              Only for the Lagerleitung, and not on the phone. */}
+          {isOrganizer && (
+            <CampNowCard
+              sessions={getCampSessions(camp)}
+              groups={getGroups(camp)}
+              myId={me.id}
+              now={now}
+              timeZone={timeZone}
+              className="hidden lg:flex"
+            />
+          )}
+        </div>
 
-        {done.length > 0 && (
-          <section aria-labelledby="done-heading" className="flex flex-col gap-2">
-            <h2 id="done-heading" className="type-title-sm">
-              {t("done")}
-            </h2>
-            {/* Finished sessions are faded and not links. */}
-            <div className="flex flex-col gap-2 opacity-60">
-              {done.map((s) => (
-                <Item key={s.id} variant="muted" size="sm" className="flex-nowrap">
-                  <ItemMedia className="w-12 items-start text-sm font-semibold">
-                    {time(s.starts_at)}
-                  </ItemMedia>
-                  <ItemContent className="min-w-0">
-                    <ItemTitle>{s.title}</ItemTitle>
-                    <ItemDescription className="line-clamp-none">{description(s)}</ItemDescription>
-                  </ItemContent>
-                  <ItemActions>
-                    <CheckIcon role="img" aria-label={t("done")} className="size-4" />
-                  </ItemActions>
-                </Item>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {lastUpdated && (
-          <p className="type-caption text-center">
-            {t("lastUpdated", { time: format.dateTime(lastUpdated, "time", { timeZone }) })}
-          </p>
+        {/* On a laptop, the layout shows "Zuletzt aktualisiert" in the bottom right corner instead. */}
+        {lastUpdatedLabel && (
+          <p className={cn("type-caption text-center", isOrganizer && "lg:hidden")}>{lastUpdatedLabel}</p>
         )}
       </main>
-    </>
+    </div>
   );
 }

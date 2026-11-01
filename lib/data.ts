@@ -210,6 +210,28 @@ export function saveSession(
   return session.id;
 }
 
+// Moves a session to another time, and in the Gantt possibly to another group
+// (the edit mode of Wochenplan and Gantt). Prototype only, like saveSession.
+// TODO: "update sessions set starts_at = $2, ends_at = $3, group_id = $4, updated_by = $5, updated_at = now() where id = $1".
+export function rescheduleSession(
+  id: string,
+  startsAt: Date,
+  endsAt: Date,
+  groupId: string | null,
+  updatedBy: string,
+  updatedAt: Date,
+) {
+  const session = sessions.find((s) => s.id === id);
+  if (!session) return;
+  Object.assign(session, {
+    starts_at: startsAt.toISOString(),
+    ends_at: endsAt.toISOString(),
+    group_id: groupId,
+    updated_by: updatedBy,
+    updated_at: updatedAt.toISOString(),
+  });
+}
+
 // Prototype only, like saveSession. TODO: "delete from sessions where id = $1" in Supabase
 // (session_coaches rows go with it through "on delete cascade").
 export function deleteSession(id: string) {
