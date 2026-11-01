@@ -33,8 +33,25 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - Data field `profiles.phone`.
 - shadcn components `alert`, `alert-dialog`, `checkbox` and `textarea`.
 - Laptop designs for the Lagerleitung in `design/desktop/` (screenshots and design sources): sticky sidebar, full-screen Wochenplan with an edit mode, Einheit details, Einheit bearbeiten and Profil. `design/README.md` and `CLAUDE.md` now point to `design/mobile/` and `design/desktop/`.
+- Updated laptop designs: the Wochenplan shows one group at a time, picked in a dropdown, instead of one lane per group. A new **Gantt** view (`07-gantt.png`, `08-gantt-bearbeiten.png`, sidebar entry "Gantt") shows all groups as rows and the week along the top, with the same edit mode. The laptop sample data now has 10 groups.
+- Laptop design for Heute (`design/desktop/screens/01-heute.png`), now the Lagerleitung's start page and first sidebar entry: their own sessions on the left and "Im Lager gerade" (what every group is doing right now) on the right.
+- Laptop layout for the Lagerleitung (Tailwind `lg` and wider), built from `design/desktop/screens/02-wochenplan.png`, `03-wochenplan-bearbeiten.png`, `07-gantt.png` and `08-gantt-bearbeiten.png`:
+  - Sticky sidebar instead of the bottom navigation: Kyandō with the camp name, Heute, Kalender, Gantt and Profil, Coaches, Gruppen and Orte (disabled until they have screens), and the user with "Abmelden".
+  - Full-screen Wochenplan at `/[locale]/kalender?ansicht=woche&filter=…`: one group or "Meine Einheiten" at a time, picked in a dropdown (the same `filter` as on the phone). Mo–Fr as five wide columns, 08:00–21:30 including the evening, blocks with title, time and location ("· Alle Gruppen" for shared sessions), legend, "now" line and today's date in primary. Clicking a session opens its details.
+  - Gantt at `/[locale]/gantt`: all groups at once, one row per group plus "Alle Gruppen" on top, Mo–Fr side by side along the top. It scrolls sideways, opens at today, keeps the group names and the header in place, and has a zoom dropdown (50–200 %). Coaches are sent to the Kalender.
+  - Edit mode ("Bearbeiten"), the same in both views: drag a session to another day or time (in the Gantt also into another group's row), drag its edge to change the length (Wochenplan: bottom, Gantt: right), or click or drag in an empty slot to open "Neue Einheit" with day, time and group filled in. Everything snaps to 15 minutes. Arrow keys work too. Changed sessions get a primary dot, and a bar explains the mode and counts the unsaved changes.
+  - "Speichern" stores all changes at once through the Server Action `savePlanChangesAction`. "Abbrechen", or leaving the page with unsaved changes, asks "Änderungen verwerfen?" first.
+  - The "Bearbeiten" button sits in the toolbar above the plan, next to the dropdowns.
+  - Heute at `/[locale]/heute`, built from `design/desktop/screens/01-heute.png`: the same sections as on the phone on the left ("Jetzt" card with location, group and co-coach side by side, "Später heute" and "Erledigt" side by side). On the right, the card "Im Lager gerade" (`heute/camp-now-card.tsx`): one row per group with what it is doing right now (its own session, or else one for all groups), the user's own row marked "Meine", an "Im Gantt" button and "Danach: …" with the next session for the whole camp. Only the Lagerleitung sees this card, and only on a laptop.
+  - "Zuletzt aktualisiert um …" stays in the bottom right corner on every laptop screen (Heute, Wochenplan, Gantt, Profil). It shows the most recent change to any session of the camp (`components/last-updated.tsx`). The phone screens keep their own label at the bottom of the page.
+- `/[locale]/einheit/neu` accepts `?tag=…&beginn=…&ende=…&gruppe=…` to fill in a new session (without `gruppe` it's for all groups).
+- Six more demo groups (Wölfe, Steinböcke, Gämsen, Murmeltiere, Biber, Eulen, 10 in total, like the laptop designs), with sessions copied from the first four groups.
+- shadcn component `sidebar` (with `sheet`, `skeleton`, `tooltip` and `hooks/use-mobile.ts`).
 
 ### Changed
+
+- Pages set their own width now (`max-w-md` for the phone screens) instead of the logged-in layout, so the Wochenplan can use the whole screen.
+- The phone week view, the Wochenplan and the Gantt share one helper for showing overlapping sessions side by side. The code shared by Wochenplan and Gantt lives in `app/[locale]/(app)/_plan/` (the underscore keeps the folder out of the URLs).
 
 - For testing, "Anmelden" no longer checks credentials: it always goes to the Heute screen in the current language.
 - changed login form an removed 'forgot password'

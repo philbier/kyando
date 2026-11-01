@@ -14,15 +14,16 @@ export const categoryClasses: Record<Category, string> = {
 const categories = Object.keys(categoryClasses) as Category[];
 
 // The colored square with the category's letter ("J" for Judo).
-export function CategoryLetter({ category }: { category: Category }) {
+export function CategoryLetter({ category, className }: { category: Category; className?: string }) {
   const t = useTranslations("Categories");
   return (
     <span
       role="img"
       aria-label={t(category)}
       className={cn(
-        "flex size-8 items-center justify-center rounded-md text-sm font-bold",
+        "flex size-8 shrink-0 items-center justify-center rounded-md text-sm font-bold",
         categoryClasses[category],
+        className,
       )}
     >
       {t(`letter.${category}`)}

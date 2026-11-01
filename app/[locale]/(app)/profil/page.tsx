@@ -49,7 +49,7 @@ export default async function ProfilPage({ params }: PageProps<"/[locale]/profil
   const headOrganizers = getHeadOrganizers();
 
   return (
-    <main className="flex flex-col gap-4 px-4 pt-6">
+    <main className="mx-auto flex w-full max-w-md flex-col gap-4 px-4 pt-6">
       <h1 className="text-3xl font-extrabold tracking-tight">{t("title")}</h1>
 
       <div className="flex items-center gap-4">

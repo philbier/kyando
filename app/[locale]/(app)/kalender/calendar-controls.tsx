@@ -109,14 +109,26 @@ export function DayPicker({ state, days }: { state: CalendarState; days: Option[
 }
 
 // "Alle Gruppen" / "Meine Einheiten" / "Gruppe Adler" …
-export function CalendarFilter({ state, options }: { state: CalendarState; options: Option[] }) {
+// `className` adjusts the trigger, e.g. narrower in the laptop Wochenplan.
+export function CalendarFilter({
+  state,
+  options,
+  className,
+}: {
+  state: CalendarState;
+  options: Option[];
+  className?: string;
+}) {
   const t = useTranslations("Kalender");
   const { current, navigate } = useCalendarNavigation(state);
   const selected = options.find((option) => option.value === current.filter);
 
   return (
     <Select value={current.filter} onValueChange={(filter) => navigate({ filter })}>
-      <SelectTrigger aria-label={t("filter")} className="w-full bg-card text-base data-[size=default]:h-11">
+      <SelectTrigger
+        aria-label={t("filter")}
+        className={cn("w-full bg-card text-base data-[size=default]:h-11", className)}
+      >
         {/* Explicit label, so it shows before JavaScript has loaded. */}
         <SelectValue>{selected?.label}</SelectValue>
       </SelectTrigger>

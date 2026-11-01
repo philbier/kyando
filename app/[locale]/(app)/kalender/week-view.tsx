@@ -4,6 +4,7 @@ import { CategoryLegend, categoryClasses } from "@/components/category";
 import { Link } from "@/i18n/navigation";
 import { dateInTimeZone, minutesInTimeZone, type SessionWithDetails } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { placeSideBySide } from "../_plan/side-by-side";
 
 // The grid shows 08:00–18:00. Sessions starting at 18:00 or later go into the
 // separate evening row below it.
@@ -14,34 +15,16 @@ const PX_PER_MINUTE = HOUR_HEIGHT / 60;
 const GRID_HEIGHT = ((GRID_END - GRID_START) / 60) * HOUR_HEIGHT;
 const HOURS = Array.from({ length: (GRID_END - GRID_START) / 60 + 1 }, (_, i) => GRID_START / 60 + i);
 
-// A session placed in a day column. Overlapping sessions share the column
-// side by side: `lane` is the sub-column, `lanes` how many there are.
-type Block = { session: SessionWithDetails; start: number; end: number; lane: number; lanes: number };
-
-// Assigns lanes to a day's sessions (ordered by start): each session takes the
-// first lane that is free again, and a run of overlapping sessions shares one lane count.
-function placeInLanes(sessions: SessionWithDetails[], timeZone: string): Block[] {
-  const blocks: Block[] = [];
-  let run: Block[] = [];
-  let laneEnds: number[] = []; // end minute of the last block in each lane of the current run
-
-  for (const session of sessions) {
-    const start = minutesInTimeZone(new Date(session.starts_at), timeZone);
-    const end = minutesInTimeZone(new Date(session.ends_at), timeZone);
-    if (run.length > 0 && start >= Math.max(...laneEnds)) {
-      run.forEach((block) => (block.lanes = laneEnds.length));
-      run = [];
-      laneEnds = [];
-    }
-    let lane = laneEnds.findIndex((laneEnd) => laneEnd <= start);
-    if (lane === -1) lane = laneEnds.length;
-    laneEnds[lane] = end;
-    const block = { session, start, end, lane, lanes: 1 };
-    run.push(block);
-    blocks.push(block);
-  }
-  run.forEach((block) => (block.lanes = laneEnds.length));
-  return blocks;
+// Places a day's sessions (ordered by start) in the day column; overlapping
+// sessions are shown side by side.
+function placeInColumn(sessions: SessionWithDetails[], timeZone: string) {
+  return placeSideBySide(
+    sessions.map((session) => ({
+      session,
+      start: minutesInTimeZone(new Date(session.starts_at), timeZone),
+      end: minutesInTimeZone(new Date(session.ends_at), timeZone),
+    })),
+  );
 }
 
 type WeekViewProps = {
@@ -78,7 +61,7 @@ export async function WeekView({ dates, sessions, lensLabel, myId, now, today, t
     return {
       date,
       longLabel: dayFormat(date, { weekday: "long" }),
-      blocks: placeInLanes(daySessions.filter((s) => !startsInEvening(s)), timeZone),
+      blocks: placeInColumn(daySessions.filter((s) => !startsInEvening(s)), timeZone),
       evening: daySessions.filter(startsInEvening),
     };
   });
@@ -172,7 +155,7 @@ export async function WeekView({ dates, sessions, lensLabel, myId, now, today, t
                 />
               ))}
 
-              {day.blocks.map(({ session, start, end, lane, lanes }) => {
+              {day.blocks.map(({ session, start, end, column, columns }) => {
                 // Clip to the grid, and leave 1px of space above and below each block.
                 const top = (Math.max(start, GRID_START) - GRID_START) * PX_PER_MINUTE + 1;
                 const height = (Math.min(end, GRID_END) - Math.max(start, GRID_START)) * PX_PER_MINUTE - 2;
@@ -182,7 +165,7 @@ export async function WeekView({ dates, sessions, lensLabel, myId, now, today, t
                     href={`/einheit/${session.id}`}
                     aria-label={blockLabel(session, day.longLabel)}
                     className={cn("absolute", blockClasses(session))}
-                    style={{ top, height, left: `${(lane / lanes) * 100}%`, width: `${100 / lanes}%` }}
+                    style={{ top, height, left: `${(column / columns) * 100}%`, width: `${100 / columns}%` }}
                   >
                     <span className="block font-semibold">{session.short_name}</span>
                     {/* The times only fit in blocks of about an hour or longer. */}

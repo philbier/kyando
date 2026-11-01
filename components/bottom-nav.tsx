@@ -14,7 +14,7 @@ const items = [
   { href: "/profil", key: "profil", Icon: UserIcon },
 ] as const;
 
-export function BottomNav() {
+export function BottomNav({ className }: { className?: string }) {
   const t = useTranslations("Navigation");
   // Path without the locale, e.g. "/heute" (not "/de/heute").
   const pathname = usePathname();
@@ -22,7 +22,10 @@ export function BottomNav() {
   return (
     <nav
       aria-label={t("label")}
-      className="fixed inset-x-0 bottom-0 z-10 border-t bg-card pb-[max(1rem,env(safe-area-inset-bottom))]"
+      className={cn(
+        "fixed inset-x-0 bottom-0 z-10 border-t bg-card pb-[max(1rem,env(safe-area-inset-bottom))]",
+        className,
+      )}
     >
       <div className="mx-auto grid max-w-md grid-cols-3 px-2 pt-2">
         {items.map(({ href, key, Icon }) => {

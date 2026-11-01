@@ -1,8 +1,8 @@
 [
-  { "id": "coach-lena", "full_name": "Lena Brunner", "email": "lena.brunner@beispiel.ch", "role": "coach", "job_title": "Judo-Coach", "locale": "de" },
-  { "id": "coach-marco", "full_name": "Marco Keller", "email": "marco.keller@beispiel.ch", "role": "coach", "job_title": "Judo-Coach", "locale": "de" },
-  { "id": "coach-nora", "full_name": "Nora Frei", "email": "nora.frei@beispiel.ch", "role": "coach", "job_title": "Polysport-Coach", "locale": "fr" },
-  { "id": "coach-luca", "full_name": "Luca Rossi", "email": "luca.rossi@beispiel.ch", "role": "coach", "job_title": "Polysport-Coach", "locale": "it" },
-  { "id": "coach-julia", "full_name": "Julia Weber", "email": "julia.weber@beispiel.ch", "role": "coach", "job_title": null, "locale": "de" },
-  { "id": "lead-sandra", "full_name": "Sandra Meier", "email": "sandra.meier@beispiel.ch", "role": "head_organizer", "job_title": null, "locale": "de" }
+  { "id": "coach-lena", "full_name": "Lena Brunner", "email": "lena.brunner@beispiel.ch", "role": "coach", "job_title": "Judo-Coach", "phone": "+41 79 000 00 01", "locale": "de" },
+  { "id": "coach-marco", "full_name": "Marco Keller", "email": "marco.keller@beispiel.ch", "role": "coach", "job_title": "Judo-Coach", "phone": "+41 79 000 00 02", "locale": "de" },
+  { "id": "coach-nora", "full_name": "Nora Frei", "email": "nora.frei@beispiel.ch", "role": "coach", "job_title": "Polysport-Coach", "phone": "+41 79 000 00 03", "locale": "fr" },
+  { "id": "coach-luca", "full_name": "Luca Rossi", "email": "luca.rossi@beispiel.ch", "role": "coach", "job_title": "Polysport-Coach", "phone": "+41 79 000 00 04", "locale": "it" },
+  { "id": "coach-julia", "full_name": "Julia Weber", "email": "julia.weber@beispiel.ch", "role": "coach", "job_title": null, "phone": null, "locale": "de" },
+  { "id": "lead-sandra", "full_name": "Sandra Meier", "email": "sandra.meier@beispiel.ch", "role": "head_organizer", "job_title": null, "phone": "+41 79 000 00 09", "locale": "de" }
 ]

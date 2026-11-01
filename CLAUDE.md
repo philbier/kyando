@@ -84,7 +84,7 @@ The screens were designed on a Claude Design canvas. Treat them as the visual ta
 - `design/mobile/screens/*.png`: one screenshot per phone screen. Open the matching image before building a screen.
 - `design/mobile/source/*.dc.html`: the design source of each phone screen. Read it for exact German copy and for which shadcn component is used where. It is **not runnable**: `<x-import component-from-global-scope="ShadcnUI.Card">` means shadcn's `<Card>`, and `<sc-for>` / `<sc-if>` are loops and conditions.
 - `design/mobile/Kyandō – Mobile Screens.pdf`: all phone screens in one file.
-- `design/desktop/screens/*.png` and `design/desktop/source/*.dc.html`: the laptop screens for the Lagerleitung (sidebar, full-screen Wochenplan with edit mode, Einheit details, Einheit bearbeiten, Profil).
+- `design/desktop/screens/*.png` and `design/desktop/source/*.dc.html`: the laptop screens for the Lagerleitung (sidebar, Heute, full-screen Wochenplan and Gantt, each with edit mode, Einheit details, Einheit bearbeiten, Profil).
 
 ## App structure (planned routes)
 
@@ -103,24 +103,30 @@ The bottom navigation (Heute · Kalender · Profil) lives once in the logged-in 
 
 - **Navigation:** a sticky sidebar replaces the bottom navigation. It holds:
   - the camp switcher;
-  - Kalender and Profil;
+  - Heute, Kalender (the Wochenplan), Gantt and Profil;
   - Coaches, Gruppen and Orte, which are placeholders with no screens yet;
   - the user with "Abmelden" in the footer.
-- **After login:** they land on the full-screen Wochenplan (`/[locale]/kalender?ansicht=woche`), not on Heute. The login screen looks the same as on the phone.
-- **Wochenplan:** shows all groups at once, with one fixed lane per group in each day column.
-- **Edit mode:** "Bearbeiten" (top right) switches the Wochenplan into edit mode, with "Abbrechen" and "Speichern". In edit mode the Lagerleitung can:
-  - drag a session to another time or day (15-minute steps);
-  - drag a session's bottom edge to change its length;
+- **After login:** they land on **Heute** (`/[locale]/heute`) in its laptop layout. The login screen looks the same as on the phone.
+  - **Left:** their own sessions, like on the phone. The Lagerleitung can be assigned to sessions like any coach.
+  - **Right:** a card "Im Lager gerade" with what every group is doing right now, a link to the Gantt, and what's next for the whole camp.
+- **Wochenplan:** one group at a time, with **no group lanes**. A dropdown above the calendar picks "Meine Einheiten" or one group, like on the phone. Each day is one wide column with full titles, times and locations. Sessions for all groups appear in every group's view.
+- **Gantt** (sidebar entry "Gantt", suggested route `/[locale]/gantt`): all groups at once.
+  - **Rows:** one per group (labels on the left), plus a row "Alle Gruppen" on top for shared sessions.
+  - **Time axis:** Mo–Fr side by side along the top, each 08:00–21:30. The page scrolls sideways and opens scrolled to today; labels and header stay in place.
+  - **Group count:** the design uses 10 groups, so it must work for that many and more.
+- **Edit mode**, the same in Wochenplan and Gantt: "Bearbeiten" (top right) switches it on, with "Abbrechen" and "Speichern". In edit mode the Lagerleitung can:
+  - drag a session to another time or day (15-minute steps); in the Gantt also into another group's row, which changes its group;
+  - drag a session's edge to change its length (Wochenplan: bottom edge, Gantt: right edge);
   - drag across an empty slot to create a session, which opens "Einheit bearbeiten".
 
   Changes are only stored when they click "Speichern"; "Abbrechen" throws them away.
-- **Laptop layouts:** only Wochenplan, Einheit details, Einheit bearbeiten and Profil have one. Heute and the day view keep the phone layout.
+- **Laptop layouts:** Heute, Wochenplan, Gantt, Einheit details, Einheit bearbeiten and Profil have one. The day view keeps the phone layout.
 - **Not decided yet:** what coaches see on a laptop. Ask the owner before building it.
 
 ## Data model (first draft)
 
 - `camps`: id, name, starts_on, ends_on, timezone (default `Europe/Berlin`), venue, emergency_phone, is_active
-- `profiles`: id (references `auth.users`), full_name, email, role, job_title (e.g. "Judo-Coach", optional), locale
+- `profiles`: id (references `auth.users`), full_name, email, role, job_title (e.g. "Judo-Coach", optional), phone (optional), locale
 - `groups`: id, camp_id, name, age_range, size
 - `locations`: id, camp_id, name, address_hint
 - `sessions`: id, camp_id, title, short_name (≤ 10 chars), category (`judo` | `polysport` | `gemeinsam` | `ausflug_abend`), starts_at, ends_at (`timestamptz`), location_id, group_id (null means all groups), coaches_only (shown as "Alle Coaches", e.g. the morning meeting), notes, updated_by, updated_at
@@ -140,6 +146,6 @@ The bottom navigation (Heute · Kalender · Profil) lives once in the logged-in 
 ## Scope
 
 - **Prototype v1:** the designed screens: login, Heute, Kalender (day and week), session details, edit or create a session, Profil with language switcher.
-- **Laptop layout for the Lagerleitung:** designed in `design/desktop/`: sidebar, full-screen Wochenplan with edit mode (drag to move, resize, draw new), Einheit details, Einheit bearbeiten, Profil.
+- **Laptop layout for the Lagerleitung:** designed in `design/desktop/`: sidebar, Heute (own sessions plus "Im Lager gerade") as start page, full-screen Wochenplan (one group at a time) and Gantt (all groups), both with edit mode (drag to move, resize, draw new), Einheit details, Einheit bearbeiten, Profil.
 - **Later** (see `prompt.text` and `ui-prompt_2.txt`): Excel import of the schedule, notifying coaches of schedule changes, shared materials (file uploads), switching camps by year.
 - **Out of scope:** payments, booking, camper accounts, native app.
