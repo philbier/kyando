@@ -45,6 +45,12 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             </x-import>
             <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
               <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 6h8"></path><path d="M12 16h6"></path><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M8 11h7"></path></svg>
+                <span>Gantt</span>
+              </x-import>
+            </x-import>
+            <x-import component-from-global-scope="ShadcnUI.SidebarMenuItem">
+              <x-import component-from-global-scope="ShadcnUI.SidebarMenuButton">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 <span>Profil</span>
               </x-import>
@@ -89,12 +95,12 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
     </x-import>
   </x-import>
 
-  <main style="flex: 1; min-width: 0; height: 960px; overflow: auto; box-sizing: border-box; padding: 24px 24px 24px; display: flex; flex-direction: column; gap: 16px">
+  <main style="flex: 1; min-width: 0; height: 960px; overflow: auto; box-sizing: border-box; padding: 24px; display: flex; flex-direction: column; gap: 16px">
 
     <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
       <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
         <h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800; letter-spacing: -0.025em">Wochenplan</h1>
-        <p style="margin: 0; font-size: 14px; line-height: 20px">Herbstlager 2026 · 12.–16. Oktober · alle Gruppen</p>
+        <p style="margin: 0; font-size: 14px; line-height: 20px">Herbstlager 2026 · 12.–16. Oktober</p>
       </div>
       <div style="display: flex; align-items: center; gap: 8px">
         <sc-if value="{{viewMode}}" hint-placeholder-val="{{true}}">
@@ -116,43 +122,51 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       </div>
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 40px">
+    <div style="display: flex; align-items: center; gap: 16px; min-height: 40px">
+      <div style="width: 240px; flex: none">
+        <x-import component-from-global-scope="ShadcnUI.Select" value="{{sel}}" on-value-change="{{pickGroup}}">
+          <x-import component-from-global-scope="ShadcnUI.SelectTrigger" aria-label="Gruppe wählen" style="width: 240px">
+            <x-import component-from-global-scope="ShadcnUI.SelectValue" placeholder="Gruppe wählen"></x-import>
+          </x-import>
+          <x-import component-from-global-scope="ShadcnUI.SelectContent">
+            <x-import component-from-global-scope="ShadcnUI.SelectItem" value="meine">Meine Einheiten</x-import>
+            <x-import component-from-global-scope="ShadcnUI.SelectSeparator"></x-import>
+            <sc-for list="{{groupOptions}}" as="o" hint-placeholder-count="10">
+              <x-import component-from-global-scope="ShadcnUI.SelectItem" value="{{o.value}}">{{o.label}}</x-import>
+            </sc-for>
+          </x-import>
+        </x-import>
+      </div>
       <sc-if value="{{viewMode}}" hint-placeholder-val="{{true}}">
-        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-size: 12px; line-height: 16px; font-weight: 500">
+        <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-size: 12px; line-height: 16px; font-weight: 500">
           <sc-for list="{{legend}}" as="l" hint-placeholder-count="4">
             <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 12px; height: 12px; box-sizing: border-box; border-radius: 3px; background: {{l.bg}}; border: {{l.bd}}"></span>{{l.name}}</span>
           </sc-for>
-          <span>Spalten je Tag: Adler · Füchse · Luchse · Bären</span>
+          <span style="margin-left: auto">Klick auf eine Einheit öffnet die Details. Alle Gruppen auf einmal: Gantt.</span>
         </div>
-        <span style="font-size: 12px; line-height: 16px; font-weight: 500">Klick auf eine Einheit öffnet die Details.</span>
       </sc-if>
       <sc-if value="{{editing}}" hint-placeholder-val="{{false}}">
         <div role="status" style="flex: 1; display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: var(--radius-lg); background: var(--muted); border: 1px solid var(--border); font-size: 14px; line-height: 20px">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg>
-          <span><span style="font-weight: 600">Bearbeitungsmodus.</span> Einheit ziehen zum Verschieben · unteren Rand ziehen für die Dauer · in eine freie Fläche ziehen für eine neue Einheit.</span>
+          <span><span style="font-weight: 600">Bearbeitungsmodus.</span> Ziehen zum Verschieben · unteren Rand ziehen für die Dauer · in freie Fläche ziehen für eine neue Einheit.</span>
           <span style="margin-left: auto; flex: none"><x-import component-from-global-scope="ShadcnUI.Badge" variant="secondary">2 ungespeicherte Änderungen</x-import></span>
         </div>
       </sc-if>
     </div>
 
-    <section aria-label="Wochenplan aller Gruppen" style="flex: 1; min-height: 0; display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--card); box-shadow: var(--shadow-sm); padding: 12px 16px 16px 8px">
-      <div style="display: grid; grid-template-columns: 48px repeat(5, minmax(0, 1fr)); column-gap: 8px">
+    <section aria-label="{{gridLabel}}" style="flex: 1; min-height: 0; display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--card); box-shadow: var(--shadow-sm); padding: 12px 16px 16px 8px">
+      <div style="display: grid; grid-template-columns: 48px repeat(5, minmax(0, 1fr)); column-gap: 12px">
         <span></span>
         <sc-for list="{{days}}" as="d" hint-placeholder-count="5">
-          <div style="display: flex; flex-direction: column; gap: 6px; padding-bottom: 6px; border-bottom: 1px solid var(--border)">
-            <div style="display: flex; align-items: center; gap: 8px; height: 28px">
-              <span style="font-size: 14px; line-height: 20px; font-weight: 600">{{d.d}}</span>
-              <span style="display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 6px; box-sizing: border-box; border-radius: 999px; font-size: 14px; font-weight: 700; background: {{d.headBg}}; color: {{d.headFg}}">{{d.n}}</span>
-              <span style="font-size: 12px; line-height: 16px; font-weight: 500">{{d.note}}</span>
-            </div>
-            <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; font-size: 11px; line-height: 14px; font-weight: 500; text-align: center">
-              <span>Adler</span><span>Füchse</span><span>Luchse</span><span>Bären</span>
-            </div>
+          <div style="display: flex; align-items: center; gap: 8px; height: 36px; border-bottom: 1px solid var(--border)">
+            <span style="font-size: 14px; line-height: 20px; font-weight: 600">{{d.d}}</span>
+            <span style="display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 6px; box-sizing: border-box; border-radius: 999px; font-size: 14px; font-weight: 700; background: {{d.headBg}}; color: {{d.headFg}}">{{d.n}}</span>
+            <span style="font-size: 12px; line-height: 16px; font-weight: 500">{{d.note}}</span>
           </div>
         </sc-for>
       </div>
 
-      <div style="display: grid; grid-template-columns: 48px repeat(5, minmax(0, 1fr)); column-gap: 8px; padding-top: 8px">
+      <div style="display: grid; grid-template-columns: 48px repeat(5, minmax(0, 1fr)); column-gap: 12px; padding-top: 8px">
         <div style="position: relative; height: {{gridH}}px">
           <sc-for list="{{hours}}" as="h" hint-placeholder-count="14">
             <span style="position: absolute; right: 4px; top: {{h.top}}px; transform: translateY(-50%); font-family: var(--font-mono); font-size: 11px; line-height: 12px">{{h.label}}</span>
@@ -163,12 +177,13 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             <sc-if value="{{editing}}" hint-placeholder-val="{{false}}">
               <span aria-hidden="true" style="position: absolute; inset: 0; opacity: 0.45; background: repeating-linear-gradient(to bottom, var(--border) 0 1px, transparent 1px {{quarterPx}}px)"></span>
             </sc-if>
-            <sc-for list="{{d.blocks}}" as="b" hint-placeholder-count="12">
-              <a href="{{b.href}}" aria-label="{{b.aria}}" style="position: absolute; top: {{b.top}}px; height: {{b.h}}px; left: {{b.left}}; width: {{b.width}}; box-sizing: border-box; padding: 3px 4px; border-radius: var(--radius-sm); background: {{b.bg}}; color: {{b.fg}}; border: {{b.bd}}; box-shadow: {{b.shadow}}; z-index: {{b.z}}; overflow: {{b.ov}}; opacity: {{b.op}}; cursor: {{b.cursor}}; font-size: 11px; line-height: 14px">
-                <span style="display: block; font-weight: 600; hyphens: manual">{{b.label}}</span>
+            <sc-for list="{{d.blocks}}" as="b" hint-placeholder-count="6">
+              <a href="{{b.href}}" aria-label="{{b.aria}}" style="position: absolute; top: {{b.top}}px; height: {{b.h}}px; left: 0; right: 0; box-sizing: border-box; padding: 5px 8px; border-radius: var(--radius-md); background: {{b.bg}}; color: {{b.fg}}; border: {{b.bd}}; box-shadow: {{b.shadow}}; z-index: {{b.z}}; overflow: {{b.ov}}; opacity: {{b.op}}; cursor: {{b.cursor}}; font-size: 12px; line-height: 16px">
+                <span style="display: block; font-size: 13px; font-weight: 600">{{b.title}}</span>
                 <sc-if value="{{b.showTime}}" hint-placeholder-val="{{true}}"><span style="display: block">{{b.time}}</span></sc-if>
-                <sc-if value="{{b.changed}}" hint-placeholder-val="{{false}}"><span role="img" aria-label="Geändert, nicht gespeichert" style="position: absolute; top: 3px; right: 3px; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); box-shadow: 0 0 0 2px var(--card)"></span></sc-if>
-                <sc-if value="{{b.grip}}" hint-placeholder-val="{{false}}"><span aria-hidden="true" style="position: absolute; left: 50%; bottom: 2px; width: 16px; height: 3px; margin-left: -8px; border-radius: 999px; background: currentColor; opacity: 0.6"></span></sc-if>
+                <sc-if value="{{b.showSub}}" hint-placeholder-val="{{true}}"><span style="display: block">{{b.sub}}</span></sc-if>
+                <sc-if value="{{b.changed}}" hint-placeholder-val="{{false}}"><span role="img" aria-label="Geändert, nicht gespeichert" style="position: absolute; top: 5px; right: 5px; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); box-shadow: 0 0 0 2px var(--card)"></span></sc-if>
+                <sc-if value="{{b.grip}}" hint-placeholder-val="{{false}}"><span aria-hidden="true" style="position: absolute; left: 50%; bottom: 2px; width: 20px; height: 3px; margin-left: -10px; border-radius: 999px; background: currentColor; opacity: 0.6"></span></sc-if>
                 <sc-if value="{{b.showTip}}" hint-placeholder-val="{{false}}"><span role="status" style="position: absolute; left: {{b.tipLeft}}; right: {{b.tipRight}}; top: calc(100% + 6px); white-space: nowrap; padding: 4px 8px; border-radius: var(--radius-md); background: var(--foreground); color: var(--background); font-size: 12px; line-height: 16px; font-weight: 500; box-shadow: var(--shadow-md)">{{b.tip}}</span></sc-if>
               </a>
             </sc-for>
@@ -187,90 +202,110 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 class Component extends DCLogic {
   renderVals() {
     var self = this;
-    var editing = (this.state && typeof this.state.editing === 'boolean') ? this.state.editing : this.props.modus === 'bearbeiten';
+    var st = this.state || {};
+    var editing = typeof st.editing === 'boolean' ? st.editing : this.props.modus === 'bearbeiten';
+    var sel = typeof st.sel === 'string' ? st.sel : '0';
+
+    // ---- Sample data: the same generator as in DesktopGantt.dc.html ----
+    var H = '­';
     var CAT = {
       judo: { bg: 'var(--chart-2)', fg: 'var(--primary-foreground)', bd: 'none', name: 'Judo' },
       poly: { bg: 'var(--chart-3)', fg: 'var(--accent-foreground)', bd: 'none', name: 'Polysport' },
       gem: { bg: 'var(--muted)', fg: 'var(--foreground)', bd: '1px solid var(--border)', name: 'Gemeinsam' },
       abend: { bg: 'var(--chart-5)', fg: 'var(--accent-foreground)', bd: 'none', name: 'Ausflug & Abend' }
     };
-    var GROUPS = ['Gruppe Adler', 'Gruppe Füchse', 'Gruppe Luchse', 'Gruppe Bären'];
-    var H = '­';
-    var WEEK = [
-      { key: 'mo', d: 'Mo', n: '12', long: 'Montag, 12. Oktober', note: '', rows: [
-        ['09:00', '09:45', -1, 'gem', 'Begrüssung'],
-        ['10:00', '12:00', 0, 'judo', 'Judo'], ['10:00', '12:00', 1, 'poly', 'Bad' + H + 'minton'], ['10:00', '12:00', 2, 'judo', 'Judo'], ['10:00', '12:00', 3, 'poly', 'Uni' + H + 'hockey'],
-        ['12:00', '13:15', -1, 'gem', 'Mittagessen'],
-        ['14:00', '15:30', 0, 'poly', 'Uni' + H + 'hockey'], ['14:00', '15:30', 1, 'judo', 'Judo'], ['14:00', '15:30', 2, 'poly', 'Klet' + H + 'tern'], ['14:00', '15:30', 3, 'poly', 'Schwim' + H + 'men'],
-        ['16:00', '17:30', 0, 'poly', 'Schwim' + H + 'men'], ['16:00', '17:30', 1, 'poly', 'Klet' + H + 'tern'], ['16:00', '17:30', 2, 'poly', 'Uni' + H + 'hockey'], ['16:00', '17:30', 3, 'judo', 'Judo'],
-        ['19:30', '21:00', -1, 'abend', 'Spielabend'] ] },
-      { key: 'di', d: 'Di', n: '13', long: 'Dienstag, 13. Oktober', note: 'heute', today: true, rows: [
-        ['09:00', '10:30', 0, 'poly', 'Uni' + H + 'hockey'], ['09:00', '10:30', 1, 'judo', 'Judo'], ['09:00', '10:30', 2, 'poly', 'OL'], ['09:00', '10:30', 3, 'poly', 'Schwim' + H + 'men'],
-        ['10:45', '12:00', 0, 'judo', 'Judo'], ['10:45', '12:00', 1, 'poly', 'Bad' + H + 'minton'], ['10:45', '12:00', 2, 'poly', 'Klet' + H + 'tern'], ['10:45', '12:00', 3, 'judo', 'Judo'],
-        ['12:00', '13:15', -1, 'gem', 'Mittagessen'],
-        ['14:00', '15:30', 0, 'poly', 'Velo'], ['14:00', '15:30', 1, 'poly', 'Uni' + H + 'hockey'], ['14:00', '15:30', 2, 'judo', 'Judo'], ['14:00', '15:30', 3, 'poly', 'OL'],
-        ['16:00', '17:30', -1, 'gem', 'Ateliers nach Wahl'],
-        ['19:30', '21:00', -1, 'abend', 'Lagerolympiade'] ] },
-      { key: 'mi', d: 'Mi', n: '14', long: 'Mittwoch, 14. Oktober', note: '', rows: [
-        ['08:30', '16:30', -1, 'abend', 'Ausflug: Seilpark'],
-        ['19:30', '21:00', -1, 'abend', 'Lagerfeuer'] ] },
-      { key: 'do', d: 'Do', n: '15', long: 'Donnerstag, 15. Oktober', note: '', rows: [
-        ['09:00', '10:30', 0, 'judo', 'Judo'], ['09:00', '10:30', 1, 'poly', 'Schwim' + H + 'men'], ['09:00', '10:30', 2, 'poly', 'Bad' + H + 'minton'], ['09:00', '10:30', 3, 'poly', 'Klet' + H + 'tern'],
-        ['10:45', '12:00', 0, 'poly', 'Bad' + H + 'minton'], ['10:45', '12:00', 1, 'judo', 'Judo'], ['10:45', '12:00', 2, 'judo', 'Judo'], ['10:45', '12:00', 3, 'poly', 'Uni' + H + 'hockey'],
-        ['12:00', '13:15', -1, 'gem', 'Mittagessen'],
-        ['14:00', '15:30', 0, 'poly', 'Klet' + H + 'tern'], ['14:00', '15:30', 1, 'poly', 'Velo'], ['14:00', '15:30', 2, 'poly', 'Uni' + H + 'hockey'], ['14:00', '15:30', 3, 'judo', 'Judo'],
-        ['16:00', '17:30', 0, 'poly', 'Schwim' + H + 'men'], ['16:00', '17:30', 1, 'poly', 'OL'], ['16:00', '17:30', 2, 'poly', 'Velo'], ['16:00', '17:30', 3, 'poly', 'Bad' + H + 'minton'],
-        ['19:30', '21:00', -1, 'abend', 'Disco'] ] },
-      { key: 'fr', d: 'Fr', n: '16', long: 'Freitag, 16. Oktober', note: '', rows: [
-        ['09:00', '10:30', 0, 'judo', 'Prü' + H + 'fung'], ['09:00', '10:30', 1, 'poly', 'Tur' + H + 'nier'], ['09:00', '10:30', 2, 'judo', 'Prü' + H + 'fung'], ['09:00', '10:30', 3, 'poly', 'Tur' + H + 'nier'],
-        ['10:45', '12:00', 0, 'poly', 'Tur' + H + 'nier'], ['10:45', '12:00', 1, 'judo', 'Prü' + H + 'fung'], ['10:45', '12:00', 2, 'poly', 'Tur' + H + 'nier'], ['10:45', '12:00', 3, 'judo', 'Prü' + H + 'fung'],
-        ['12:00', '13:15', -1, 'gem', 'Mittagessen'],
-        ['14:00', '15:30', -1, 'gem', 'Abschlussfeier mit Eltern'] ] }
+    var GROUPS = ['Adler', 'Füchse', 'Luchse', 'Bären', 'Wölfe', 'Steinböcke', 'Gämsen', 'Murmeltiere', 'Biber', 'Eulen'];
+    var DAYS = [
+      { key: 'mo', d: 'Mo', n: '12', long: 'Montag, 12. Oktober', short: 'Mo, 12. Okt.' },
+      { key: 'di', d: 'Di', n: '13', long: 'Dienstag, 13. Oktober', short: 'Di, 13. Okt.', today: true },
+      { key: 'mi', d: 'Mi', n: '14', long: 'Mittwoch, 14. Oktober', short: 'Mi, 14. Okt.' },
+      { key: 'do', d: 'Do', n: '15', long: 'Donnerstag, 15. Oktober', short: 'Do, 15. Okt.' },
+      { key: 'fr', d: 'Fr', n: '16', long: 'Freitag, 16. Oktober', short: 'Fr, 16. Okt.' }
     ];
+    var LOC = { Judo: 'Dojo (Halle B)', 'Prüfung': 'Dojo (Halle B)', Unihockey: 'Dreifachturnhalle', Badminton: 'Dreifachturnhalle', Turnier: 'Dreifachturnhalle', Klettern: 'Kletterwand', Schwimmen: 'Hallenbad', OL: 'Wald Sonnenberg', Velo: 'Sportplatz Nord' };
+    var TITLE = { 'Prüfung': 'Judo: Gürtelprüfung', Turnier: 'Spielturnier', OL: 'Orientierungslauf', Velo: 'Velo-Parcours' };
+    var SHORT = { Unihockey: 'Uni' + H + 'hockey', Badminton: 'Bad' + H + 'minton', Klettern: 'Klet' + H + 'tern', Schwimmen: 'Schwim' + H + 'men', Turnier: 'Tur' + H + 'nier', 'Prüfung': 'Prü' + H + 'fung' };
+    var SPECIAL = { 'mo-10:00-0': 'Judo: Schnupperstunde', 'di-10:45-0': 'Judo: Fallschule', 'di-14:00-2': 'Judo: Randori', 'do-09:00-0': 'Judo: Randori', 'di-10:45-3': 'Judo: Spiele' };
+    var ROT = ['Judo', 'Unihockey', 'Badminton', 'Klettern', 'Schwimmen', 'OL', 'Velo'];
+    var SHARED = [
+      [0, '09:00', '09:45', 'gem', 'Begrüssung', 'Start', 'Sportplatz Nord', true],
+      [0, '12:00', '13:15', 'gem', 'Mittagessen', 'Essen', 'Mensa'],
+      [0, '19:30', '21:00', 'abend', 'Spielabend', 'Spiel' + H + 'abend', 'Mensa'],
+      [1, '12:00', '13:15', 'gem', 'Mittagessen', 'Essen', 'Mensa'],
+      [1, '16:00', '17:30', 'gem', 'Ateliers nach Wahl', 'Ate' + H + 'liers', 'Ganzes Gelände'],
+      [1, '19:30', '21:00', 'abend', 'Lagerolympiade', 'Olym' + H + 'piade', 'Sportplatz Nord', true],
+      [2, '08:30', '16:30', 'abend', 'Ausflug: Seilpark', 'Ausflug', 'Treffpunkt Haupteingang', true],
+      [2, '19:30', '21:00', 'abend', 'Lagerfeuer', 'Lager' + H + 'feuer', 'Feuerstelle'],
+      [3, '12:00', '13:15', 'gem', 'Mittagessen', 'Essen', 'Mensa'],
+      [3, '19:30', '21:00', 'abend', 'Disco', 'Disco', 'Mensa'],
+      [4, '12:00', '13:15', 'gem', 'Mittagessen', 'Essen', 'Mensa'],
+      [4, '14:00', '15:30', 'gem', 'Abschlussfeier mit Eltern', 'Abschluss', 'Dreifachturnhalle', true]
+    ];
+    var SLOTS = [
+      [['10:00', '12:00', ['Judo', 'Badminton', 'Judo', 'Unihockey']], ['14:00', '15:30', ['Unihockey', 'Judo', 'Klettern', 'Schwimmen']], ['16:00', '17:30', ['Schwimmen', 'Klettern', 'Unihockey', 'Judo']]],
+      [['09:00', '10:30', ['Unihockey', 'Judo', 'OL', 'Schwimmen']], ['10:45', '12:00', ['Judo', 'Badminton', 'Klettern', 'Judo']], ['14:00', '15:30', ['Velo', 'Unihockey', 'Judo', 'OL']]],
+      [],
+      [['09:00', '10:30', ['Judo', 'Schwimmen', 'Badminton', 'Klettern']], ['10:45', '12:00', ['Badminton', 'Judo', 'Judo', 'Unihockey']], ['14:00', '15:30', ['Klettern', 'Velo', 'Unihockey', 'Judo']], ['16:00', '17:30', ['Schwimmen', 'OL', 'Velo', 'Badminton']]],
+      [['09:00', '10:30', ['Prüfung', 'Turnier', 'Prüfung', 'Turnier']], ['10:45', '12:00', ['Turnier', 'Prüfung', 'Turnier', 'Prüfung']]]
+    ];
+    var SESSIONS = [];
+    SHARED.forEach(function (r) {
+      SESSIONS.push({ id: DAYS[r[0]].key + '-' + r[1] + '--1', day: r[0], s: r[1], e: r[2], g: -1, cat: r[3], title: r[4], short: r[5], loc: r[6], mine: !!r[7] });
+    });
+    SLOTS.forEach(function (slots, di) {
+      slots.forEach(function (slot, si) {
+        for (var g = 0; g < GROUPS.length; g++) {
+          var name = g < 4 ? slot[2][g] : (di === 4 ? ((g + si) % 2 ? 'Turnier' : 'Prüfung') : ROT[(g * 3 + si * 2 + di) % ROT.length]);
+          var id = DAYS[di].key + '-' + slot[0] + '-' + g;
+          SESSIONS.push({ id: id, day: di, s: slot[0], e: slot[1], g: g, cat: (name === 'Judo' || name === 'Prüfung') ? 'judo' : 'poly', title: SPECIAL[id] || TITLE[name] || name, short: SHORT[name] || name, loc: LOC[name], mine: false });
+        }
+      });
+    });
+    // ---- end of sample data ----
+
     var START = 480, END = 1290, PX = 0.84;
     var toMin = function (s) { var p = s.split(':'); return Number(p[0]) * 60 + Number(p[1]); };
     var fmt = function (m) { var h = Math.floor(m / 60), mm = m % 60; return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; };
-    var place = function (lane) { return lane < 0 ? { left: '0', width: '100%' } : { left: (lane * 25) + '%', width: 'calc(25% - 2px)' }; };
+    var gi = sel === 'meine' ? -2 : Number(sel);
+    var adler = gi === 0;
 
-    var make = function (day, r, extra) {
-      var c = CAT[r[3]];
-      var s = toMin(r[0]), e = toMin(r[1]);
-      var pos = place(r[2]);
+    var block = function (x, extra) {
+      var c = CAT[x.cat];
+      var s = toMin(x.s), e = toMin(x.e);
       var h = (e - s) * PX - 2;
-      var all = r[2] < 0;
       var b = {
-        label: r[4], time: all ? r[0] + ' – ' + r[1] : r[0], showTime: h >= 30,
-        top: (s - START) * PX + 1, h: h, left: pos.left, width: pos.width,
-        bg: c.bg, fg: c.fg, bd: c.bd, shadow: 'none', z: 1, ov: 'hidden', op: 1,
+        title: x.title, time: x.s + ' – ' + x.e, sub: x.loc + (x.g < 0 ? ' · Alle Gruppen' : ''),
+        showTime: h >= 34, showSub: h >= 56,
+        top: (s - START) * PX + 1, h: h, bg: c.bg, fg: c.fg, bd: c.bd, shadow: 'none', z: 1, ov: 'hidden', op: 1,
         cursor: editing ? 'grab' : 'pointer', href: editing ? '#' : 'DesktopDetails.dc.html',
         grip: editing, changed: false, showTip: false, tip: '', tipLeft: '0', tipRight: 'auto',
-        aria: r[4].split(H).join('') + ', ' + (all ? 'Alle Gruppen' : GROUPS[r[2]]) + ', ' + day.long + ', ' + r[0] + '–' + r[1]
+        aria: x.title + ', ' + (x.g < 0 ? 'Alle Gruppen' : 'Gruppe ' + GROUPS[x.g]) + ', ' + DAYS[x.day].long + ', ' + x.s + '–' + x.e
       };
       if (extra) { for (var k in extra) { b[k] = extra[k]; } }
       return b;
     };
 
-    var days = WEEK.map(function (day) {
-      var blocks = day.rows.map(function (r) {
-        var id = day.key + '-' + r[0] + '-' + r[2];
-        if (editing && id === 'mo-14:00-2') {
+    var days = DAYS.map(function (day, di) {
+      var list = SESSIONS.filter(function (x) { return x.day === di && (gi === -2 ? x.mine : (x.g === gi || x.g === -1)); });
+      var blocks = list.map(function (x) {
+        if (editing && adler && x.id === 'mo-14:00-0') {
           var s = toMin('14:00'), e = toMin('15:45');
-          return make(day, ['14:00', '15:45', 2, 'poly', r[4]], { h: (e - s) * PX - 2, shadow: '0 0 0 2px var(--ring)', z: 6, ov: 'visible', showTip: true, tip: '14:00–15:45 · 105 Min.', changed: true });
+          return block({ day: x.day, s: '14:00', e: '15:45', g: 0, cat: x.cat, title: x.title, loc: x.loc }, { shadow: '0 0 0 2px var(--ring)', z: 6, ov: 'visible', showTip: true, tip: '14:00–15:45 · 105 Min.', changed: true });
         }
-        if (editing && id === 'di-14:00-3') { return make(day, r, { changed: true }); }
-        if (editing && id === 'do-16:00-0') {
-          return make(day, r, { bg: 'transparent', fg: 'var(--foreground)', bd: '2px dashed var(--foreground)', op: 0.45, grip: false, aria: 'Ursprüngliche Position von Schwimmen, Gruppe Adler' });
+        if (editing && adler && x.id === 'di-14:00-0') { return block(x, { changed: true }); }
+        if (editing && adler && x.id === 'do-16:00-0') {
+          return block(x, { bg: 'transparent', fg: 'var(--foreground)', bd: '2px dashed var(--foreground)', op: 0.45, grip: false, aria: 'Ursprüngliche Position von ' + x.title });
         }
-        return make(day, r);
+        return block(x);
       });
-      if (editing && day.key === 'mi') {
-        blocks.push(make(day, ['16:45', '18:15', 0, 'poly', 'Schwim' + H + 'men'], { shadow: '0 0 0 2px var(--ring), var(--shadow-xl)', z: 10, ov: 'visible', showTip: true, tip: 'Mi, 14. Okt. · 16:45–18:15', cursor: 'grabbing' }));
+      if (editing && adler && di === 2) {
+        blocks.push(block({ day: 2, s: '16:45', e: '18:15', g: 0, cat: 'poly', title: 'Schwimmen', loc: 'Hallenbad' }, { shadow: '0 0 0 2px var(--ring), var(--shadow-xl)', z: 10, ov: 'visible', showTip: true, tip: 'Mi, 14. Okt. · 16:45–18:15', cursor: 'grabbing' }));
       }
-      if (editing && day.key === 'fr') {
-        blocks.push(make(day, ['16:00', '17:00', 3, 'gem', '+ Neu'], { bg: 'var(--card)', fg: 'var(--foreground)', bd: '2px dashed var(--primary)', z: 6, ov: 'visible', showTip: true, tip: 'Neue Einheit · 16:00–17:00', tipLeft: 'auto', tipRight: '0', grip: false, cursor: 'crosshair', aria: 'Neue Einheit, Gruppe Bären, Freitag, 16:00–17:00' }));
+      if (editing && adler && di === 4) {
+        blocks.push(block({ day: 4, s: '16:00', e: '17:00', g: 0, cat: 'gem', title: '+ Neue Einheit', loc: '' }, { bg: 'var(--card)', fg: 'var(--foreground)', bd: '2px dashed var(--primary)', z: 6, ov: 'visible', showSub: false, showTip: true, tip: 'Gruppe Adler · Fr, 16. Okt. · 16:00–17:00', tipLeft: 'auto', tipRight: '0', grip: false, cursor: 'crosshair', aria: 'Neue Einheit, Gruppe Adler, Freitag, 16:00–17:00' }));
       }
       return {
-        d: day.d, n: day.n, note: day.note, today: !!day.today, blocks: blocks,
+        d: day.d, n: day.n, note: day.today ? 'heute' : '', today: !!day.today, blocks: blocks,
         headBg: day.today ? 'var(--primary)' : 'transparent',
         headFg: day.today ? 'var(--primary-foreground)' : 'var(--foreground)'
       };
@@ -278,8 +313,11 @@ class Component extends DCLogic {
     var hours = [];
     for (var m = START; m <= END; m += 60) { hours.push({ label: fmt(m), top: (m - START) * PX }); }
     var legend = ['judo', 'poly', 'gem', 'abend'].map(function (k) { return { name: CAT[k].name, bg: CAT[k].bg, bd: CAT[k].bd }; });
+    var groupOptions = GROUPS.map(function (g, i) { return { value: String(i), label: 'Gruppe ' + g }; });
     return {
-      yes: true, editing: editing, viewMode: !editing,
+      yes: true, editing: editing, viewMode: !editing, sel: sel, groupOptions: groupOptions,
+      gridLabel: 'Wochenplan ' + (gi === -2 ? 'meine Einheiten' : 'Gruppe ' + GROUPS[gi]),
+      pickGroup: function (v) { self.setState({ sel: v }); },
       startEdit: function () { self.setState({ editing: true }); },
       stopEdit: function () { self.setState({ editing: false }); },
       days: days, hours: hours, legend: legend,
