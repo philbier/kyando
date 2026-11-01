@@ -27,8 +27,16 @@ import {
 } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "@/i18n/navigation";
-import { dateInTimeZone, getActiveCamp, getDemoContext, getProfile, getSession } from "@/lib/data";
+import {
+  dateInTimeZone,
+  getActiveCamp,
+  getCampSessions,
+  getDemoContext,
+  getProfile,
+  getSession,
+} from "@/lib/data";
 import { cn, initials } from "@/lib/utils";
+import { SessionDetailsWide, type SessionLabels } from "./session-details-wide";
 
 export async function generateMetadata({
   params,
@@ -103,181 +111,248 @@ export default async function EinheitPage({ params }: PageProps<"/[locale]/einhe
           time: time(updatedAt),
         }));
 
+  // --- Laptop layout (Lagerleitung only) ---
+  // Both layouts are rendered, and CSS shows the one that fits the screen,
+  // because the server doesn't know the screen size (like the Kalender page).
+  const isOrganizer = me.role === "head_organizer";
+  const day = dateInTimeZone(startsAt, timeZone);
+  const timeRange = tSession("timeRange", { start: time(startsAt), end: time(endsAt) });
+
+  const labels: SessionLabels = {
+    categoryName: tCategories(session.category),
+    categoryLetter: tCategories(`letter.${session.category}`),
+    timeRange,
+    date: format.dateTime(startsAt, { weekday: "long", day: "numeric", month: "long", timeZone }),
+    length: tDuration("minutes", { minutes: Math.round((endsAt.getTime() - startsAt.getTime()) / 60_000) }),
+    remaining: isNow ? t("remaining", { duration: duration(endsAt.getTime() - nowMs) }) : null,
+    startsIn: isLaterToday ? t("startsIn", { duration: duration(startsAt.getTime() - nowMs) }) : null,
+    // "Zuletzt geändert von …" (the phone says "Geändert von …" under the notes)
+    changed: !updatedBy
+      ? null
+      : (dateInTimeZone(updatedAt, timeZone) === dateInTimeZone(now, timeZone)
+        ? t("lastChangedByToday", { name: updatedBy.full_name, time: time(updatedAt) })
+        : t("lastChangedByOn", {
+            name: updatedBy.full_name,
+            date: format.dateTime(updatedAt, { day: "numeric", month: "long", timeZone }),
+            time: time(updatedAt),
+          })),
+    group: groupLabel,
+    groupDetails: session.group
+      ? t("groupDetails", { size: session.group.size, ageRange: session.group.age_range })
+      : null,
+    mapsHref: mapsHref || null,
+  };
+
+  // "Gleichzeitig im Plan": the other groups' sessions that overlap this one, by group name.
+  const parallel = isOrganizer
+    ? getCampSessions(camp)
+        .filter(
+          (s) =>
+            s.group !== null &&
+            s.group_id !== session.group_id &&
+            Date.parse(s.starts_at) < endsAt.getTime() &&
+            startsAt.getTime() < Date.parse(s.ends_at),
+        )
+        .sort((a, b) => a.group!.name.localeCompare(b.group!.name))
+    : [];
+
   return (
     <>
-      <header className="flex items-center gap-1 border-b px-2 py-1.5">
-        <Button asChild variant="ghost" size="icon" className="size-11">
-          <BackLink fallbackHref="/kalender" aria-label={t("back")}>
-            <ArrowLeftIcon aria-hidden="true" className="size-5" />
-          </BackLink>
-        </Button>
-        <span className="text-base font-semibold">{t("title")}</span>
-      </header>
-
-      <main className="flex flex-col gap-5 px-4 pt-5">
-        <section className="flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-sm font-medium">
-            {/* The letter repeats the category name next to it, so screen readers skip it. */}
-            <span
-              aria-hidden="true"
-              className={cn(
-                "flex size-6 items-center justify-center rounded-sm text-xs font-bold",
-                categoryClasses[session.category],
-              )}
-            >
-              {tCategories(`letter.${session.category}`)}
-            </span>
-            {tCategories(session.category)}
-          </div>
-          <h1 className="text-3xl font-extrabold tracking-tight">{session.title}</h1>
-          {isNow && (
-            <div className="flex items-center gap-2">
-              <Badge>{t("now")}</Badge>
-              <span className="text-sm">{t("remaining", { duration: duration(endsAt.getTime() - nowMs) })}</span>
-            </div>
-          )}
-          {isLaterToday && (
-            <p className="text-sm">{t("startsIn", { duration: duration(startsAt.getTime() - nowMs) })}</p>
-          )}
-        </section>
-
-        <Card className="py-3">
-          <CardContent className="flex flex-col gap-1 px-3">
-            <Item size="sm" className="flex-nowrap px-2">
-              <ItemMedia variant="icon">
-                <ClockIcon aria-hidden="true" />
-              </ItemMedia>
-              <ItemContent>
-                <ItemTitle className="text-base">
-                  {t("timeAndDuration", {
-                    start: time(startsAt),
-                    end: time(endsAt),
-                    // The length is always in minutes here ("75 Min."), like in the design.
-                    duration: tDuration("minutes", {
-                      minutes: Math.round((endsAt.getTime() - startsAt.getTime()) / 60_000),
-                    }),
-                  })}
-                </ItemTitle>
-                <ItemDescription className="line-clamp-none text-base">
-                  {format.dateTime(startsAt, { weekday: "long", day: "numeric", month: "long", timeZone })}
-                </ItemDescription>
-              </ItemContent>
-            </Item>
-
-            {location && (
-              <>
-                <Separator />
-                <Item size="sm" className="flex-nowrap px-2">
-                  <ItemMedia variant="icon">
-                    <MapPinIcon aria-hidden="true" />
-                  </ItemMedia>
-                  {/* min-w-0 + line-clamp-none: long location names wrap instead of being cut off. */}
-                  <ItemContent className="min-w-0">
-                    <ItemTitle className="text-base">{location.name}</ItemTitle>
-                    {location.address_hint && (
-                      <ItemDescription className="line-clamp-none text-base">{location.address_hint}</ItemDescription>
-                    )}
-                  </ItemContent>
-                  {mapsHref && (
-                    <ItemActions>
-                      <Button asChild variant="outline" className="h-11 text-base">
-                        <a
-                          href={mapsHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={t("mapLabel", { location: location.name })}
-                        >
-                          <NavigationIcon aria-hidden="true" />
-                          {t("map")}
-                        </a>
-                      </Button>
-                    </ItemActions>
-                  )}
-                </Item>
-              </>
-            )}
-
-            <Separator />
-            <Item size="sm" className="flex-nowrap px-2">
-              <ItemMedia variant="icon">
-                <UsersIcon aria-hidden="true" />
-              </ItemMedia>
-              <ItemContent>
-                <ItemTitle className="text-base">{groupLabel}</ItemTitle>
-                {session.group && (
-                  <ItemDescription className="line-clamp-none text-base">
-                    {t("groupDetails", { size: session.group.size, ageRange: session.group.age_range })}
-                  </ItemDescription>
-                )}
-              </ItemContent>
-            </Item>
-          </CardContent>
-        </Card>
-
-        <section aria-labelledby="coaches-heading" className="flex flex-col gap-2">
-          <h2 id="coaches-heading" className="type-title-sm">
-            {t("coaches")}
-          </h2>
-          {session.coaches.length === 0 && <p className="type-body">{t("noCoaches")}</p>}
-          {session.coaches.map((coach) => (
-            <Item key={coach.id} variant="outline" size="sm" className="flex-nowrap bg-card">
-              <ItemMedia>
-                <Avatar>
-                  <AvatarFallback>{initials(coach.full_name)}</AvatarFallback>
-                </Avatar>
-              </ItemMedia>
-              <ItemContent className="min-w-0">
-                <ItemTitle className="text-base">
-                  {coach.id === me.id ? t("you", { name: coach.full_name }) : coach.full_name}
-                </ItemTitle>
-                <ItemDescription className="line-clamp-none text-base">
-                  {coach.job_title ?? tRoles(coach.role)}
-                </ItemDescription>
-              </ItemContent>
-              {/* No call button for yourself or when the number is unknown. */}
-              {coach.id !== me.id && coach.phone && (
-                <ItemActions>
-                  <a
-                    href={`tel:${coach.phone.replace(/\s/g, "")}`}
-                    aria-label={t("call", { name: coach.full_name })}
-                    className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "size-11")}
-                  >
-                    <PhoneIcon aria-hidden="true" />
-                  </a>
-                </ItemActions>
-              )}
-            </Item>
-          ))}
-        </section>
-
-        {session.notes ? (
-          <section aria-labelledby="notes-heading" className="flex flex-col gap-2 rounded-xl bg-muted p-4">
-            <h2 id="notes-heading" className="text-base font-semibold">
-              {t("notes")}
-            </h2>
-            {/* whitespace-pre-line keeps the line breaks typed into the notes field. */}
-            <p className="type-body whitespace-pre-line">{session.notes}</p>
-            {changedLabel && <p className="type-caption">{changedLabel}</p>}
-          </section>
-        ) : (
-          changedLabel && <p className="type-caption">{changedLabel}</p>
-        )}
-      </main>
-
-      {/* Only the Lagerleitung edits sessions. Hiding the button is convenience only:
-          the edit page and its Server Action check the role too. */}
-      {me.role === "head_organizer" && (
-        <ActionBar>
-          <Button asChild size="lg" className="h-11 w-full text-base">
-            {/* replace: the edit screen takes the place of the details in the history,
-                so "back" after saving doesn't lead to the form again. */}
-            <Link href={`/einheit/${session.id}/bearbeiten`} replace>
-              <PencilIcon aria-hidden="true" />
-              {t("edit")}
-            </Link>
-          </Button>
-        </ActionBar>
+      {isOrganizer && (
+        <div className="hidden lg:block">
+          <SessionDetailsWide
+            session={session}
+            me={me}
+            labels={labels}
+            // The Wochenplan of this session's group (or "Meine Einheiten" for shared sessions).
+            weekHref={`/kalender?ansicht=woche&tag=${day}&filter=${session.group_id ?? "meine"}`}
+            parallel={parallel}
+            parallelHint={t("parallelHint", {
+              count: parallel.length,
+              start: time(startsAt),
+              end: time(endsAt),
+              more: parallel.length > 3 ? "yes" : "no",
+            })}
+          />
+        </div>
       )}
+
+      {/* Phone layout */}
+      <div className={cn("mx-auto w-full max-w-md", isOrganizer && "lg:hidden")}>
+        <header className="flex items-center gap-1 border-b px-2 py-1.5">
+          <Button asChild variant="ghost" size="icon" className="size-11">
+            <BackLink fallbackHref="/kalender" aria-label={t("back")}>
+              <ArrowLeftIcon aria-hidden="true" className="size-5" />
+            </BackLink>
+          </Button>
+          <span className="text-base font-semibold">{t("title")}</span>
+        </header>
+
+        <main className="flex flex-col gap-5 px-4 pt-5">
+          <section className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 text-sm font-medium">
+              {/* The letter repeats the category name next to it, so screen readers skip it. */}
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "flex size-6 items-center justify-center rounded-sm text-xs font-bold",
+                  categoryClasses[session.category],
+                )}
+              >
+                {tCategories(`letter.${session.category}`)}
+              </span>
+              {tCategories(session.category)}
+            </div>
+            <h1 className="text-3xl font-extrabold tracking-tight">{session.title}</h1>
+            {isNow && (
+              <div className="flex items-center gap-2">
+                <Badge>{t("now")}</Badge>
+                <span className="text-sm">{t("remaining", { duration: duration(endsAt.getTime() - nowMs) })}</span>
+              </div>
+            )}
+            {isLaterToday && (
+              <p className="text-sm">{t("startsIn", { duration: duration(startsAt.getTime() - nowMs) })}</p>
+            )}
+          </section>
+
+          <Card className="py-3">
+            <CardContent className="flex flex-col gap-1 px-3">
+              <Item size="sm" className="flex-nowrap px-2">
+                <ItemMedia variant="icon">
+                  <ClockIcon aria-hidden="true" />
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle className="text-base">
+                    {t("timeAndDuration", {
+                      start: time(startsAt),
+                      end: time(endsAt),
+                      // The length is always in minutes here ("75 Min."), like in the design.
+                      duration: tDuration("minutes", {
+                        minutes: Math.round((endsAt.getTime() - startsAt.getTime()) / 60_000),
+                      }),
+                    })}
+                  </ItemTitle>
+                  <ItemDescription className="line-clamp-none text-base">
+                    {format.dateTime(startsAt, { weekday: "long", day: "numeric", month: "long", timeZone })}
+                  </ItemDescription>
+                </ItemContent>
+              </Item>
+
+              {location && (
+                <>
+                  <Separator />
+                  <Item size="sm" className="flex-nowrap px-2">
+                    <ItemMedia variant="icon">
+                      <MapPinIcon aria-hidden="true" />
+                    </ItemMedia>
+                    {/* min-w-0 + line-clamp-none: long location names wrap instead of being cut off. */}
+                    <ItemContent className="min-w-0">
+                      <ItemTitle className="text-base">{location.name}</ItemTitle>
+                      {location.address_hint && (
+                        <ItemDescription className="line-clamp-none text-base">{location.address_hint}</ItemDescription>
+                      )}
+                    </ItemContent>
+                    {mapsHref && (
+                      <ItemActions>
+                        <Button asChild variant="outline" className="h-11 text-base">
+                          <a
+                            href={mapsHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={t("mapLabel", { location: location.name })}
+                          >
+                            <NavigationIcon aria-hidden="true" />
+                            {t("map")}
+                          </a>
+                        </Button>
+                      </ItemActions>
+                    )}
+                  </Item>
+                </>
+              )}
+
+              <Separator />
+              <Item size="sm" className="flex-nowrap px-2">
+                <ItemMedia variant="icon">
+                  <UsersIcon aria-hidden="true" />
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle className="text-base">{groupLabel}</ItemTitle>
+                  {session.group && (
+                    <ItemDescription className="line-clamp-none text-base">
+                      {t("groupDetails", { size: session.group.size, ageRange: session.group.age_range })}
+                    </ItemDescription>
+                  )}
+                </ItemContent>
+              </Item>
+            </CardContent>
+          </Card>
+
+          <section aria-labelledby="coaches-heading" className="flex flex-col gap-2">
+            <h2 id="coaches-heading" className="type-title-sm">
+              {t("coaches")}
+            </h2>
+            {session.coaches.length === 0 && <p className="type-body">{t("noCoaches")}</p>}
+            {session.coaches.map((coach) => (
+              <Item key={coach.id} variant="outline" size="sm" className="flex-nowrap bg-card">
+                <ItemMedia>
+                  <Avatar>
+                    <AvatarFallback>{initials(coach.full_name)}</AvatarFallback>
+                  </Avatar>
+                </ItemMedia>
+                <ItemContent className="min-w-0">
+                  <ItemTitle className="text-base">
+                    {coach.id === me.id ? t("you", { name: coach.full_name }) : coach.full_name}
+                  </ItemTitle>
+                  <ItemDescription className="line-clamp-none text-base">
+                    {coach.job_title ?? tRoles(coach.role)}
+                  </ItemDescription>
+                </ItemContent>
+                {/* No call button for yourself or when the number is unknown. */}
+                {coach.id !== me.id && coach.phone && (
+                  <ItemActions>
+                    <a
+                      href={`tel:${coach.phone.replace(/\s/g, "")}`}
+                      aria-label={t("call", { name: coach.full_name })}
+                      className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "size-11")}
+                    >
+                      <PhoneIcon aria-hidden="true" />
+                    </a>
+                  </ItemActions>
+                )}
+              </Item>
+            ))}
+          </section>
+
+          {session.notes ? (
+            <section aria-labelledby="notes-heading" className="flex flex-col gap-2 rounded-xl bg-muted p-4">
+              <h2 id="notes-heading" className="text-base font-semibold">
+                {t("notes")}
+              </h2>
+              {/* whitespace-pre-line keeps the line breaks typed into the notes field. */}
+              <p className="type-body whitespace-pre-line">{session.notes}</p>
+              {changedLabel && <p className="type-caption">{changedLabel}</p>}
+            </section>
+          ) : (
+            changedLabel && <p className="type-caption">{changedLabel}</p>
+          )}
+        </main>
+
+        {/* Only the Lagerleitung edits sessions. Hiding the button is convenience only:
+            the edit page and its Server Action check the role too. */}
+        {isOrganizer && (
+          <ActionBar className="lg:hidden">
+            <Button asChild size="lg" className="h-11 w-full text-base">
+              {/* replace: the edit screen takes the place of the details in the history,
+                  so "back" after saving doesn't lead to the form again. */}
+              <Link href={`/einheit/${session.id}/bearbeiten`} replace>
+                <PencilIcon aria-hidden="true" />
+                {t("edit")}
+              </Link>
+            </Button>
+          </ActionBar>
+        )}
+      </div>
     </>
   );
 }

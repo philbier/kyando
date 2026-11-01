@@ -36,13 +36,15 @@ type Item = {
   key: "heute" | "kalender" | "gantt" | "profil" | "coaches" | "gruppen" | "orte";
   Icon: LucideIcon;
   href?: string;
+  alsoActiveOn?: string; // another path where this item is highlighted
 };
 
 const campItems: Item[] = [
   // The Lagerleitung's start page: their own sessions plus "Im Lager gerade".
   { key: "heute", Icon: HouseIcon, href: "/heute" },
   // The Lagerleitung works with the whole week on a laptop.
-  { key: "kalender", Icon: CalendarIcon, href: "/kalender?ansicht=woche" },
+  // Session details and the edit form count as part of the Kalender.
+  { key: "kalender", Icon: CalendarIcon, href: "/kalender?ansicht=woche", alsoActiveOn: "/einheit" },
   { key: "gantt", Icon: ChartGanttIcon, href: "/gantt" },
   { key: "profil", Icon: UserIcon, href: "/profil" },
 ];
@@ -68,8 +70,10 @@ export function AppSidebar({ campName, fullName, roleLabel, className }: AppSide
 
   const menu = (items: Item[]) => (
     <SidebarMenu>
-      {items.map(({ key, Icon, href }) => {
-        const isActive = !!href && pathname.startsWith(href.split("?")[0]);
+      {items.map(({ key, Icon, href, alsoActiveOn }) => {
+        const isActive =
+          !!href &&
+          (pathname.startsWith(href.split("?")[0]) || (!!alsoActiveOn && pathname.startsWith(alsoActiveOn)));
         return (
           <SidebarMenuItem key={key}>
             {href ? (

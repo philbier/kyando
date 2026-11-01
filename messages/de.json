@@ -45,7 +45,14 @@
     "headOrganizer": "Lagerleitung",
     "emergency": "Notfall",
     "emergencyPlaceholder": "[Notfallnummer]",
-    "signOut": "Abmelden"
+    "signOut": "Abmelden",
+    "subtitle": "Dein Konto, deine Sprache und Infos zum Lager.",
+    "account": "Konto",
+    "groups": "Gruppen",
+    "groupsValue": "{count, plural, one {# Gruppe: {first}} other {# Gruppen, von {first} bis {last}}}",
+    "coaches": "Coaches",
+    "coachesValue": "{count, plural, one {# Coach} other {# Coaches}}",
+    "languageDefault": "Standard"
   },
   "Roles": {
     "coach": "Coach",
@@ -160,7 +167,20 @@
     "notes": "Hinweise",
     "changedByToday": "Geändert von {name}, heute {time}",
     "changedByOn": "Geändert von {name}, {date}, {time}",
-    "edit": "Einheit bearbeiten"
+    "edit": "Einheit bearbeiten",
+    "breadcrumb": "Pfad",
+    "weekPlan": "Wochenplan",
+    "editShort": "Bearbeiten",
+    "lastChangedByToday": "Zuletzt geändert von {name}, heute {time}",
+    "lastChangedByOn": "Zuletzt geändert von {name}, {date}, {time}",
+    "time": "Zeit",
+    "location": "Ort",
+    "group": "Gruppe",
+    "noLocation": "Kein Ort",
+    "parallel": "Gleichzeitig im Plan",
+    "parallelHint": "{count, plural, one {# andere Gruppe} other {# andere Gruppen}} von {start} bis {end}{more, select, yes {, hier die ersten drei} other {}}.",
+    "openGantt": "Alle im Gantt",
+    "coachCount": "{count, plural, =0 {Noch keine Coaches eingeteilt} one {# Coach eingeteilt} other {# Coaches eingeteilt}}"
   },
   "EinheitForm": {
     "editTitle": "Einheit bearbeiten",
@@ -195,7 +215,14 @@
     "errorShortNameTooLong": "Höchstens 10 Zeichen.",
     "errorEndBeforeStart": "Das Ende muss nach dem Beginn liegen.",
     "errorForbidden": "Nur die Lagerleitung kann Einheiten bearbeiten.",
-    "errorSummary": "Bitte prüfe die markierten Felder."
+    "errorSummary": "Bitte prüfe die markierten Felder.",
+    "saveShort": "Speichern",
+    "editBreadcrumb": "Bearbeiten",
+    "sectionSession": "Einheit",
+    "sectionTimeAndPlace": "Zeit und Ort",
+    "coachFree": "frei",
+    "coachBusy": "belegt",
+    "deleteHint": "Entfernt die Einheit für alle Coaches. Das lässt sich nicht rückgängig machen."
   },
   "Categories": {
     "judo": "Judo",

@@ -45,7 +45,14 @@
     "headOrganizer": "Direzione del campo",
     "emergency": "Emergenza",
     "emergencyPlaceholder": "[numero di emergenza]",
-    "signOut": "Esci"
+    "signOut": "Esci",
+    "subtitle": "Il tuo account, la tua lingua e le informazioni sul campo.",
+    "account": "Account",
+    "groups": "Gruppi",
+    "groupsValue": "{count, plural, one {# gruppo: {first}} other {# gruppi, da {first} a {last}}}",
+    "coaches": "Coach",
+    "coachesValue": "{count, plural, one {# coach} other {# coach}}",
+    "languageDefault": "Predefinita"
   },
   "Roles": {
     "coach": "Coach",
@@ -160,7 +167,20 @@
     "notes": "Note",
     "changedByToday": "Modificato da {name}, oggi alle {time}",
     "changedByOn": "Modificato da {name}, il {date} alle {time}",
-    "edit": "Modifica unità"
+    "edit": "Modifica unità",
+    "breadcrumb": "Percorso",
+    "weekPlan": "Piano settimanale",
+    "editShort": "Modifica",
+    "lastChangedByToday": "Ultima modifica di {name}, oggi {time}",
+    "lastChangedByOn": "Ultima modifica di {name}, {date}, {time}",
+    "time": "Orario",
+    "location": "Luogo",
+    "group": "Gruppo",
+    "noLocation": "Nessun luogo",
+    "parallel": "Nello stesso momento",
+    "parallelHint": "{count, plural, one {# altro gruppo} other {# altri gruppi}} dalle {start} alle {end}{more, select, yes {, ecco i primi tre} other {}}.",
+    "openGantt": "Tutti nel Gantt",
+    "coachCount": "{count, plural, =0 {Ancora nessun coach assegnato} one {# coach assegnato} other {# coach assegnati}}"
   },
   "EinheitForm": {
     "editTitle": "Modifica unità",
@@ -195,7 +215,14 @@
     "errorShortNameTooLong": "Al massimo 10 caratteri.",
     "errorEndBeforeStart": "La fine deve essere dopo l’inizio.",
     "errorForbidden": "Solo la direzione del campo può modificare le unità.",
-    "errorSummary": "Controlla i campi segnati."
+    "errorSummary": "Controlla i campi segnati.",
+    "saveShort": "Salva",
+    "editBreadcrumb": "Modifica",
+    "sectionSession": "Unità",
+    "sectionTimeAndPlace": "Orario e luogo",
+    "coachFree": "libero",
+    "coachBusy": "occupato",
+    "deleteHint": "Rimuove l’unità per tutti i coach. L’operazione non si può annullare."
   },
   "Categories": {
     "judo": "Judo",

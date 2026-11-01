@@ -45,7 +45,14 @@
     "headOrganizer": "Direction du camp",
     "emergency": "Urgence",
     "emergencyPlaceholder": "[numéro d’urgence]",
-    "signOut": "Se déconnecter"
+    "signOut": "Se déconnecter",
+    "subtitle": "Ton compte, ta langue et les infos sur le camp.",
+    "account": "Compte",
+    "groups": "Groupes",
+    "groupsValue": "{count, plural, one {# groupe : {first}} other {# groupes, de {first} à {last}}}",
+    "coaches": "Coachs",
+    "coachesValue": "{count, plural, one {# coach} other {# coachs}}",
+    "languageDefault": "Par défaut"
   },
   "Roles": {
     "coach": "Coach",
@@ -160,7 +167,20 @@
     "notes": "Remarques",
     "changedByToday": "Modifié par {name}, aujourd’hui à {time}",
     "changedByOn": "Modifié par {name}, le {date} à {time}",
-    "edit": "Modifier l’unité"
+    "edit": "Modifier l’unité",
+    "breadcrumb": "Fil d’Ariane",
+    "weekPlan": "Planning de la semaine",
+    "editShort": "Modifier",
+    "lastChangedByToday": "Dernière modification par {name}, aujourd’hui {time}",
+    "lastChangedByOn": "Dernière modification par {name}, {date}, {time}",
+    "time": "Heure",
+    "location": "Lieu",
+    "group": "Groupe",
+    "noLocation": "Aucun lieu",
+    "parallel": "En même temps",
+    "parallelHint": "{count, plural, one {# autre groupe} other {# autres groupes}} de {start} à {end}{more, select, yes {, voici les trois premiers} other {}}.",
+    "openGantt": "Tout dans le Gantt",
+    "coachCount": "{count, plural, =0 {Aucun coach attribué} one {# coach attribué} other {# coachs attribués}}"
   },
   "EinheitForm": {
     "editTitle": "Modifier l’unité",
@@ -195,7 +215,14 @@
     "errorShortNameTooLong": "10 caractères au maximum.",
     "errorEndBeforeStart": "La fin doit être après le début.",
     "errorForbidden": "Seule la direction du camp peut modifier les unités.",
-    "errorSummary": "Vérifie les champs marqués."
+    "errorSummary": "Vérifie les champs marqués.",
+    "saveShort": "Enregistrer",
+    "editBreadcrumb": "Modifier",
+    "sectionSession": "Unité",
+    "sectionTimeAndPlace": "Heure et lieu",
+    "coachFree": "libre",
+    "coachBusy": "occupé",
+    "deleteHint": "Supprime l’unité pour tous les coachs. Cette action est irréversible."
   },
   "Categories": {
     "judo": "Judo",
